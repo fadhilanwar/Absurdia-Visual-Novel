@@ -7,6 +7,7 @@
 #include <SFML/Audio.hpp>
 
 #include "../../engine/canvas.hpp"
+#include "../../engine/ui.hpp"
 #include "../../scenes/scene.hpp"
 
 struct Scene;
@@ -42,13 +43,14 @@ void SceneManager_Destroy(SceneManager *sceneManager);
 struct SceneManager
 {
     SceneManagerState state = SceneManagerState::Empty;
+    sf::Window *window;
     Canvas *canvas;
 
     Scene *currentScene;
     Scene *pendingScene = nullptr;
     bool isTransitioningScene = false;
     bool isPendingSceneHasEntered = false;
-    Canvas *lastSceneCanvas = nullptr;
+    // Canvas *lastSceneCanvas = nullptr;
     float sceneTransitionProgress = 0.0f;
 
     sf::Texture *backgroundImage = nullptr;
@@ -75,7 +77,7 @@ struct SceneManager
     }
 };
 
-SceneManager *SceneManager_Create(Canvas *canvas);
+SceneManager *SceneManager_Create(Canvas *canvas, sf::Window *window);
 void SceneManager_GoToScene(SceneManager *sceneManager, Scene *scene);
 void SceneManager_SetBackground(SceneManager *sceneMg, std::string filePath);
 void SceneManager_AddDialog(SceneManager *sceneMg, bool isLeft, std::string name, std::string message, std::string imageFilePath);

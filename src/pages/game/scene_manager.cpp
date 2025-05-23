@@ -3,9 +3,10 @@
 
 void m_SceneManager_Update(SceneManager *sceneMg);
 
-SceneManager *SceneManager_Create(Canvas *canvas)
+SceneManager *SceneManager_Create(Canvas *canvas, sf::Window *window)
 {
     auto sceneMg = new SceneManager{
+        .window = window,
         .canvas = canvas,
         .update = m_SceneManager_Update};
     return sceneMg;
@@ -32,6 +33,8 @@ void SceneManager_Destroy(SceneManager *sceneMg)
 void SceneManager_GoToScene(SceneManager *sceneMg, Scene *scene)
 {
     scene->sceneManager = sceneMg;
+    scene->canvas = Canvas_Create();
+    scene->ui = UI_Create();
 
     if (sceneMg->currentScene != nullptr)
     {
@@ -39,9 +42,9 @@ void SceneManager_GoToScene(SceneManager *sceneMg, Scene *scene)
         sceneMg->pendingScene = scene;
         sceneMg->sceneTransitionProgress = 0.0f;
 
-        delete sceneMg->lastSceneCanvas;
-        sceneMg->lastSceneCanvas = Canvas_Create();
-        Canvas_Copy(sceneMg->lastSceneCanvas, sceneMg->canvas);
+        // delete sceneMg->lastSceneCanvas;
+        // sceneMg->lastSceneCanvas = Canvas_Create();
+        // Canvas_Copy(sceneMg->lastSceneCanvas, sceneMg->currentScene->canvas);
     }
     else
     {
@@ -129,25 +132,25 @@ void m_SceneManager_DrawDialog(SceneManager *sceneMg)
     if (dialogue->isLeft)
     {
         int x = -180 + (200 * sceneMg->dialogPersonAnimProgress);
-        Canvas_DrawImage(sceneMg->canvas, x, 80, dialogue->imageFilePath);
+        Canvas_DrawImage(sceneMg->currentScene->canvas, x, 80, dialogue->imageFilePath);
     }
     else
     {
         int x = 700 - (200 * sceneMg->dialogPersonAnimProgress);
-        Canvas_DrawImage(sceneMg->canvas, x, 80, dialogue->imageFilePath);
+        Canvas_DrawImage(sceneMg->currentScene->canvas, x, 80, dialogue->imageFilePath);
     }
 
     int nametagX = dialogue->isLeft ? 752 : 46;
     int modifierY = 100 * std::min((sceneMg->dialogPersonAnimProgress * 2.f), 1.f);
 
-    Canvas_DrawRect(sceneMg->canvas, 48, 480 - modifierY, 904, 144, sf::Color(0, 0, 0, 150));
-    Canvas_DrawImage(sceneMg->canvas, nametagX, 345, "nametag.png");
-    Canvas_DrawText(sceneMg->canvas, nametagX + 14, 350, dialogue->name, TextStyle::BOLD, 20, sf::Color::White);
+    Canvas_DrawRect(sceneMg->currentScene->canvas, 48, 480 - modifierY, 904, 144, sf::Color(0, 0, 0, 150));
+    Canvas_DrawImage(sceneMg->currentScene->canvas, nametagX, 345, "nametag.png");
+    Canvas_DrawText(sceneMg->currentScene->canvas, nametagX + 14, 350, dialogue->name, TextStyle::BOLD, 20, sf::Color::White);
 
     if (sceneMg->dialogPersonAnimProgress >= 0.8f)
     {
         std::string cuttedMessage = dialogue->message.substr(0, sceneMg->dialogTextProgressMax - sceneMg->dialogTextProgress);
-        Canvas_DrawText(sceneMg->canvas, 72, 504 - modifierY, cuttedMessage, TextStyle::NORMAL, 24, sf::Color::White);
+        Canvas_DrawText(sceneMg->currentScene->canvas, 72, 504 - modifierY, cuttedMessage, TextStyle::NORMAL, 24, sf::Color::White);
 
         if (sceneMg->dialogTextWaitTime > 3)
         {
@@ -178,7 +181,7 @@ void m_SceneManager_DrawDialog(SceneManager *sceneMg)
         }
         sceneMg->dialogArrowXModifier += 1.0f * sceneMg->dialogArrowXModifierReverse ? -1 : 1;
 
-        Canvas_DrawImage(sceneMg->canvas, 918 + sceneMg->dialogArrowXModifier, 500, "arrow_dialog.png");
+        Canvas_DrawImage(sceneMg->currentScene->canvas, 918 + sceneMg->dialogArrowXModifier, 500, "arrow_dialog.png");
     }
 }
 
@@ -202,7 +205,7 @@ void m_SceneManager_Update(SceneManager *sceneMg)
             // Clear canvas first
             Canvas_Clear(sceneMg->canvas);
             // Copy last rendered frame from last page to compositor
-            Canvas_Copy(sceneMg->canvas, sceneMg->lastSceneCanvas);
+            Canvas_Copy(sceneMg->canvas, sceneMg->currentScene->canvas);
             // Fade in
             Canvas_DrawRect(sceneMg->canvas, 0, 0, 1000, 550, sf::Color(0, 0, 0, 255 * sceneMg->sceneTransitionProgress));
             // Tell compositor to display our canvas
@@ -221,11 +224,15 @@ void m_SceneManager_Update(SceneManager *sceneMg)
             // Gambar background image kalau ada
             if (sceneMg->backgroundImage)
             {
-                Canvas_DrawTexture(sceneMg->canvas, 0, 0, sceneMg->backgroundImage);
+                Canvas_DrawTexture(sceneMg->pendingScene->canvas, 0, 0, sceneMg->backgroundImage);
             }
 
             // Kasih tau scene bahwa ada update
             sceneMg->pendingScene->update(sceneMg->pendingScene);
+
+            // Copy canvas scene ke canvas scene_manager
+            Canvas_Update(sceneMg->pendingScene->canvas);
+            Canvas_Copy(sceneMg->canvas, sceneMg->pendingScene->canvas);
 
             // Fade out
             Canvas_DrawRect(sceneMg->canvas, 0, 0, 1000, 550, sf::Color(0, 0, 0, 255 - ((sceneMg->sceneTransitionProgress - 1.0f) * 255)));
@@ -240,25 +247,35 @@ void m_SceneManager_Update(SceneManager *sceneMg)
             sceneMg->isTransitioningScene = false;
             sceneMg->currentScene = sceneMg->pendingScene;
             sceneMg->pendingScene = nullptr;
-            delete sceneMg->lastSceneCanvas;
-            sceneMg->lastSceneCanvas = nullptr;
+            // delete sceneMg->lastSceneCanvas;
+            // sceneMg->lastSceneCanvas = nullptr;
             sceneMg->isPendingSceneHasEntered = false;
         }
 
         sceneMg->sceneTransitionProgress += 0.025f;
     }
-    else if (!sceneMg->isTransitioningScene)
+    else
     {
         Canvas_Clear(sceneMg->canvas);
+        Canvas_Clear(sceneMg->currentScene->canvas);
 
         // Gambar background image kalau ada
         if (sceneMg->backgroundImage)
         {
-            Canvas_DrawTexture(sceneMg->canvas, 0, 0, sceneMg->backgroundImage);
+            Canvas_DrawTexture(sceneMg->currentScene->canvas, 0, 0, sceneMg->backgroundImage);
         }
 
         // Kasih tau scene bahwa ada update
         sceneMg->currentScene->update(sceneMg->currentScene);
+
+        // Hit test UI
+        UI_HitTest(sceneMg->currentScene->ui, sceneMg->window);
+        // Gambar UI
+        if (sceneMg->currentScene->ui->isDirty)
+        {
+            UI_DrawAll(sceneMg->currentScene->ui);
+        }
+        Canvas_Copy(sceneMg->currentScene->canvas, sceneMg->currentScene->ui->canvas);
 
         // Apabila ada dialog
         if (!sceneMg->dialogQueue.empty())
@@ -302,6 +319,10 @@ void m_SceneManager_Update(SceneManager *sceneMg)
                 }
             }
         }
+
+        // Copy canvas scene ke canvas scene_manager
+        Canvas_Update(sceneMg->currentScene->canvas);
+        Canvas_Copy(sceneMg->canvas, sceneMg->currentScene->canvas);
 
         Canvas_Update(sceneMg->canvas);
     }

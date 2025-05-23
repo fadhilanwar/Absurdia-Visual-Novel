@@ -4,7 +4,10 @@
 void GamePG_Start(Page *page)
 {
     GamePageData *data = (GamePageData *)page->data;
-    SceneManager *sceneMg = data->sceneMg;
+
+    Canvas *canvas = Canvas_Create();
+    SceneManager *sceneMg = SceneManager_Create(canvas, page->pageManager->window);
+    data->sceneMg = sceneMg;
 
     Scene *mainMenuScene = Scene1_Create();
     SceneManager_GoToScene(sceneMg, mainMenuScene);
@@ -30,11 +33,7 @@ void GamePG_Destroy(Page *page)
 
 Page *GamePG_Create()
 {
-    Canvas *canvas = Canvas_Create();
-    SceneManager *sceneMg = SceneManager_Create(canvas);
-
-    GamePageData *data = new GamePageData{
-        .sceneMg = sceneMg};
+    GamePageData *data = new GamePageData{};
     Page *page = new Page{
         .data = data,
         .start = GamePG_Start,

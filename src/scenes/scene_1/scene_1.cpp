@@ -26,6 +26,7 @@ void Scene1_Start(Scene *scene)
 void Scene1_Update(Scene *scene)
 {
     Scene1Data *data = (Scene1Data *)scene->data;
+    Canvas_DrawText(scene->canvas, 0, 0, "Abc 123", TextStyle::NORMAL, 24, sf::Color::White);
 }
 
 void Scene1_Destroy(Scene *scene)

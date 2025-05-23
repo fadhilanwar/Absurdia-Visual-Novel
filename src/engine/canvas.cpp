@@ -22,7 +22,7 @@ Canvas *Canvas_Create(sf::RenderTexture *renderTexture)
 
 void Canvas_Clear(Canvas *canvas)
 {
-    canvas->renderTexture->clear(sf::Color(0, 0, 0));
+    canvas->renderTexture->clear(sf::Color(0, 0, 0, 0));
 }
 
 void Canvas_Update(Canvas *canvas)

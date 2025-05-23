@@ -1,7 +1,7 @@
 #include "engine.hpp"
 #include <iostream>
 
-Engine* Engine_Create()
+Engine *Engine_Create()
 {
     Engine *engine = new Engine();
 
@@ -15,39 +15,50 @@ Engine* Engine_Create()
     return engine;
 }
 
-void Engine_Run(Engine* engine)
+void Engine_Run(Engine *engine)
 {
-    int i = 0;
+    int frameRendered = 0;
+    sf::Clock fpsClock;
     sf::Clock clock;
-    // sf::Time timeElapsed = sf::Time::Zero;
-    int32_t timePerFrame = 16;
-    // int waitTime = 16;
+
+    sf::Font font(GetExePath() + "Roboto-SemiBold.ttf");
+    sf::Text fpsTextBlock(font);
+    fpsTextBlock.setPosition({0, 0});
+    fpsTextBlock.setFillColor(sf::Color::Red);
+    fpsTextBlock.setString("");
+
+    fpsClock.start();
 
     while (engine->window.isOpen())
     {
-        // if (clock.getElapsedTime().asMilliseconds() > timePerFrame)
-        // {
-            int waitTime = std::max(16 - clock.getElapsedTime().asMilliseconds(), 0);
-            clock.restart();
-            // timeElapsed = sf::Time::Zero;
+        if (fpsClock.getElapsedTime().asMilliseconds() >= 1000)
+        {
+            fpsTextBlock.setString(std::to_string(frameRendered));
+            frameRendered = 0;
+            fpsClock.restart();
+        }
 
-            while (const std::optional event = engine->window.pollEvent())
+        int waitTime = std::max(8 - clock.getElapsedTime().asMilliseconds(), 0);
+        clock.restart();
+
+        while (const std::optional event = engine->window.pollEvent())
+        {
+            if (event->is<sf::Event::Closed>())
             {
-                if (event->is<sf::Event::Closed>())
-                {
-                    engine->window.close();
-                }
+                engine->window.close();
             }
+        }
 
-            
-            engine->pageManager->update(engine->pageManager);
-            
-            sf::Sprite sprite(engine->renderTexture.getTexture());
-            engine->window.draw(sprite);
-            engine->window.display();
+        engine->pageManager->update(engine->pageManager);
 
-            clock.stop();
-            std::this_thread::sleep_for(std::chrono::milliseconds(waitTime));
-        // }
+        engine->window.clear();
+        sf::Sprite sprite(engine->renderTexture.getTexture());
+        engine->window.draw(sprite);
+        engine->window.draw(fpsTextBlock);
+        engine->window.display();
+        frameRendered++;
+
+        clock.stop();
+        std::this_thread::sleep_for(std::chrono::milliseconds(waitTime));
     }
 }

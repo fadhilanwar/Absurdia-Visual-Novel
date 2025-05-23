@@ -3,6 +3,9 @@
 UI *UI_Create()
 {
     Canvas *canvas = Canvas_Create();
+    Canvas_Clear(canvas);
+    Canvas_Update(canvas);
+
     UI *ui = new UI{
         .canvas = canvas};
     return ui;
@@ -203,6 +206,8 @@ void UI_RequestUpdate(UI *ui)
 
 void UI_DrawAll(UI *ui)
 {
+    Canvas_Clear(ui->canvas);
+
     for (const UIElement *elem : ui->elements)
     {
         if (elem->type == UIElementType::TEXT)
