@@ -9,7 +9,7 @@
 
 struct Scene1Data
 {
-    int waitTime;
+
 };
 
 Scene *Scene1_Create();

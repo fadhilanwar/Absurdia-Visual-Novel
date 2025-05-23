@@ -6,7 +6,6 @@
 
 struct MainMenuPageData
 {
-    Text *heading;
 };
 
 Page *MainMenuPG_Create();

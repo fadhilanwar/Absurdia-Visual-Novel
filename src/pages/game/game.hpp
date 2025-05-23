@@ -9,7 +9,7 @@ struct GamePageData
 {
     SceneManager* sceneMg;
 
-    Image *sceneImage;
+    UIElement *sceneImage;
 };
 
 Page* GamePG_Create();

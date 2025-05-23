@@ -19,8 +19,8 @@ void AboutPG_Start(Page* page)
 {
     AboutPageData *data = (AboutPageData*)page->data;
 
-    UI_AddImage(page->ui, 0, 0, 1000, 550, true, "emoji.png");
-    UI_AddText(page->ui, 50, 10, "About", TextStyle::NORMAL, 24, sf::Color::White);
+    UI_AddImage(page->ui, nullptr, 0, 0, 1000, 550, true, "emoji.png");
+    UI_AddText(page->ui, nullptr, 50, 10, "About", TextStyle::NORMAL, 24, sf::Color::White);
     // UI_AddButton(page->ui, 50, 150, 200, 50, "Button test", 16, sf::Color::White, "", MainMenuPG_OnButtonClick, page);
 }
 

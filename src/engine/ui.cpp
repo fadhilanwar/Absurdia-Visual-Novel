@@ -14,11 +14,11 @@ void UI_HitTest(UI *ui, sf::Window *window)
 
     bool isHoveringButton = false;
 
-    for (const UIElement &elem : ui->elements)
+    for (const UIElement *elem : ui->elements)
     {
-        if (elem.type == UIElementType::BUTTON /*  || elem.type == UIElementType::BUTTON_WITH_TEXT */)
+        if (elem->type == UIElementType::BUTTON /*  || elem.type == UIElementType::BUTTON_WITH_TEXT */)
         {
-            ButtonPrimitive button = (ButtonPrimitive)((Button *)elem.properties)->button;
+            ButtonPrimitive button = (ButtonPrimitive)((Button *)elem->properties)->button;
             // if (elem.type == UIElementType::BUTTON)
             // {
             //     button = (ButtonPrimitive)((Button *)elem.properties)->button;
@@ -67,7 +67,30 @@ void UI_ResetCursor(UI *ui, sf::Window *window)
     window->setMouseCursor(cursor);
 }
 
-Text *UI_AddText(UI *ui, int x, int y, std::string text, TextStyle style, int fontSize, sf::Color color)
+void m_UI_AddElement(UI *ui, UIElement *element, UIElement *insertAfter)
+{
+    if (insertAfter != nullptr)
+    {
+        auto it = std::find_if(ui->elements.begin(), ui->elements.end(),
+                               [&](UIElement *item)
+                               { return item->id == insertAfter->id; });
+        if (it != ui->elements.end())
+        {
+            ui->elements.insert(it + 1, element);
+        }
+        else
+        {
+            std::cout << "Gagal tambah elemen UI! elemen UI insertAfter tidak ada di daftar elemen UI yang ada. Elemen UI akan ditambah di akhir daftar elemen UI.\n";
+            ui->elements.push_back(element);
+        }
+    }
+    else
+    {
+        ui->elements.push_back(element);
+    }
+}
+
+UIElement *UI_AddText(UI *ui, UIElement *insertAfter, int x, int y, std::string text, TextStyle style, int fontSize, sf::Color color)
 {
     Text *textElement = new Text{
         .x = x,
@@ -76,17 +99,18 @@ Text *UI_AddText(UI *ui, int x, int y, std::string text, TextStyle style, int fo
         .style = style,
         .fontSize = fontSize,
         .color = color};
-    UIElement element{
+    UIElement *element = new UIElement{
+        .id = rand() % 1000001,
         .type = UIElementType::TEXT,
         .properties = textElement};
 
-    ui->elements.push_back(element);
+    m_UI_AddElement(ui, element, insertAfter);
     ui->isDirty = true;
 
-    return textElement;
+    return element;
 }
 
-Button *UI_AddButton(UI *ui, int x, int y, int width, int height, std::string text, int fontSize, sf::Color textColor, std::string backgroundFilePath, std::function<void(void *)> onClick, void *onClickParameter)
+UIElement *UI_AddButton(UI *ui, UIElement *insertAfter, int x, int y, int width, int height, std::string text, int fontSize, sf::Color textColor, std::string backgroundFilePath, std::function<void(void *)> onClick, void *onClickParameter)
 {
     sf::Texture backgroundImage;
     if (backgroundFilePath == "")
@@ -110,17 +134,18 @@ Button *UI_AddButton(UI *ui, int x, int y, int width, int height, std::string te
         .fontSize = fontSize,
         .textColor = textColor,
         .backgroundImage = backgroundImage};
-    UIElement element{
+    UIElement *element = new UIElement{
+        .id = rand() % 1000001,
         .type = UIElementType::BUTTON,
         .properties = buttonElement};
 
-    ui->elements.push_back(element);
+    m_UI_AddElement(ui, element, insertAfter);
     ui->isDirty = true;
 
-    return buttonElement;
+    return element;
 }
 
-Rectangle *UI_AddRectangle(UI *ui, int x, int y, int width, int height, sf::Color color)
+UIElement *UI_AddRectangle(UI *ui, UIElement *insertAfter, int x, int y, int width, int height, sf::Color color)
 {
     Rectangle *rectangleElem = new Rectangle{
         .x = x,
@@ -128,17 +153,18 @@ Rectangle *UI_AddRectangle(UI *ui, int x, int y, int width, int height, sf::Colo
         .width = width,
         .height = height,
         .color = color};
-    UIElement element{
+    UIElement *element = new UIElement{
+        .id = rand() % 1000001,
         .type = UIElementType::RECTANGLE,
         .properties = rectangleElem};
 
-    ui->elements.push_back(element);
+    m_UI_AddElement(ui, element, insertAfter);
     ui->isDirty = true;
 
-    return rectangleElem;
+    return element;
 }
 
-Image *UI_AddImage(UI *ui, int x, int y, int width, int height, bool stretch, std::string imageFilePath)
+UIElement *UI_AddImage(UI *ui, UIElement *insertAfter, int x, int y, int width, int height, bool stretch, std::string imageFilePath)
 {
     sf::Texture image;
     if (imageFilePath != "")
@@ -153,14 +179,15 @@ Image *UI_AddImage(UI *ui, int x, int y, int width, int height, bool stretch, st
         .height = height,
         .image = image,
         .stretch = stretch};
-    UIElement element{
+    UIElement *element = new UIElement{
+        .id = rand() % 1000001,
         .type = UIElementType::IMAGE,
         .properties = rectangleElem};
 
-    ui->elements.push_back(element);
+    m_UI_AddElement(ui, element, insertAfter);
     ui->isDirty = true;
 
-    return rectangleElem;
+    return element;
 }
 
 void UI_CopyCanvasToImage(UI *ui, Image *targetImage, Canvas *srcCanvas)
@@ -176,28 +203,28 @@ void UI_RequestUpdate(UI *ui)
 
 void UI_DrawAll(UI *ui)
 {
-    for (const UIElement &elem : ui->elements)
+    for (const UIElement *elem : ui->elements)
     {
-        if (elem.type == UIElementType::TEXT)
+        if (elem->type == UIElementType::TEXT)
         {
-            Text *text = (Text *)elem.properties;
+            Text *text = (Text *)elem->properties;
             Canvas_DrawText(ui->canvas, text->x, text->y, text->text, text->style, text->fontSize, text->color);
         }
-        else if (elem.type == UIElementType::BUTTON)
+        else if (elem->type == UIElementType::BUTTON)
         {
-            Button *button = (Button *)elem.properties;
+            Button *button = (Button *)elem->properties;
             ButtonPrimitive &buttonPrim = button->button;
             Canvas_DrawTexture(ui->canvas, buttonPrim.x, buttonPrim.y, buttonPrim.width, buttonPrim.height, true, &button->backgroundImage);
             Canvas_DrawText(ui->canvas, buttonPrim.x, buttonPrim.y, buttonPrim.width, buttonPrim.height, button->text, TextStyle::BOLD, TextAlignment::CENTER, button->fontSize, button->textColor);
         }
-        else if (elem.type == UIElementType::RECTANGLE)
+        else if (elem->type == UIElementType::RECTANGLE)
         {
-            Rectangle *rect = (Rectangle *)elem.properties;
+            Rectangle *rect = (Rectangle *)elem->properties;
             Canvas_DrawRect(ui->canvas, rect->x, rect->y, rect->width, rect->height, rect->color);
         }
-        else if (elem.type == UIElementType::IMAGE)
+        else if (elem->type == UIElementType::IMAGE)
         {
-            Image *image = (Image *)elem.properties;
+            Image *image = (Image *)elem->properties;
             Canvas_DrawTexture(ui->canvas, image->x, image->y, image->width, image->height, image->stretch, &image->image);
         }
     }
