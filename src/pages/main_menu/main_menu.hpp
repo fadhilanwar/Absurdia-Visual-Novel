@@ -6,6 +6,7 @@
 
 struct MainMenuPageData
 {
+    UIElement *textAku;
 };
 
 Page *MainMenuPG_Create();
