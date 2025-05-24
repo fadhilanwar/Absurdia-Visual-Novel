@@ -27,6 +27,17 @@ struct Dialog
     Scene *onFinishedParameter;
 };
 
+struct Sound
+{
+    sf::SoundBuffer *buffer;
+    sf::Sound *soundPlayer;
+
+    ~Sound()
+    {
+        delete buffer;
+        delete soundPlayer;
+    }
+};
 
 enum SceneManagerState
 {
@@ -37,9 +48,7 @@ enum SceneManagerState
 };
 
 struct SceneManager;
-
 void SceneManager_Destroy(SceneManager *sceneManager);
-
 struct SceneManager
 {
     SceneManagerState state = SceneManagerState::Empty;
@@ -68,6 +77,7 @@ struct SceneManager
     // int dialogTextAnimProgressStep = 0;
 
     sf::Music *musicPlaying = nullptr;
+    std::vector<Sound*> soundsPlaying;
 
     void (*update)(SceneManager *sceneMg);
 
@@ -84,4 +94,5 @@ void SceneManager_AddDialog(SceneManager *sceneMg, bool isLeft, std::string name
 void SceneManager_AddDialog(SceneManager *sceneMg, bool isLeft, std::string name, std::string message, std::string imageFilePath, std::function<void(Scene *)> onFinished, Scene *onFinishedParameter);
 void SceneManager_AddQuestion(SceneManager *sceneMg, bool isLeft, std::string name, std::string message, std::string question1, std::string question2, std::string question3, std::string question4, std::string imageFilePath);
 void SceneManager_PlayMusic(SceneManager *sceneMg, std::string filePath);
+void SceneManager_PlaySound(SceneManager *sceneMg, std::string filePath);
 void SceneManager_StopMusic(SceneManager *sceneMg);

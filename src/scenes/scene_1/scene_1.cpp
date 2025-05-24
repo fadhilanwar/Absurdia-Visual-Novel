@@ -8,6 +8,11 @@ void Scene1_DialogBeres(Scene *scene)
     SceneManager_GoToScene(scene->sceneManager, newScene);
 }
 
+void Scene1_TestDialogBeres(Scene *scene)
+{
+    SceneManager_PlaySound(scene->sceneManager, "nya.mp3");
+}
+
 void Scene1_Start(Scene *scene)
 {
     Scene1Data *data = (Scene1Data *)scene->data;
@@ -16,7 +21,7 @@ void Scene1_Start(Scene *scene)
     SceneManager_AddDialog(scene->sceneManager, true, "Fuad", "Ehh.. ehhh.. Halo..", "fuad.png");
     SceneManager_AddDialog(scene->sceneManager, false, "Mita", "Eh.. Halo!! Nama kamu siapa?", "mita.png");
     SceneManager_AddDialog(scene->sceneManager, true, "Fuad", "Ehh.. ehhh.. Fuad.. Fuad Mubarak", "fuad_anxiety.png");
-    SceneManager_AddDialog(scene->sceneManager, false, "Mita", "Ihhhhhhhhh lucu banget dehh", "mita.png");
+    SceneManager_AddDialog(scene->sceneManager, false, "Mita", "Ihhhhhhhhh lucu banget dehh", "mita.png", Scene1_TestDialogBeres, scene);
     SceneManager_AddDialog(scene->sceneManager, false, "Mita", "Halo Fuad.. Kenalin aku Mita! :)", "mita_happy.png");
     SceneManager_AddDialog(scene->sceneManager, true, "Fuad", "Ehh.. ehhh.. Sa... Salam kenal!", "fuad_anxiety.png", Scene1_DialogBeres, scene);
 

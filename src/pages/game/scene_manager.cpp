@@ -109,6 +109,19 @@ void SceneManager_PlayMusic(SceneManager *sceneMg, std::string filePath)
     sceneMg->musicPlaying->play();
 }
 
+void SceneManager_PlaySound(SceneManager *sceneMg, std::string filePath)
+{
+    sf::SoundBuffer *buffer = new sf::SoundBuffer;
+    buffer->loadFromFile(GetExePath() + filePath);
+    sf::Sound *soundPlayer = new sf::Sound(*buffer);
+    Sound *sound = new Sound{
+        .buffer = buffer,
+        .soundPlayer = soundPlayer};
+
+    sceneMg->soundsPlaying.push_back(sound);
+    soundPlayer->play();
+}
+
 void SceneManager_StopMusic(SceneManager *sceneMg)
 {
     if (sceneMg->musicPlaying == nullptr)
@@ -198,6 +211,20 @@ void m_SceneManager_ResetDialog(SceneManager *sceneMg)
 
 void m_SceneManager_Update(SceneManager *sceneMg)
 {
+    // Hapus semua sound yang udah selesai playing
+    if (!sceneMg->soundsPlaying.empty())
+    {
+        for (auto it = sceneMg->soundsPlaying.begin(); it != sceneMg->soundsPlaying.end(); it++)
+        {
+            Sound *sound = *it;
+            if (sound->soundPlayer->getStatus() == sf::SoundSource::Status::Stopped)
+            {
+                sceneMg->soundsPlaying.erase(it);
+                delete sound;
+            }
+        }
+    }
+
     if (sceneMg->isTransitioningScene)
     {
         if (sceneMg->sceneTransitionProgress <= 1.0f)
