@@ -13,3 +13,4 @@ struct GamePageData
 };
 
 Page* GamePG_Create();
+Page* GamePG_CreateFromSave(const char* saveName);

@@ -1,4 +1,5 @@
 #include "main_menu.hpp"
+#include "../load_game/load_game.hpp"
 #include <iostream>
 
 
@@ -16,7 +17,7 @@ void MainMenuPG_OnButtonClick2(void* parameter)
     Page *page = (Page*)parameter;
     MainMenuPageData *data = (MainMenuPageData*)page->data;
 
-    Page *gamePage = AboutPG_Create();
+    Page *gamePage = LoadGamePG_Create();
     PageManager_GoToScene(page->pageManager, gamePage);
 }
 
@@ -71,7 +72,7 @@ void MainMenuPG_Start(Page* page)
     // UI_AddButton(page->ui, nullptr, 50, 220, 200, 50, "About", 16, sf::Color::White, "nametag.png", MainMenuPG_OnButtonClick2, page);
     // UI_AddText(page->ui, nullptr, 10, 10, "Abc 123", TextStyle::NORMAL, 24, sf::Color::White);
 }
-
+  
 void MainMenuPG_Update(Page* page)
 {
     MainMenuPageData *data = (MainMenuPageData*)page->data;

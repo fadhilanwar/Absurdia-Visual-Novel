@@ -1,0 +1,60 @@
+#include "load_game.hpp"
+#include <iostream>
+#include "../main_menu/main_menu.hpp"
+#include "../game/game.hpp"
+#include "../../engine/page_manager.hpp"
+
+void LoadGamePG_OnButtonClick(void* parameter)
+{
+    Page *page = (Page*)parameter;
+    Page *gamePage = GamePG_CreateFromSave("Ahmad");
+    PageManager_GoToScene(page->pageManager, gamePage);
+}
+
+void LoadGamePG_OnBack(void* parameter)
+{
+    Page *page = (Page*)parameter;
+    Page *mainMenu = MainMenuPG_Create();
+    PageManager_GoToScene(page->pageManager, mainMenu);
+}
+
+void LoadGamePG_Start(Page* page)
+{
+    LoadGamePageData *data = (LoadGamePageData*)page->data;
+
+    UI_AddImage(page->ui, nullptr, 0, 0, 1000, 550, true, "wp_loadgame.png");
+    UI_AddText(page->ui, nullptr, 400, 100, "Load Game", TextStyle::BOLD, 32, sf::Color::White);
+
+    // Contoh beberapa slot save
+    UI_AddButton(page->ui, nullptr, 380, 180, 240, 40, "Ahmad", 20, sf::Color::Black, "button.png", LoadGamePG_OnButtonClick, page);
+    UI_AddButton(page->ui, nullptr, 380, 240, 240, 40, "Masda", 20, sf::Color::Black, "button.png", LoadGamePG_OnButtonClick, page);
+    UI_AddButton(page->ui, nullptr, 380, 300, 240, 40, "Virgi", 20, sf::Color::Black, "button.png", LoadGamePG_OnButtonClick, page);
+
+    // Tombol kembali
+    UI_AddButton(page->ui, nullptr, 350, 400, 35, 35, " ", 20, sf::Color::White, "back.png", LoadGamePG_OnBack, page);
+}
+
+void LoadGamePG_Update(Page* page)
+{
+    
+}
+
+void LoadGamePG_Destroy(Page* page)
+{
+    LoadGamePageData *data = (LoadGamePageData*)page->data;
+    delete data;
+}
+
+Page *LoadGamePG_Create()
+{
+    LoadGamePageData *data = new LoadGamePageData {};
+    Page *page = new Page {
+        .pageManager = nullptr,
+        .ui = UI_Create(),
+        .data = data,
+        .start = LoadGamePG_Start,
+        .update = LoadGamePG_Update,
+        .destroy = LoadGamePG_Destroy
+    };
+    return page;
+}

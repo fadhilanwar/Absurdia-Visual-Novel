@@ -41,3 +41,14 @@ Page *GamePG_Create()
         .destroy = GamePG_Destroy};
     return page;
 }
+
+Page *GamePG_CreateFromSave(const char *saveName)
+{
+    GamePageData *data = new GamePageData{};
+    Page *page = new Page{
+        .data = data,
+        .start = GamePG_Start,
+        .update = GamePG_Update,
+        .destroy = GamePG_Destroy};
+    return page;
+}
