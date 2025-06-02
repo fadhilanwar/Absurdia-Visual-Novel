@@ -43,14 +43,28 @@ void MainMenuPG_Start(Page* page)
 {
     MainMenuPageData *data = (MainMenuPageData*)page->data;
     
-    // Nambahin foto
-    UI_AddImage(page->ui, nullptr, 0, 0, 1000, 550, true, "Futon_Room.png");
+    // Nambahin background
+    UI_AddImage(page->ui, nullptr, 0, 0, 1000, 550, true, "walpaper_menu.png");
+
+   // UI_AddImage(page->ui, nullptr, 0, 0, 1000, 550, true, "Futon_Room.png");
 
     // Nambahin teks
-    data->textAku = UI_AddText(page->ui, nullptr, 10, 20, "Abcasdsadasdasd", TextStyle::NORMAL, 16, sf::Color(50, 50, 50, 255));
+    UI_AddText(page->ui, nullptr, 380, 250, "Interview terakhir sebelum gila", TextStyle::BOLD, 20, sf::Color::White);
+
+    // Nambahin heading utama
+    UI_AddText(page->ui, nullptr, 380, 200, "Absurdia Inc", TextStyle::BOLD, 48, sf::Color::White);
+
+    //data->textAku = UI_AddText(page->ui, nullptr, 10, 20, "Abcasdsadasdasd", TextStyle::NORMAL, 16, sf::Color(50, 50, 50, 255));
 
     // Nambahin button
-    UI_AddButton(page->ui, nullptr, 20, 50, 100, 50, "Pencet aku", 18, sf::Color::Blue, "fuad.png", MainMenuPG_ButtonDiklik, page);
+    UI_AddButton(page->ui, nullptr, 75, 150, 150, 50, "New Game", 18, sf::Color::Black, "button.png", MainMenuPG_OnButtonClick, page);
+    UI_AddButton(page->ui, nullptr, 75, 220, 150, 50, "Load Game", 18, sf::Color::Black, "button.png", MainMenuPG_OnButtonClick2, page);
+    UI_AddButton(page->ui, nullptr, 75, 290, 150, 50, "Quit", 18, sf::Color::Black, "button.png",
+        [](void* param) {
+            std::exit(0);
+        }, page);
+
+   // UI_AddButton(page->ui, nullptr, 20, 50, 100, 50, "Pencet aku", 18, sf::Color::Blue, "fuad.png", MainMenuPG_ButtonDiklik, page);
 
 
     // UI_AddButton(page->ui, nullptr, 50, 150, 200, 50, "Button test", 16, sf::Color::White, "nametag.png", MainMenuPG_OnButtonClick, page);

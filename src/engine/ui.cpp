@@ -1,4 +1,5 @@
 #include "ui.hpp"
+#include <algorithm>
 
 UI *UI_Create()
 {
