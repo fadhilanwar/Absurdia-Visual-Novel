@@ -26,7 +26,7 @@ void Scene1_Start(Scene *scene)
 //     SceneManager_SetBackground(scene->sceneManager, "wp_awal.png");
     SceneManager_SetBackground(scene->sceneManager, "wp_pilihan.png");
     //     SceneManager_AddDialog(scene->sceneManager, true, "Fuad", "asdasdasdasdasd", "muka_datar.png", Scene1_DialogBeres, scene);
-    SceneManager_AddDialog(scene->sceneManager, true, "MC", "Haloo! Selamat datang di dunia Absurdian. Dunia dimana kamu akan melakukan interview ter absurd yang pernah ada.", "talkingPajamas.png", Scene1_DialogPilihan1, scene);
+    SceneManager_AddDialog(scene->sceneManager, true, "MC", "Haloo!\nSelamat datang di dunia Absurdian. Dunia dimana kamu akan\nmelakukan interview ter absurd yang pernah ada.", "talkingPajamas.png", Scene1_DialogPilihan1, scene);
     // SceneManager_AddQuestion(scene->sceneManager, "Pilihan Action: ",
     // {
     //     {"questio1", Scene1_DialogPilihan1},
