@@ -11,6 +11,7 @@ void Scene1_DialogPilihan1(Scene *scene)
 //pilihan 2
 void Scene1_DialogPilihan2(Scene *scene)
 {
+    
     std::cout << "Pilihan 2 dipilih\n";
 }
 

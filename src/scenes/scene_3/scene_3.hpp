@@ -1,11 +1,11 @@
-// #include once
+#pragma once
 
-// #include "SFML/Audio.hpp"
-// #include "../scene.hpp"
-// #include "../../umum.hpp"
+#include "SFML/Audio.hpp"
+#include "../scene.hpp"
+#include "../../umum.hpp"
 
-// struct Scene3Data
-// {
+struct Scene3Data
+{
 
-// };
-// Scene *Scene3_Create();
+};
+Scene *Scene3_Create();
