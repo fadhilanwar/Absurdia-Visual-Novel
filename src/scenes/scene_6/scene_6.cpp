@@ -4,8 +4,8 @@
 void Scene6_DialogScene6(Scene *scene)
 {
     std::cout << "Dialog beres\n";
-    Scene *scene6 = Scene6_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene6);
+    Scene *scene7 = Scene7_Create();
+    SceneManager_GoToScene(scene->sceneManager, scene7);
 }
 
 void Scene6_Start(Scene *scene)
