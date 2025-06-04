@@ -24,8 +24,8 @@ void Scene1_Start(Scene *scene)
     Scene1Data *data = (Scene1Data *)scene->data;
 
     
-    SceneManager_SetBackground(scene->sceneManager, "Futon_Room.png");
-    SceneManager_AddDialog(scene->sceneManager, true, "Fuad", "asdasdasdasdasd", "fuad.png", Scene1_DialogBeres, scene);
+    SceneManager_SetBackground(scene->sceneManager, "wp_awal.png");
+    SceneManager_AddDialog(scene->sceneManager, true, "Fuad", "asdasdasdasdasd", "muka_datar.png", Scene1_DialogBeres, scene);
 
     // SceneManager_AddDialog(scene->sceneManager, false, "Mita", "Hai! Apa kabar!", "mita.png");
     // SceneManager_AddDialog(scene->sceneManager, true, "Fuad", "Ehh.. ehhh.. Halo..", "fuad.png");

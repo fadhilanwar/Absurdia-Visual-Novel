@@ -3,16 +3,27 @@
 #include "../game/game.hpp" 
 #include "../../engine/ui.hpp"
 #include <iostream>
+#include <fstream>
 
 void NewGamePG_OnStartClick(void* parameter) {
     Page* page = (Page*)parameter;
     NewGamePageData* data = (NewGamePageData*)page->data;
 
     std::string nama = UI_GetInputText(data->inputNamaKarakter);
-    std::cout << "Nama karakter: " << nama << std::endl;
+    std::ofstream saveFile("save.txt");
+    if (saveFile.is_open())
+    {
+        saveFile << nama << std:: endl;
+        saveFile.close();
+        std::cout << "Nama karakter disimpan ke save.txt";
+    }
+    else
+    {
+        std::cerr << "Gagal menyimpan nama karakter";
+    }
 
-    // Simpan nama karakter atau oper ke game
-    Page* gamePage = GamePG_Create(); // Atur ini sesuai halaman game kamu
+    // simpan nama karakter atau oper ke game
+    Page* gamePage = GamePG_Create(); 
     PageManager_GoToScene(page->pageManager, gamePage);
 }
 
@@ -38,7 +49,7 @@ void NewGamePG_Start(Page* page) {
 
 void NewGamePG_Update(Page* page) 
 {
-    
+    //
 }
 
 void NewGamePG_Destroy(Page* page) 

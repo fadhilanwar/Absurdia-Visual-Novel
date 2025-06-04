@@ -41,14 +41,6 @@ void Engine_Run(Engine *engine)
         int waitTime = std::max(8 - clock.getElapsedTime().asMilliseconds(), 0);
         clock.restart();
 
-        while (const std::optional event = engine->window.pollEvent())
-        {
-            if (event->is<sf::Event::Closed>())
-            {
-                engine->window.close();
-            }
-        }
-
         engine->pageManager->update(engine->pageManager);
 
         engine->window.clear();
