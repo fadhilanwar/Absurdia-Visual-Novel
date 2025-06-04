@@ -35,6 +35,8 @@ add_executable(main
     src/pages/main_menu/main_menu.cpp
     src/pages/load_game/load_game.hpp
     src/pages/load_game/load_game.cpp
+    src/pages/new_game/new_game.hpp
+    src/pages/new_game/new_game.cpp
     src/engine/canvas.hpp
     src/engine/canvas.cpp
     src/engine/ui.hpp

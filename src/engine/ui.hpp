@@ -49,12 +49,23 @@ struct Image
     bool stretch;
 };
 
+struct InputField
+{
+    int x, y;
+    int width, height;
+    std::string placeholderText;
+    std::string text; 
+    int maxLength; 
+    sf::Color textColor;
+    sf::Texture backgroundImage; 
+};
 enum UIElementType
 {
     TEXT,
     BUTTON,
     RECTANGLE,
-    IMAGE
+    IMAGE,
+    INPUT_FIELD
     // BUTTON_WITH_TEXT
 };
 
@@ -103,3 +114,6 @@ UIElement *UI_AddImage(UI *ui, UIElement *insertAfter, int x, int y, int width, 
 void UI_CopyCanvasToImage(UI *ui, Image *targetImage, Canvas *srcCanvas);
 void UI_RequestUpdate(UI *ui);
 void UI_DrawAll(UI *ui);
+
+UIElement* UI_AddInputField(UI* ui, UIElement* insertAfter, int x, int y, int width, int height, std::string placeholderText, int maxLength, sf::Color textColor, std::string backgroundFilePath);
+std::string UI_GetInputText(UIElement*);

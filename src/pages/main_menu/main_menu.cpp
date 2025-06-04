@@ -1,5 +1,6 @@
 #include "main_menu.hpp"
 #include "../load_game/load_game.hpp"
+#include "../new_game/new_game.hpp"
 #include <iostream>
 
 
@@ -8,7 +9,7 @@ void MainMenuPG_OnButtonClick(void* parameter)
     Page *page = (Page*)parameter;
     MainMenuPageData *data = (MainMenuPageData*)page->data;
 
-    Page *gamePage = GamePG_Create();
+    Page *gamePage = NewGamePG_Create();
     PageManager_GoToScene(page->pageManager, gamePage);
 }
 

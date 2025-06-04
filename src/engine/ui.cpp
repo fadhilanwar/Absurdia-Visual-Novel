@@ -233,9 +233,47 @@ void UI_DrawAll(UI *ui)
             Image *image = (Image *)elem->properties;
             Canvas_DrawTexture(ui->canvas, image->x, image->y, image->width, image->height, image->stretch, &image->image);
         }
+        else if (elem->type == UIElementType::INPUT_FIELD)
+        {
+            InputField *inputField = (InputField *)elem->properties;
+            Canvas_DrawTexture(ui->canvas, inputField->x, inputField->y, inputField->width, inputField->height, true, &inputField->backgroundImage);
+            Canvas_DrawText(ui->canvas, inputField->x + 5, inputField->y + 5, inputField->text, TextStyle::NORMAL, 16, inputField->textColor);
+        }
     }
     Canvas_Update(ui->canvas);
 
     ui->isDirty = false;
     ui->isRequireCopy = true;
 }
+
+UIElement* UI_AddInputField(
+    UI* ui, UIElement* insertAfter, int x, int y, int width, int height, std::string placeholderText, int maxLength, sf::Color textColor, std::string backgroundFilePath) {
+    InputField* inputField = new InputField{
+        .x = x,
+        .y = y,
+        .width = width,
+        .height = height,
+        .text = placeholderText,
+        .maxLength = maxLength,
+        .textColor = textColor,
+        .backgroundImage = sf::Texture(GetExePath() + backgroundFilePath)
+    };
+    UIElement* element = new UIElement{
+        .id = rand() % 1000001,
+        .type = UIElementType::INPUT_FIELD,
+        .properties = inputField
+    };
+
+    m_UI_AddElement(ui, element, insertAfter);
+    ui->isDirty = true;
+
+    return element;
+}
+
+std::string UI_GetInputText(UIElement* element) {
+    if (element->type == UIElementType::INPUT_FIELD) {
+        InputField *inputField = (InputField *)element->properties;
+        return inputField->text;
+    }
+    return "";
+};
