@@ -24,6 +24,8 @@ add_executable(main
     src/scenes/scene_1/scene_1.cpp
     src/scenes/scene_2/scene_2.hpp
     src/scenes/scene_2/scene_2.cpp
+    src/scenes/scene_3/scene_3.hpp
+    src/scenes/scene_3/scene_3.cpp
     src/pages/page.hpp
     src/pages/game/game.hpp
     src/pages/game/game.cpp
