@@ -1,7 +1,12 @@
 #include "scene_3.hpp"
 #include <iostream>
 
-
+void Scene3_DialogScene3(Scene *scene)
+{
+    std::cout << "Dialog beres\n";
+    Scene *scene3 = Scene3_Create();
+    SceneManager_GoToScene(scene->sceneManager, scene3);
+}
 
 void Scene3_Start(Scene *scene)
 {

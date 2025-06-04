@@ -6,7 +6,6 @@
 #include "../../umum.hpp"
 #include "../scene_2/scene_2.hpp"
 
-
 struct Scene1Data
 {
 

@@ -5,21 +5,21 @@
 void Scene1_DialogPilihan1(Scene *scene)
 {
     std::cout << "Pilihan 1 dipilih\n";
-    Scene *scene2 = Scene2_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene2);
+    Scene *scene_2 = Scene2_Create();
+    SceneManager_GoToScene(scene->sceneManager, scene_2);
 }
-//pilihan 2
-void Scene1_DialogPilihan2(Scene *scene)
-{
-    
-    std::cout << "Pilihan 2 dipilih\n";
-}
+// //pilihan 2
+// void Scene1_DialogPilihan2(Scene *scene)
+// {
 
-//pilihan 3
-void Scene1_DialogPilihan3(Scene *scene)
-{
-    std::cout << "Pilihan 3 dipilih\n";
-}
+//     std::cout << "Pilihan 2 dipilih\n";
+// }
+
+// //pilihan 3
+// void Scene1_DialogPilihan3(Scene *scene)
+// {
+//     std::cout << "Pilihan 3 dipilih\n";
+// }
 
 void Scene1_Start(Scene *scene)
 {
