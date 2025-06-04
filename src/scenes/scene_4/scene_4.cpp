@@ -11,8 +11,13 @@ void Scene4_DialogScene4(Scene *scene)
 void Scene4_Start(Scene *scene)
 {
     Scene4Data *data = (Scene4Data *)scene->data;
-    SceneManager_SetBackground(scene->sceneManager, "tiba_dikota.png");
-    SceneManager_AddDialog(scene->sceneManager, true, "MC","Aku harus cepat! Kalau telat, mereka bisa langsung mencoret namaku..", "talkingWork.png", Scene4_DialogScene4, scene);
+    SceneManager_SetBackground(scene->sceneManager, "resepsionis.png");
+    SceneManager_AddDialog(scene->sceneManager, false, "Resepsionis","(sambil tersenyum lebar) Pasti kamu mau bertanya kan, haha!", "resepsionisTertawa.png");
+    SceneManager_AddDialog(scene->sceneManager, true, "MC","Eh… iya, saya...", "talkingWork.png");
+    SceneManager_AddDialog(scene->sceneManager, false, "Resepsionis","Ayo ayo, mau tanya apa, ha?", "resepsionisTalk.png");
+    SceneManager_AddDialog(scene->sceneManager, true, "MC","A-aku ke sini... ingin interview kerja di Absurdia Inc.", "confusedWork.png");
+    SceneManager_AddDialog(scene->sceneManager, false, "Resepsionis", "Ooo begitu! Langsung naik lift saja, ada di lantai 3. Oke!!", "resepsionisSenyum.png");
+    SceneManager_AddDialog(scene->sceneManager, true, "MC","Baik. Terima kasih", "talkingWork.png", Scene4_DialogScene4, scene);
 
     SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
 }
