@@ -1,5 +1,7 @@
 #include "ui.hpp"
+
 #include <algorithm>
+#include <iostream>
 
 UI *UI_Create()
 {
