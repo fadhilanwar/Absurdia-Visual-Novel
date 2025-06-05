@@ -1,8 +1,24 @@
 #include "load_game.hpp"
 #include <iostream>
+#include <fstream>
 #include "../main_menu/main_menu.hpp"
 #include "../game/game.hpp"
 #include "../../engine/page_manager.hpp"
+
+void LoadSaveCharacterName(Page* page)
+{
+    std::ifstream saveFile("save.txt");
+    std::string savedName;
+    if (saveFile.is_open() && std::getline(saveFile, savedName))
+    {
+        InputField *inputField = page->ui->inputFieldAktif;
+        if (inputField)
+        {
+            inputField->text = savedName;
+            UI_RequestUpdate(page->ui);     
+        }
+    }
+}
 
 void LoadGamePG_OnButtonClick(void* parameter)
 {

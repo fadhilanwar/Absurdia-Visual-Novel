@@ -58,6 +58,7 @@ struct InputField
     int maxLength; 
     sf::Color textColor;
     sf::Texture backgroundImage; 
+    bool isActive = false; // Menandakan apakah input field aktif
 };
 enum UIElementType
 {
@@ -102,6 +103,7 @@ struct UI
                 delete (Image *)elem->properties;
         }
     }
+    InputField *inputFieldAktif = nullptr; 
 };
 
 UI *UI_Create();
