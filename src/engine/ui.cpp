@@ -14,34 +14,42 @@ UI *UI_Create()
     return ui;
 }
 
-void UI_HitTest(UI *ui, sf::Window *window)
+void UI_EventTest(UI *ui, EngineWindow *engineWindow)
 {
-    sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
+    // Dapatkan posisi mouse
+    sf::Vector2i mousePos = sf::Mouse::getPosition(engineWindow->window);
 
-    bool isHoveringButton = false;
+    // bool isHoveringButton = false;
+    // bool isHoveringTextField = false;
+    bool needRedraw = false;
+    UIElement *_hoveredElement = nullptr;
+    UIElement *_focusedElement = ui->focusedElement;
 
-    for (const UIElement *elem : ui->elements)
+    // Tes satu-satu semua elemen dari belakang,
+    // apabila sudah ada elemen yang di-"hover", stop iterasi
+    for (auto it = ui->elements.rbegin(); it != ui->elements.rend(); ++it)
     {
+        UIElement *elem = *it;
+
+        // Apabila elemen adalah Button
         if (elem->type == UIElementType::BUTTON /*  || elem.type == UIElementType::BUTTON_WITH_TEXT */)
         {
-            ButtonPrimitive button = (ButtonPrimitive)((Button *)elem->properties)->button;
-            // if (elem.type == UIElementType::BUTTON)
-            // {
-            //     button = (ButtonPrimitive)((Button *)elem.properties)->button;
-            // }
+            Button *button = (Button *)elem->properties;
 
-            if (mousePos.x >= button.x && mousePos.x <= button.x + button.width &&
-                mousePos.y >= button.y && mousePos.y <= button.y + button.height)
+            if (mousePos.x >= button->x && mousePos.x <= button->x + button->width &&
+                mousePos.y >= button->y && mousePos.y <= button->y + button->height)
             {
-                isHoveringButton = true;
+                _hoveredElement = elem;
+                // isHoveringButton = true;
 
                 if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
                 {
                     if (!ui->isMouseDown)
                     {
                         ui->isMouseDown = true;
-                        if (button.onClick != nullptr)
-                            button.onClick(button.onClickParameter);
+                        _focusedElement = elem;
+                        if (button->onClick != nullptr)
+                            button->onClick(button->onClickParameter);
                     }
                 }
                 else
@@ -49,28 +57,101 @@ void UI_HitTest(UI *ui, sf::Window *window)
                     if (ui->isMouseDown)
                         ui->isMouseDown = false;
                 }
+
+                break;
+            }
+        }
+        else if (elem->type == UIElementType::INPUT_FIELD)
+        {
+            InputField *inputField = (InputField *)elem->properties;
+
+            if (mousePos.x >= inputField->x && mousePos.x <= inputField->x + inputField->width &&
+                mousePos.y >= inputField->y && mousePos.y <= inputField->y + inputField->height)
+            {
+                _hoveredElement = elem;
+
+                if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+                {
+                    if (!ui->isMouseDown)
+                    {
+                        ui->isMouseDown = true;
+                        _focusedElement = elem;
+                        needRedraw = true;
+                    }
+                }
+                else
+                {
+                    if (ui->isMouseDown)
+                        ui->isMouseDown = false;
+                }
+
+                break;
             }
         }
     }
 
-    if (!ui->isHoveringButton && isHoveringButton)
+    // Cabut elemen fokus kalau mouse dipencet bukan di elemen yang bisa diklik
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && _hoveredElement == nullptr)
     {
-        auto cursor = sf::Cursor::createFromSystem(sf::Cursor::Type::Hand).value();
-        window->setMouseCursor(cursor);
-        ui->isHoveringButton = true;
+        _focusedElement = nullptr;
+        needRedraw = true;
     }
-    else if (ui->isHoveringButton && !isHoveringButton)
+
+    // Cek hovered element
+    if (_hoveredElement != nullptr)
+    {
+        if (_hoveredElement->type == UIElementType::BUTTON)
+        {
+            auto cursor = sf::Cursor::createFromSystem(sf::Cursor::Type::Hand).value();
+            engineWindow->window.setMouseCursor(cursor);
+        }
+        else if (_hoveredElement->type == UIElementType::INPUT_FIELD)
+        {
+            auto cursor = sf::Cursor::createFromSystem(sf::Cursor::Type::Text).value();
+            engineWindow->window.setMouseCursor(cursor);
+        }
+    }
+    else if (_hoveredElement == nullptr && ui->hoveredElement != nullptr)
     {
         auto cursor = sf::Cursor::createFromSystem(sf::Cursor::Type::Arrow).value();
-        window->setMouseCursor(cursor);
+        engineWindow->window.setMouseCursor(cursor);
         ui->isHoveringButton = false;
     }
+
+    // Cek focused element
+    if (_focusedElement != nullptr)
+    {
+        if (_focusedElement->type == UIElementType::INPUT_FIELD)
+        {
+            InputField *inputField = (InputField *)_focusedElement->properties;
+            if (engineWindow->inputtedText == 8)
+            {
+                if (!inputField->text.empty())
+                {
+                    inputField->text.pop_back();
+                    needRedraw = true;
+                }
+            }
+            else if (engineWindow->inputtedText != '\0' && inputField->text.size() <= inputField->maxLength)
+            {
+                inputField->text += engineWindow->inputtedText;
+                needRedraw = true;
+            }
+        }
+    }
+
+    ui->hoveredElement = _hoveredElement;
+    if (ui->focusedElement != _focusedElement)
+        ui->focusedElement = _focusedElement;
+
+    if (needRedraw)
+        UI_RequestUpdate(ui);
 }
 
-void UI_ResetCursor(UI *ui, sf::Window *window)
+void UI_ResetCursor(UI *ui, EngineWindow *engineWindow)
 {
     auto cursor = sf::Cursor::createFromSystem(sf::Cursor::Type::Arrow).value();
-    window->setMouseCursor(cursor);
+    engineWindow->window.setMouseCursor(cursor);
 }
 
 void m_UI_AddElement(UI *ui, UIElement *element, UIElement *insertAfter)
@@ -96,13 +177,13 @@ void m_UI_AddElement(UI *ui, UIElement *element, UIElement *insertAfter)
     }
 }
 
-UIElement *UI_AddText(UI *ui, UIElement *insertAfter, int x, int y, std::string text, TextStyle style, int fontSize, sf::Color color)
+UIElement *UI_AddText(UI *ui, UIElement *insertAfter, int x, int y, std::string text, std::string fontPath, int fontSize, sf::Color color)
 {
     Text *textElement = new Text{
         .x = x,
         .y = y,
         .text = text,
-        .style = style,
+        .fontPath = fontPath,
         .fontSize = fontSize,
         .color = color};
     UIElement *element = new UIElement{
@@ -116,7 +197,7 @@ UIElement *UI_AddText(UI *ui, UIElement *insertAfter, int x, int y, std::string 
     return element;
 }
 
-UIElement *UI_AddButton(UI *ui, UIElement *insertAfter, int x, int y, int width, int height, std::string text, int fontSize, sf::Color textColor, std::string backgroundFilePath, std::function<void(void *)> onClick, void *onClickParameter)
+UIElement *UI_AddButton(UI *ui, UIElement *insertAfter, int x, int y, int width, int height, sf::Vector2i horizontalPadding, sf::Vector2i verticalPadding, std::string text, std::string fontPath, int fontSize, sf::Color textColor, std::string backgroundFilePath, std::function<void(void *)> onClick, void *onClickParameter)
 {
     sf::Texture backgroundImage;
     if (backgroundFilePath == "")
@@ -129,17 +210,20 @@ UIElement *UI_AddButton(UI *ui, UIElement *insertAfter, int x, int y, int width,
     }
 
     Button *buttonElement = new Button{
-        .button = ButtonPrimitive{
-            .x = x,
-            .y = y,
-            .width = width,
-            .height = height,
-            .onClick = onClick,
-            .onClickParameter = onClickParameter},
+        .x = x,
+        .y = y,
+        .width = width,
+        .height = height,
+        .horizontalPadding = horizontalPadding,
+        .verticalPadding = verticalPadding,
         .text = text,
+        .fontPath = fontPath,
         .fontSize = fontSize,
         .textColor = textColor,
-        .backgroundImage = backgroundImage};
+        .backgroundImage = backgroundImage,
+        .onClick = onClick,
+        .onClickParameter = onClickParameter,
+    };
     UIElement *element = new UIElement{
         .id = rand() % 1000001,
         .type = UIElementType::BUTTON,
@@ -196,6 +280,43 @@ UIElement *UI_AddImage(UI *ui, UIElement *insertAfter, int x, int y, int width, 
     return element;
 }
 
+UIElement *UI_AddInputField(
+    UI *ui, UIElement *insertAfter, int x, int y, int width, int height, sf::Vector2i horizontalPadding, sf::Vector2i verticalPadding, std::string placeholderText, int maxLength, std::string fontPath, sf::Color textColor, std::string backgroundFilePath, std::string focusedBackgroundFilePath)
+{
+    InputField *inputField = new InputField{
+        .x = x,
+        .y = y,
+        .width = width,
+        .height = height,
+        .horizontalPadding = horizontalPadding,
+        .verticalPadding = verticalPadding,
+        .placeholderText = placeholderText,
+        .maxLength = maxLength,
+        .fontPath = fontPath,
+        .textColor = textColor,
+        .backgroundImage = sf::Texture(GetExePath() + backgroundFilePath),
+        .focusedBackgroundImage = sf::Texture(GetExePath() + focusedBackgroundFilePath)};
+    UIElement *element = new UIElement{
+        .id = rand() % 1000001,
+        .type = UIElementType::INPUT_FIELD,
+        .properties = inputField};
+
+    m_UI_AddElement(ui, element, insertAfter);
+    ui->isDirty = true;
+
+    return element;
+}
+
+std::string UI_GetInputText(UIElement *element)
+{
+    if (element->type == UIElementType::INPUT_FIELD)
+    {
+        InputField *inputField = (InputField *)element->properties;
+        return inputField->text;
+    }
+    return "";
+};
+
 void UI_CopyCanvasToImage(UI *ui, Image *targetImage, Canvas *srcCanvas)
 {
     targetImage->image = Canvas_GetTexture(srcCanvas);
@@ -216,14 +337,28 @@ void UI_DrawAll(UI *ui)
         if (elem->type == UIElementType::TEXT)
         {
             Text *text = (Text *)elem->properties;
-            Canvas_DrawText(ui->canvas, text->x, text->y, text->text, text->style, text->fontSize, text->color);
+            Canvas_DrawText(ui->canvas, text->x, text->y, text->text, text->fontPath, text->fontSize, text->color);
         }
         else if (elem->type == UIElementType::BUTTON)
         {
             Button *button = (Button *)elem->properties;
-            ButtonPrimitive &buttonPrim = button->button;
-            Canvas_DrawTexture(ui->canvas, buttonPrim.x, buttonPrim.y, buttonPrim.width, buttonPrim.height, true, &button->backgroundImage);
-            Canvas_DrawText(ui->canvas, buttonPrim.x, buttonPrim.y, buttonPrim.width, buttonPrim.height, button->text, TextStyle::BOLD, TextAlignment::CENTER, button->fontSize, button->textColor);
+            Canvas_DrawTexture(
+                ui->canvas,
+                button->x, button->y,
+                button->width, button->height,
+                true,
+                &button->backgroundImage);
+            Canvas_DrawText(
+                ui->canvas,
+                button->x + button->horizontalPadding.x,
+                button->y + button->verticalPadding.x,
+                button->width - button->horizontalPadding.x - button->horizontalPadding.y,
+                button->height - button->verticalPadding.x - button->verticalPadding.y,
+                button->text,
+                button->fontPath,
+                Alignment::Center,
+                button->fontSize,
+                button->textColor);
         }
         else if (elem->type == UIElementType::RECTANGLE)
         {
@@ -238,8 +373,41 @@ void UI_DrawAll(UI *ui)
         else if (elem->type == UIElementType::INPUT_FIELD)
         {
             InputField *inputField = (InputField *)elem->properties;
-            Canvas_DrawTexture(ui->canvas, inputField->x, inputField->y, inputField->width, inputField->height, true, &inputField->backgroundImage);
-            Canvas_DrawText(ui->canvas, inputField->x + 5, inputField->y + 5, inputField->text, TextStyle::NORMAL, 16, inputField->textColor);
+            Canvas_DrawTexture(
+                ui->canvas,
+                inputField->x, inputField->y,
+                inputField->width, inputField->height,
+                true,
+                ui->focusedElement == elem ? &inputField->focusedBackgroundImage : &inputField->backgroundImage);
+            if (inputField->text.empty())
+            {
+                sf::Color placeholderColor(inputField->textColor.r, inputField->textColor.g, inputField->textColor.b, 80);
+                Canvas_DrawText(
+                    ui->canvas,
+                    inputField->x + inputField->horizontalPadding.x,
+                    inputField->y + inputField->verticalPadding.x,
+                    inputField->width - inputField->horizontalPadding.x - inputField->horizontalPadding.y,
+                    inputField->height - inputField->verticalPadding.x - inputField->verticalPadding.y,
+                    inputField->placeholderText,
+                    inputField->fontPath,
+                    Alignment::Left,
+                    16,
+                    placeholderColor);
+            }
+            else
+            {
+                Canvas_DrawText(
+                    ui->canvas,
+                    inputField->x + inputField->horizontalPadding.x,
+                    inputField->y + inputField->verticalPadding.x,
+                    inputField->width - inputField->horizontalPadding.x - inputField->horizontalPadding.y,
+                    inputField->height - inputField->verticalPadding.x - inputField->verticalPadding.y,
+                    inputField->text,
+                    inputField->fontPath,
+                    Alignment::Left,
+                    16,
+                    inputField->textColor);
+            }
         }
     }
     Canvas_Update(ui->canvas);
@@ -247,35 +415,3 @@ void UI_DrawAll(UI *ui)
     ui->isDirty = false;
     ui->isRequireCopy = true;
 }
-
-UIElement* UI_AddInputField(
-    UI* ui, UIElement* insertAfter, int x, int y, int width, int height, std::string placeholderText, int maxLength, sf::Color textColor, std::string backgroundFilePath) {
-    InputField* inputField = new InputField{
-        .x = x,
-        .y = y,
-        .width = width,
-        .height = height,
-        .text = placeholderText,
-        .maxLength = maxLength,
-        .textColor = textColor,
-        .backgroundImage = sf::Texture(GetExePath() + backgroundFilePath)
-    };
-    UIElement* element = new UIElement{
-        .id = rand() % 1000001,
-        .type = UIElementType::INPUT_FIELD,
-        .properties = inputField
-    };
-
-    m_UI_AddElement(ui, element, insertAfter);
-    ui->isDirty = true;
-
-    return element;
-}
-
-std::string UI_GetInputText(UIElement* element) {
-    if (element->type == UIElementType::INPUT_FIELD) {
-        InputField *inputField = (InputField *)element->properties;
-        return inputField->text;
-    }
-    return "";
-};

@@ -12,34 +12,92 @@
 
 struct Scene;
 
+//
+// ============================
+// ========== Dialog ==========
+// ============================
+//
+
+// Posisi orang di dialognya
+enum class DialogPersonPosition
+{
+    Left,
+    Center,
+    Right
+};
+// Animasi orangnya
+enum DialogPersonAnimation
+{
+    None, // Gausah dikasih animasi
+    Slide, // Masuk geser dari kiri/kanan/bawah tergantung posisinya dimana
+    FadeIn, // Opacitynya 0 -> 1
+    FadeOut, // Opacitynya 1 -> 0
+    Shake, // Geter
+    Pop, // Loncat dikit
+    Joget, // Joget
+};
+// Data orangnya
+struct DialogPerson
+{
+    std::string imageFilePath;
+    DialogPersonPosition position;
+    DialogPersonAnimation animation = DialogPersonAnimation::None;
+};
+
+// Data pertanyaan dialognya
+struct DialogQuestion
+{
+    std::string question;
+
+    // Callback kalau question dijawab
+    std::function<void(Scene *)> onAnswered;
+    Scene *onAnsweredParameter;
+};
+
+// Data dialog
 struct Dialog
 {
-    bool isLeft;
-    bool isQuestion;
-    std::string imageFilePath;
     std::string name;
     std::string message;
-    std::string question1;
-    std::string question2;
-    std::string question3;
-    std::string question4;
+    std::vector<DialogPerson> persons;
+    std::vector<DialogQuestion> questions;
+
+    // Callback kalau dialog udah beres
     std::function<void(Scene *)> onFinished;
     Scene *onFinishedParameter;
 };
 
-struct Sound
+//
+// =============================
+// =========== Sound ===========
+// =============================
+//
+
+struct SceneSound
 {
     sf::SoundBuffer *buffer;
     sf::Sound *soundPlayer;
 
-    ~Sound()
+    ~SceneSound()
     {
         delete buffer;
         delete soundPlayer;
     }
 };
 
-enum SceneManagerState
+//
+// =============================
+// ======= Scene Manager =======
+// =============================
+//
+
+enum class SceneTransition
+{
+    None,
+    Fade
+};
+
+enum class SceneManagerState
 {
     Empty,
     Navigating,
@@ -52,11 +110,12 @@ void SceneManager_Destroy(SceneManager *sceneManager);
 struct SceneManager
 {
     SceneManagerState state = SceneManagerState::Empty;
-    sf::Window *window;
+    EngineWindow *engineWindow;
     Canvas *canvas;
 
     Scene *currentScene;
     Scene *pendingScene = nullptr;
+    SceneTransition sceneTransition = SceneTransition::None;
     bool isTransitioningScene = false;
     bool isPendingSceneHasEntered = false;
     // Canvas *lastSceneCanvas = nullptr;
@@ -66,18 +125,18 @@ struct SceneManager
 
     std::queue<Dialog *> dialogQueue;
     // Dialogue* nowTalkingDialog = nullptr;
-    float dialogPersonAnimProgress = 0.f;
-    float dialogPersonAnimProgressStep = 0.05f;
+    bool isFirstDialog = true;
+    float dialogAnimProgress = 0.f;
+    float dialogAnimProgressStep = 0.05f;
     int dialogTextProgress = -1;
     int dialogTextProgressMax = -1;
     int dialogTextWaitTime = 4;
-    float dialogArrowXModifier = 0.f;
-    bool dialogArrowXModifierReverse = false;
+    float dialogAnimProgressAfterText = 0.f;
     bool dialogEnterKeyPressed = false;
     // int dialogTextAnimProgressStep = 0;
 
     sf::Music *musicPlaying = nullptr;
-    std::vector<Sound*> soundsPlaying;
+    std::vector<SceneSound *> soundsPlaying;
 
     void (*update)(SceneManager *sceneMg);
 
@@ -87,12 +146,23 @@ struct SceneManager
     }
 };
 
-SceneManager *SceneManager_Create(Canvas *canvas, sf::Window *window);
-void SceneManager_GoToScene(SceneManager *sceneManager, Scene *scene);
+// Buat SceneManager (jangan dipanggil dipanggil kecuali dari game.cpp)
+SceneManager *SceneManager_Create(Canvas *canvas, EngineWindow *engineWindow);
+
+// Pindah scene
+void SceneManager_GoToScene(SceneManager *sceneManager, Scene *scene, SceneTransition transition);
+// Atur background scene
 void SceneManager_SetBackground(SceneManager *sceneMg, std::string filePath);
-void SceneManager_AddDialog(SceneManager *sceneMg, bool isLeft, std::string name, std::string message, std::string imageFilePath);
-void SceneManager_AddDialog(SceneManager *sceneMg, bool isLeft, std::string name, std::string message, std::string imageFilePath, std::function<void(Scene *)> onFinished, Scene *onFinishedParameter);
-void SceneManager_AddQuestion(SceneManager *sceneMg, bool isLeft, std::string name, std::string message, std::string question1, std::string question2, std::string question3, std::string question4, std::string imageFilePath);
+
+// Tambah dialog
+void SceneManager_AddDialog(SceneManager *sceneMg, std::vector<DialogPerson> persons, std::vector<DialogQuestion> questions, std::string name, std::string message);
+// Tambah dialog (dengan callback ketika dialognya beres)
+void SceneManager_AddDialog(SceneManager *sceneMg, std::vector<DialogPerson> persons, std::vector<DialogQuestion> questions, std::string name, std::string message, std::function<void(Scene *)> onFinished, Scene *onFinishedParameter);
+
+// Main musik (kalau ada yang panggil ini tapi masih ada musik yang diplay, musiknya bakal langsung distop ya kids)
 void SceneManager_PlayMusic(SceneManager *sceneMg, std::string filePath);
-void SceneManager_PlaySound(SceneManager *sceneMg, std::string filePath);
+// Stop musik
 void SceneManager_StopMusic(SceneManager *sceneMg);
+
+// Main suara (bebas mau panggil berapa kali juga, ga kayak musik)
+void SceneManager_PlaySound(SceneManager *sceneMg, std::string filePath);

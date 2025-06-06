@@ -5,14 +5,14 @@ void Scene25_DialogScene25(Scene *scene)
 {
     std::cout << "Dialog beres\n";
     Scene *scene26 = Scene26_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene26);
+    // // SceneManager_GoToScene(scene->sceneManager, scene26);
 }
 
 void Scene25_Start(Scene *scene)
 {
     Scene25Data *data = (Scene25Data *)scene->data;
     SceneManager_SetBackground(scene->sceneManager, "tiba_dikota.png");
-    SceneManager_AddDialog(scene->sceneManager, true, "MC","Aku harus cepat! Kalau telat, mereka bisa langsung mencoret namaku..", "talkingWork.png", Scene25_DialogScene25, scene);
+    // SceneManager_AddDialog(scene->sceneManager, true, "MC","Aku harus cepat! Kalau telat, mereka bisa langsung mencoret namaku..", "talkingWork.png", Scene25_DialogScene25, scene);
 
     SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
 }

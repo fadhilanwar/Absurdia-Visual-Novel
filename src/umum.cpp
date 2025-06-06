@@ -11,6 +11,12 @@
 
 #include <iostream>
 #include <regex.h>
+#include <cmath>
+
+// Buat animasi ease out back
+#define EASE_OUT_BACK_C1 1.70158
+#define EASE_OUT_BACK_C3 2.70158
+
 
 // Khusus buat di Windows
 #if defined(_WIN32)
@@ -44,3 +50,14 @@ std::string GetExePath()
     return rawString;
 }
 #endif
+
+
+float EaseOutBack(float x)
+{
+    return 1 + EASE_OUT_BACK_C3 * pow(x - 1, 3) + EASE_OUT_BACK_C1 * pow(x - 1, 2);
+}
+
+float EaseOutCubic(float x)
+{
+    return 1 - pow(1 - x, 3);
+}

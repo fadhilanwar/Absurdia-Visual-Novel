@@ -4,12 +4,12 @@
 #include <chrono>
 #include <thread>
 
+#include "engine_window.hpp"
 #include "page_manager.hpp"
-
 
 struct Engine
 {
-    sf::RenderWindow window;
+    EngineWindow engineWindow;
     sf::RenderTexture renderTexture;
     PageManager *pageManager;
 };

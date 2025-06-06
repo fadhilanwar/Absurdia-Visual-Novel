@@ -9,8 +9,10 @@ void MainMenuPG_OnButtonClick(void* parameter)
     Page *page = (Page*)parameter;
     MainMenuPageData *data = (MainMenuPageData*)page->data;
 
+    PageManager_PlaySound(page->pageManager, "hidup-jokowi.mp3");
+
     Page *gamePage = NewGamePG_Create();
-    PageManager_GoToScene(page->pageManager, gamePage);
+    PageManager_GoToPage(page->pageManager, gamePage);
 }
 
 void MainMenuPG_OnButtonClick2(void* parameter)
@@ -18,8 +20,10 @@ void MainMenuPG_OnButtonClick2(void* parameter)
     Page *page = (Page*)parameter;
     MainMenuPageData *data = (MainMenuPageData*)page->data;
 
+    PageManager_PlaySound(page->pageManager, "hidup-jokowi.mp3");
+
     Page *gamePage = LoadGamePG_Create();
-    PageManager_GoToScene(page->pageManager, gamePage);
+    PageManager_GoToPage(page->pageManager, gamePage);
 }
 
 // Fungsi ketika si button diklik
@@ -38,7 +42,7 @@ void MainMenuPG_ButtonDiklik(void* parameter)
     // UI_RequestUpdate(page->ui);
 
     Page *gamePage = GamePG_Create();
-    PageManager_GoToScene(page->pageManager, gamePage);
+    PageManager_GoToPage(page->pageManager, gamePage);
 }
 
 void MainMenuPG_Start(Page* page)
@@ -51,20 +55,22 @@ void MainMenuPG_Start(Page* page)
    // UI_AddImage(page->ui, nullptr, 0, 0, 1000, 550, true, "Futon_Room.png");
 
     // Nambahin teks
-    UI_AddText(page->ui, nullptr, 380, 250, "Interview terakhir sebelum gila", TextStyle::BOLD, 20, sf::Color::White);
+    UI_AddText(page->ui, nullptr, 380, 250, "Interview terakhir sebelum gila", "fonts/Chonky Bunny.ttf", 20, sf::Color::White);
 
     // Nambahin heading utama
-    UI_AddText(page->ui, nullptr, 380, 200, "Absurdia Inc", TextStyle::BOLD, 48, sf::Color::White);
+    UI_AddText(page->ui, nullptr, 380, 200, "Absurdia Inc", "fonts/Blugie.ttf", 48, sf::Color::White);
 
     //data->textAku = UI_AddText(page->ui, nullptr, 10, 20, "Abcasdsadasdasd", TextStyle::NORMAL, 16, sf::Color(50, 50, 50, 255));
 
     // Nambahin button
-    UI_AddButton(page->ui, nullptr, 75, 150, 150, 50, "New Game", 18, sf::Color::Black, "button.png", MainMenuPG_OnButtonClick, page);
-    UI_AddButton(page->ui, nullptr, 75, 220, 150, 50, "Load Game", 18, sf::Color::Black, "button.png", MainMenuPG_OnButtonClick2, page);
-    UI_AddButton(page->ui, nullptr, 75, 290, 150, 50, "Quit", 18, sf::Color::Black, "button.png",
+    UI_AddButton(page->ui, nullptr, 75, 150, 150, 50, {0, 0}, {4, 12}, "New Game", "fonts/Chonky Bunny.ttf", 18, sf::Color::Black, "button.png", MainMenuPG_OnButtonClick, page);
+    UI_AddButton(page->ui, nullptr, 75, 220, 150, 50, {0, 0}, {4, 12}, "Load Game", "fonts/Chonky Bunny.ttf", 18, sf::Color::Black, "button.png", MainMenuPG_OnButtonClick2, page);
+    UI_AddButton(page->ui, nullptr, 75, 290, 150, 50, {0, 0}, {4, 12}, "Quit", "fonts/Chonky Bunny.ttf", 18, sf::Color::Black, "button.png",
         [](void* param) {
             std::exit(0);
         }, page);
+
+    PageManager_PlayMusic(page->pageManager, "Goofy ahh Song.mp3");
 
    // UI_AddButton(page->ui, nullptr, 20, 50, 100, 50, "Pencet aku", 18, sf::Color::Blue, "fuad.png", MainMenuPG_ButtonDiklik, page);
 

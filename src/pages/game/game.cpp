@@ -6,11 +6,11 @@ void GamePG_Start(Page *page)
     GamePageData *data = (GamePageData *)page->data;
 
     Canvas *canvas = Canvas_Create();
-    SceneManager *sceneMg = SceneManager_Create(canvas, page->pageManager->window);
+    SceneManager *sceneMg = SceneManager_Create(canvas, page->pageManager->engineWindow);
     data->sceneMg = sceneMg;
 
     Scene *mainMenuScene = Scene1_Create();
-    SceneManager_GoToScene(sceneMg, mainMenuScene);
+    SceneManager_GoToScene(sceneMg, mainMenuScene, SceneTransition::None);
 
     data->sceneImage = UI_AddImage(page->ui, nullptr, 0, 0, 1000, 550, false, "");
 }

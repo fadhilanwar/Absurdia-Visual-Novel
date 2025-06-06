@@ -22,15 +22,17 @@ void NewGamePG_OnStartClick(void* parameter) {
         std::cerr << "Gagal menyimpan nama karakter";
     }
 
+    PageManager_StopMusic(page->pageManager);
+
     // simpan nama karakter atau oper ke game
     Page* gamePage = GamePG_Create(); 
-    PageManager_GoToScene(page->pageManager, gamePage);
+    PageManager_GoToPage(page->pageManager, gamePage);
 }
 
 void NewGamePG_OnBackClick(void* parameter) {
     Page* page = (Page*)parameter;
     Page* mainMenu = MainMenuPG_Create();
-    PageManager_GoToScene(page->pageManager, mainMenu);
+    PageManager_GoToPage(page->pageManager, mainMenu);
 }
 
 void NewGamePG_Start(Page* page) {
@@ -38,13 +40,13 @@ void NewGamePG_Start(Page* page) {
 
     UI_AddImage(page->ui, nullptr, 0, 0, 1000, 550, true, "wp_loadgame.png");
 
-    UI_AddText(page->ui, nullptr, 420, 120, "New Game", TextStyle::BOLD, 36, sf::Color::White);
+    UI_AddText(page->ui, nullptr, 420, 120, "New Game", "fonts/Chonky Bunny.ttf", 36, sf::Color::White);
 
-    data->inputNamaKarakter = UI_AddInputField(page->ui, nullptr, 350, 200, 300, 40, "Masukkan nama karakter", 20, sf::Color::Black, "button.png");
+    data->inputNamaKarakter = UI_AddInputField(page->ui, nullptr, 350, 200, 300, 40, {10, 10}, {2, 6}, "Masukkan nama karakter", 20, "fonts/Chonky Bunny.ttf", sf::Color::Black, "button.png", "button_focused.png");
 
-    UI_AddButton(page->ui, nullptr, 400, 260, 200, 40, "Start", 18, sf::Color::Black, "button.png", NewGamePG_OnStartClick, page);
+    UI_AddButton(page->ui, nullptr, 400, 260, 200, 40, {0, 0}, {4, 10}, "Start", "fonts/Chonky Bunny.ttf", 18, sf::Color::Black, "button.png", NewGamePG_OnStartClick, page);
 
-    UI_AddButton(page->ui, nullptr, 350, 120, 40, 40, " ", 18, sf::Color::Black, "back.png", NewGamePG_OnBackClick, page);
+    UI_AddButton(page->ui, nullptr, 350, 120, 40, 40, {0, 0}, {0, 0}, " ", "fonts/Chonky Bunny.ttf", 18, sf::Color::Black, "back.png", NewGamePG_OnBackClick, page);
 }
 
 void NewGamePG_Update(Page* page) 

@@ -1,18 +1,18 @@
 #include "page_manager.hpp"
 
-void m_PageManager_Update(PageManager *pageMg);
+void m_PageManager_Update(PageManager *);
 
-PageManager *PageManager_Create(sf::Window *window, sf::RenderTexture *engineRenderTexture)
+PageManager *PageManager_Create(EngineWindow *engineWindow, sf::RenderTexture *engineRenderTexture)
 {
     Canvas *canvas = Canvas_Create(engineRenderTexture);
     PageManager *pageManager = new PageManager{
-        .window = window,
+        .engineWindow = engineWindow,
         .canvas = canvas,
         .update = m_PageManager_Update};
     return pageManager;
 }
 
-void PageManager_GoToScene(PageManager *pageMg, Page *page)
+void PageManager_GoToPage(PageManager *pageMg, Page *page)
 {
     UI *ui = UI_Create();
     page->ui = ui;
@@ -35,13 +35,44 @@ void PageManager_GoToScene(PageManager *pageMg, Page *page)
     }
 }
 
+void PageManager_PlayMusic(PageManager *pageMg, std::string filePath)
+{
+    PageManager_StopMusic(pageMg);
+    pageMg->musicPlaying = new sf::Music(GetExePath() + filePath);
+    pageMg->musicPlaying->setLooping(true);
+    pageMg->musicPlaying->play();
+}
+
+void PageManager_StopMusic(PageManager *pageMg)
+{
+    if (pageMg->musicPlaying == nullptr)
+        return;
+
+    pageMg->musicPlaying->stop();
+    delete pageMg->musicPlaying;
+    pageMg->musicPlaying = nullptr;
+}
+
+void PageManager_PlaySound(PageManager *pageMg, std::string filePath)
+{
+    sf::SoundBuffer *buffer = new sf::SoundBuffer;
+    buffer->loadFromFile(GetExePath() + filePath);
+    sf::Sound *soundPlayer = new sf::Sound(*buffer);
+    PageSound *sound = new PageSound{
+        .buffer = buffer,
+        .soundPlayer = soundPlayer};
+
+    pageMg->soundsPlaying.push_back(sound);
+    soundPlayer->play();
+}
+
 void m_PageManager_Update(PageManager *pageMg)
 {
     if (!pageMg->isTransitioningPage)
     {
         pageMg->currentPage->update(pageMg->currentPage);
 
-        UI_HitTest(pageMg->currentPage->ui, pageMg->window);
+        UI_EventTest(pageMg->currentPage->ui, pageMg->engineWindow);
         if (pageMg->currentPage->ui->isDirty)
         {
             UI_DrawAll(pageMg->currentPage->ui);
@@ -57,7 +88,7 @@ void m_PageManager_Update(PageManager *pageMg)
     {
         if (pageMg->pageTransitionProgress == 0.0f)
         {
-            UI_ResetCursor(pageMg->currentPage->ui, pageMg->window);
+            UI_ResetCursor(pageMg->currentPage->ui, pageMg->engineWindow);
         }
         else if (pageMg->pageTransitionProgress <= 1.0f)
         {

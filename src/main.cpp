@@ -12,6 +12,6 @@ int main()
 
     // Page *gamePage = GameST_Create();
     Page *mainMenuPage = MainMenuPG_Create();
-    PageManager_GoToScene(engine->pageManager, mainMenuPage);
+    PageManager_GoToPage(engine->pageManager, mainMenuPage);
     Engine_Run(engine);
 }

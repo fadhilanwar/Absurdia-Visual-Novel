@@ -1,12 +1,14 @@
 #include "scene_manager.hpp"
+
 #include <iostream>
+#include <cmath>
 
 void m_SceneManager_Update(SceneManager *sceneMg);
 
-SceneManager *SceneManager_Create(Canvas *canvas, sf::Window *window)
+SceneManager *SceneManager_Create(Canvas *canvas, EngineWindow *engineWindow)
 {
     auto sceneMg = new SceneManager{
-        .window = window,
+        .engineWindow = engineWindow,
         .canvas = canvas,
         .update = m_SceneManager_Update};
     return sceneMg;
@@ -30,11 +32,13 @@ void SceneManager_Destroy(SceneManager *sceneMg)
     delete sceneMg->musicPlaying;
 }
 
-void SceneManager_GoToScene(SceneManager *sceneMg, Scene *scene)
+void SceneManager_GoToScene(SceneManager *sceneMg, Scene *scene, SceneTransition transition)
 {
     scene->sceneManager = sceneMg;
     scene->canvas = Canvas_Create();
     scene->ui = UI_Create();
+
+    sceneMg->sceneTransition = transition;
 
     if (sceneMg->currentScene != nullptr)
     {
@@ -69,36 +73,20 @@ void SceneManager_SetBackground(SceneManager *sceneMg, std::string filePath)
     sceneMg->backgroundImage = image;
 }
 
-void SceneManager_AddDialog(SceneManager *sceneMg, bool isLeft, std::string name, std::string message, std::string imageFilePath)
+void SceneManager_AddDialog(SceneManager *sceneMg, std::vector<DialogPerson> persons, std::vector<DialogQuestion> questions, std::string name, std::string message)
 {
-    SceneManager_AddDialog(sceneMg, isLeft, name, message, imageFilePath, nullptr, nullptr);
+    SceneManager_AddDialog(sceneMg, persons, questions, name, message, nullptr, nullptr);
 }
 
-void SceneManager_AddDialog(SceneManager *sceneMg, bool isLeft, std::string name, std::string message, std::string imageFilePath, std::function<void(Scene *)> onFinished, Scene *onFinishedParameter)
+void SceneManager_AddDialog(SceneManager *sceneMg, std::vector<DialogPerson> persons, std::vector<DialogQuestion> questions, std::string name, std::string message, std::function<void(Scene *)> onFinished, Scene *onFinishedParameter)
 {
     Dialog *dialogue = new Dialog{
-        .isLeft = isLeft,
-        .isQuestion = false,
-        .imageFilePath = imageFilePath,
         .name = name,
         .message = message,
+        .persons = persons,
+        .questions = questions,
         .onFinished = onFinished,
         .onFinishedParameter = onFinishedParameter};
-    sceneMg->dialogQueue.push(dialogue);
-}
-
-void SceneManager_AddQuestion(SceneManager *sceneMg, bool isLeft, std::string name, std::string message, std::string question1, std::string question2, std::string question3, std::string question4, std::string imageFilePath)
-{
-    Dialog *dialogue = new Dialog{
-        .isLeft = isLeft,
-        .isQuestion = true,
-        .imageFilePath = imageFilePath,
-        .name = name,
-        .message = message,
-        .question1 = question1,
-        .question2 = question2,
-        .question3 = question3,
-        .question4 = question4};
     sceneMg->dialogQueue.push(dialogue);
 }
 
@@ -106,20 +94,8 @@ void SceneManager_PlayMusic(SceneManager *sceneMg, std::string filePath)
 {
     SceneManager_StopMusic(sceneMg);
     sceneMg->musicPlaying = new sf::Music(GetExePath() + filePath);
+    sceneMg->musicPlaying->setLooping(true);
     sceneMg->musicPlaying->play();
-}
-
-void SceneManager_PlaySound(SceneManager *sceneMg, std::string filePath)
-{
-    sf::SoundBuffer *buffer = new sf::SoundBuffer;
-    buffer->loadFromFile(GetExePath() + filePath);
-    sf::Sound *soundPlayer = new sf::Sound(*buffer);
-    Sound *sound = new Sound{
-        .buffer = buffer,
-        .soundPlayer = soundPlayer};
-
-    sceneMg->soundsPlaying.push_back(sound);
-    soundPlayer->play();
 }
 
 void SceneManager_StopMusic(SceneManager *sceneMg)
@@ -132,39 +108,300 @@ void SceneManager_StopMusic(SceneManager *sceneMg)
     sceneMg->musicPlaying = nullptr;
 }
 
-void m_SceneManager_DrawDialog(SceneManager *sceneMg)
+void SceneManager_PlaySound(SceneManager *sceneMg, std::string filePath)
 {
-    Dialog *dialogue = sceneMg->dialogQueue.front();
+    sf::SoundBuffer *buffer = new sf::SoundBuffer;
+    buffer->loadFromFile(GetExePath() + filePath);
+    sf::Sound *soundPlayer = new sf::Sound(*buffer);
+    SceneSound *sound = new SceneSound{
+        .buffer = buffer,
+        .soundPlayer = soundPlayer};
 
-    if (sceneMg->dialogTextProgress == -1)
+    sceneMg->soundsPlaying.push_back(sound);
+    soundPlayer->play();
+}
+
+void m_SceneManager_ResetDialog(SceneManager *sceneMg)
+{
+    sceneMg->dialogAnimProgress = 0.f;
+    sceneMg->dialogAnimProgressStep = 0.05f;
+    sceneMg->dialogTextProgress = -1;
+    sceneMg->dialogTextProgressMax = -1;
+    sceneMg->dialogTextWaitTime = 4;
+}
+
+void m_SceneManager_DrawDialogPersons(SceneManager *sceneMg, Dialog *dialog)
+{
+    for (auto &person : dialog->persons)
     {
-        sceneMg->dialogTextProgressMax = dialogue->message.length();
-        sceneMg->dialogTextProgress = dialogue->message.length();
+        // Kalau gaada animasi
+        if (person.animation == DialogPersonAnimation::None)
+        {
+            Alignment alignment;
+            int x = 0;
+
+            if (person.position == DialogPersonPosition::Left)
+            {
+                x = 65;
+                alignment = Alignment::Left;
+            }
+            else if (person.position == DialogPersonPosition::Center)
+            {
+                x = 500;
+                alignment = Alignment::Center;
+            }
+            else
+            {
+                x = 935;
+                alignment = Alignment::Right;
+            }
+
+            Canvas_DrawImage(sceneMg->currentScene->canvas, x, 0, alignment, person.imageFilePath);
+        }
+        // Kalau animasinya Slide
+        else if (person.animation == DialogPersonAnimation::Slide)
+        {
+            Alignment alignment;
+            int x;
+            int y = 0;
+
+            // Posisi gesernya tergantung posisinya
+            if (person.position == DialogPersonPosition::Left)
+            {
+                x = -135 + (200 * (1 - pow(1 - std::min(sceneMg->dialogAnimProgress, 1.0f), 3)));
+                alignment = Alignment::Left;
+            }
+            else if (person.position == DialogPersonPosition::Center)
+            {
+                x = 500;
+                y = 200 - (1 - pow(1 - std::min(sceneMg->dialogAnimProgress, 1.0f), 3)) * 200;
+                alignment = Alignment::Center;
+            }
+            else
+            {
+                x = 1135 - (200 * (1 - pow(1 - std::min(sceneMg->dialogAnimProgress, 1.0f), 3)));
+                alignment = Alignment::Right;
+            }
+
+            Canvas_DrawImage(sceneMg->currentScene->canvas, x, y, alignment, person.imageFilePath);
+        }
+        // Kalau animasinya Fade In
+        else if (person.animation == DialogPersonAnimation::FadeIn)
+        {
+            Alignment alignment;
+            int x = 0;
+
+            if (person.position == DialogPersonPosition::Left)
+            {
+                x = 65;
+                alignment = Alignment::Left;
+            }
+            else if (person.position == DialogPersonPosition::Center)
+            {
+                x = 500;
+                alignment = Alignment::Center;
+            }
+            else
+            {
+                x = 935;
+                alignment = Alignment::Right;
+            }
+
+            Canvas_DrawImage(sceneMg->currentScene->canvas, x, 0, alignment, person.imageFilePath, std::min(sceneMg->dialogAnimProgress / 2.0f, 1.0f));
+        }
+        // Kalau animasinya Fade Out
+        else if (person.animation == DialogPersonAnimation::FadeOut)
+        {
+            Alignment alignment;
+            int x = 0;
+
+            if (person.position == DialogPersonPosition::Left)
+            {
+                x = 65;
+                alignment = Alignment::Left;
+            }
+            else if (person.position == DialogPersonPosition::Center)
+            {
+                x = 500;
+                alignment = Alignment::Center;
+            }
+            else
+            {
+                x = 935;
+                alignment = Alignment::Right;
+            }
+
+            Canvas_DrawImage(sceneMg->currentScene->canvas, x, 0, alignment, person.imageFilePath, 1.0f - std::min(sceneMg->dialogAnimProgress / 2.0f, 1.0f));
+        }
+        // Kalau animasinya Shake
+        else if (person.animation == DialogPersonAnimation::Shake)
+        {
+            Alignment alignment;
+            int x = 0;
+            int y = 0;
+
+            if (person.position == DialogPersonPosition::Left)
+            {
+                x = 65;
+                alignment = Alignment::Left;
+            }
+            else if (person.position == DialogPersonPosition::Center)
+            {
+                x = 500;
+                alignment = Alignment::Center;
+            }
+            else
+            {
+                x = 935;
+                alignment = Alignment::Right;
+            }
+
+            float divided = sceneMg->dialogAnimProgress / 0.25;
+            float result = divided - ceil(divided - 1);
+            if (result <= 0.5)
+            {
+                x += -(result * 20);
+            }
+            else
+            {
+                x += -((-2 * result + 2) * 10);
+            }
+
+            Canvas_DrawImage(sceneMg->currentScene->canvas, x, 0, alignment, person.imageFilePath);
+        }
+        // Kalau animasinya Pop
+        else if (person.animation == DialogPersonAnimation::Pop)
+        {
+            Alignment alignment;
+            int x = 0;
+            int y = 0;
+
+            if (person.position == DialogPersonPosition::Left)
+            {
+                x = 65;
+                alignment = Alignment::Left;
+            }
+            else if (person.position == DialogPersonPosition::Center)
+            {
+                x = 500;
+                alignment = Alignment::Center;
+            }
+            else
+            {
+                x = 935;
+                alignment = Alignment::Right;
+            }
+
+            if (sceneMg->dialogAnimProgress <= 0.5f)
+            {
+                y = -((1 - pow(1 - sceneMg->dialogAnimProgress * 2, 3)) * 50);
+            }
+            else if (sceneMg->dialogAnimProgress <= 1.0f)
+            {
+                y = -((-2 * sceneMg->dialogAnimProgress + 2) * 50);
+            }
+
+            Canvas_DrawImage(sceneMg->currentScene->canvas, x, y, alignment, person.imageFilePath);
+        }
+        else if (person.animation == DialogPersonAnimation::Joget)
+        {
+            Alignment alignment;
+            int x = 0;
+            int y = 0;
+
+            if (person.position == DialogPersonPosition::Left)
+            {
+                x = 65;
+                alignment = Alignment::Left;
+            }
+            else if (person.position == DialogPersonPosition::Center)
+            {
+                x = 500;
+                alignment = Alignment::Center;
+            }
+            else
+            {
+                x = 935;
+                alignment = Alignment::Right;
+            }
+
+            float divided = sceneMg->dialogAnimProgress / 1.75;
+            float result = divided - ceil(divided - 1);
+            if (result <= 0.5)
+            {
+                y = -(sin((result * 2) * M_PI / 2) * 30);
+            }
+            else
+            {
+                y = -((-2 * result + 2) * 30);
+            }
+
+            Canvas_DrawImage(sceneMg->currentScene->canvas, x, y, alignment, person.imageFilePath);
+        }
     }
+}
 
-    if (dialogue->isLeft)
+void m_SceneManager_DrawDialogQuestions(SceneManager *sceneMg, Dialog *dialog, bool &requestNextDialog)
+{
+    if (sceneMg->dialogTextProgress == 0 && !dialog->questions.empty())
     {
-        int x = -180 + (200 * sceneMg->dialogPersonAnimProgress);
-        Canvas_DrawImage(sceneMg->currentScene->canvas, x, 80, dialogue->imageFilePath);
+        if (sceneMg->dialogAnimProgressAfterText == 0.f)
+            sceneMg->dialogAnimProgressAfterText = sceneMg->dialogAnimProgress;
+
+        float _dialogAnimProgress = sceneMg->dialogAnimProgress - sceneMg->dialogAnimProgressAfterText;
+        if (_dialogAnimProgress > 1.f)
+        {
+            // Dapatkan posisi mouse
+            sf::Vector2i mousePos = sf::Mouse::getPosition(sceneMg->engineWindow->window);
+
+            int questionNumber = 0;
+            for (auto &question : dialog->questions)
+            {
+                float questionStartProgress = questionNumber * 0.5f;
+                if (_dialogAnimProgress > questionStartProgress)
+                {
+                    float questionProgress = std::min((_dialogAnimProgress - questionStartProgress) / 2, 1.f);
+                    int questionY = 223 + (questionNumber * (31 + 15)) - (EaseOutCubic(questionProgress) * 100);
+
+                    bool isHovered = false;
+                    if (mousePos.x >= 381 && mousePos.x <= 619 &&
+                        mousePos.y >= questionY && mousePos.y <= questionY + 31)
+                    {
+                        isHovered = true;
+                        if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+                        {
+                            if (question.onAnswered != nullptr)
+                                question.onAnswered(question.onAnsweredParameter);
+                            requestNextDialog = true;
+                        }
+                    }
+
+                    Canvas_DrawImage(sceneMg->currentScene->canvas, 381, questionY, "dialog/question_bg.png", questionProgress, 0.f, isHovered ? 1.05f : 1.f);
+                    Canvas_DrawText(sceneMg->currentScene->canvas, 381, questionY, 238, 31, question.question, "fonts/Chonky Bunny.ttf", Alignment::Center, 20, sf::Color(255, 251, 239, questionProgress * 255));
+                }
+                questionNumber++;
+            }
+        }
     }
-    else
+}
+
+void m_SceneManager_DrawDialogContent(SceneManager *sceneMg, Dialog *dialog, bool &requestNextDialog)
+{
+    float dialogBgProgress = (sceneMg->isFirstDialog ? EaseOutBack(std::min((sceneMg->dialogAnimProgress / 2.f), 1.f)) : 1);
+    int dialogBgYModifier = 300 * dialogBgProgress;
+
+    Canvas_DrawImage(sceneMg->currentScene->canvas, 47, 694 - dialogBgYModifier, "dialog/dialog_bg.png", 1.f, 0.f, std::min(dialogBgProgress * 1.1f, 1.f));
+    Canvas_DrawImage(sceneMg->currentScene->canvas, 381, 677 - dialogBgYModifier, "dialog/nametag.png");
+    Canvas_DrawText(sceneMg->currentScene->canvas, 381 + 17, 677 + 5 - dialogBgYModifier, 204, 21, dialog->name, "fonts/Chonky Bunny.ttf", Alignment::Center, 20, sf::Color::White);
+
+    // Gambar teks dialog sama questions (kalau ada)
+    if (sceneMg->dialogAnimProgress >= 0.8f)
     {
-        int x = 700 - (200 * sceneMg->dialogPersonAnimProgress);
-        Canvas_DrawImage(sceneMg->currentScene->canvas, x, 80, dialogue->imageFilePath);
-    }
+        // Gambar teks dialog
+        std::string cuttedMessage = dialog->message.substr(0, sceneMg->dialogTextProgressMax - sceneMg->dialogTextProgress);
+        Canvas_DrawText(sceneMg->currentScene->canvas, 72, 721 - dialogBgYModifier, cuttedMessage, "fonts/Chonky Bunny.ttf", 24, sf::Color(50, 41, 47));
 
-    int nametagX = dialogue->isLeft ? 752 : 46;
-    int modifierY = 100 * std::min((sceneMg->dialogPersonAnimProgress * 2.f), 1.f);
-
-    Canvas_DrawRect(sceneMg->currentScene->canvas, 48, 480 - modifierY, 904, 144, sf::Color(0, 0, 0, 150));
-    Canvas_DrawImage(sceneMg->currentScene->canvas, nametagX, 345, "nametag.png");
-    Canvas_DrawText(sceneMg->currentScene->canvas, nametagX + 14, 350, dialogue->name, TextStyle::BOLD, 20, sf::Color::White);
-
-    if (sceneMg->dialogPersonAnimProgress >= 0.8f)
-    {
-        std::string cuttedMessage = dialogue->message.substr(0, sceneMg->dialogTextProgressMax - sceneMg->dialogTextProgress);
-        Canvas_DrawText(sceneMg->currentScene->canvas, 72, 504 - modifierY, cuttedMessage, TextStyle::NORMAL, 24, sf::Color::White);
-
+        // Lupa ini buat apa
         if (sceneMg->dialogTextWaitTime > 3)
         {
             if (sceneMg->dialogTextProgress - 2 < 0)
@@ -181,71 +418,95 @@ void m_SceneManager_DrawDialog(SceneManager *sceneMg)
         {
             sceneMg->dialogTextWaitTime++;
         }
-    }
-    if (sceneMg->dialogPersonAnimProgress >= 1.0f)
-    {
-        if (sceneMg->dialogArrowXModifier >= 10.0f)
-        {
-            sceneMg->dialogArrowXModifierReverse = true;
-        }
-        else if (sceneMg->dialogArrowXModifier <= -10.0f)
-        {
-            sceneMg->dialogArrowXModifierReverse = false;
-        }
-        sceneMg->dialogArrowXModifier += 1.0f * sceneMg->dialogArrowXModifierReverse ? -1 : 1;
 
-        Canvas_DrawImage(sceneMg->currentScene->canvas, 918 + sceneMg->dialogArrowXModifier, 500, "arrow_dialog.png");
+        // Gambar questions (kalau ada)
+        m_SceneManager_DrawDialogQuestions(sceneMg, dialog, requestNextDialog);
     }
 }
 
-void m_SceneManager_ResetDialog(SceneManager *sceneMg)
+void m_SceneManager_ProcessDialog(SceneManager *sceneMg)
 {
-    sceneMg->dialogPersonAnimProgress = 0.f;
-    sceneMg->dialogPersonAnimProgressStep = 0.05f;
-    sceneMg->dialogTextProgress = -1;
-    sceneMg->dialogTextProgressMax = -1;
-    sceneMg->dialogTextWaitTime = 4;
-    sceneMg->dialogArrowXModifier = 0.f;
-    sceneMg->dialogArrowXModifierReverse = false;
+    Dialog *dialog = sceneMg->dialogQueue.front();
+    bool requestSkipDialog;
+
+    // Ketika dialog ini pertama kali digambar,
+    // atur semua variabel yang dibutuhkan buat ngegambar teks isi dialog
+    if (sceneMg->dialogTextProgress == -1)
+    {
+        sceneMg->dialogTextProgressMax = dialog->message.length();
+        sceneMg->dialogTextProgress = dialog->message.length();
+    }
+
+    // Gambar semua orangnya + dianimasiin
+    m_SceneManager_DrawDialogPersons(sceneMg, dialog);
+
+    // Gambar background dialog, teks nama orang, teks isi dialog, sama questions
+    // kalau salah satu question dijawab, requestSkipDialog akan menjadi true
+    m_SceneManager_DrawDialogContent(sceneMg, dialog, requestSkipDialog);
+
+    // Kalau tidak ada question apa-apa,
+    // atur requestSkipDialog = true apabila keyboard enter dipencet
+    if (dialog->questions.empty() && (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter) && !sceneMg->dialogEnterKeyPressed))
+    {
+        requestSkipDialog = true;
+    }
+
+    // Kalau requestSkipDialog = true, pindah ke dialog berikutnya
+    // Kalau kagak yaudah
+    if (requestSkipDialog)
+    {
+        std::cout << "Enter pressed!\n";
+        sceneMg->dialogEnterKeyPressed = true;
+
+        Dialog *dialog = sceneMg->dialogQueue.front();
+        if (dialog->onFinished != nullptr)
+        {
+            dialog->onFinished(dialog->onFinishedParameter);
+        }
+        sceneMg->dialogQueue.pop();
+        delete dialog;
+
+        m_SceneManager_ResetDialog(sceneMg);
+
+        if (sceneMg->dialogQueue.empty())
+        {
+            sceneMg->state = SceneManagerState::Rest;
+            sceneMg->isFirstDialog = true;
+        }
+        else
+        {
+            sceneMg->isFirstDialog = false;
+            // m_SceneManager_DrawDialog(sceneMg);
+            // sceneMg->dialogAnimProgress += sceneMg->dialogAnimProgressStep;
+        }
+    }
 }
 
 void m_SceneManager_Update(SceneManager *sceneMg)
 {
     // Hapus semua sound yang udah selesai playing
-    if (!sceneMg->soundsPlaying.empty())
+    // if (!sceneMg->soundsPlaying.empty())
+    // {
+    for (int i = 0; i < sceneMg->soundsPlaying.size(); i++)
     {
-        for (auto it = sceneMg->soundsPlaying.begin(); it != sceneMg->soundsPlaying.end(); it++)
+        SceneSound *sound = sceneMg->soundsPlaying[i];
+        if (sound->soundPlayer->getStatus() == sf::SoundSource::Status::Stopped)
         {
-            Sound *sound = *it;
-            if (sound->soundPlayer->getStatus() == sf::SoundSource::Status::Stopped)
-            {
-                sceneMg->soundsPlaying.erase(it);
-                delete sound;
-            }
+            sceneMg->soundsPlaying.erase(sceneMg->soundsPlaying.begin() + i);
+            delete sound;
         }
     }
+    // }
 
+    // Animasiin transisi scene kalau lagi ngetransisiin scene
     if (sceneMg->isTransitioningScene)
     {
-        if (sceneMg->sceneTransitionProgress <= 1.0f)
+        if (sceneMg->sceneTransition == SceneTransition::None)
         {
-            // Clear canvas first
-            Canvas_Clear(sceneMg->canvas);
-            // Copy last rendered frame from last page to compositor
-            Canvas_Copy(sceneMg->canvas, sceneMg->currentScene->canvas);
-            // Fade in
-            Canvas_DrawRect(sceneMg->canvas, 0, 0, 1000, 550, sf::Color(0, 0, 0, 255 * sceneMg->sceneTransitionProgress));
-            // Tell compositor to display our canvas
-            Canvas_Update(sceneMg->canvas);
-        }
-        else if (sceneMg->sceneTransitionProgress > 1.0f && sceneMg->sceneTransitionProgress <= 2.0f)
-        {
-            if (!sceneMg->isPendingSceneHasEntered)
-            {
-                sceneMg->pendingScene->start(sceneMg->pendingScene);
-                sceneMg->isPendingSceneHasEntered = true;
-            }
+            // Mulai pending scene
+            sceneMg->pendingScene->start(sceneMg->pendingScene);
 
+            // Hapus isi canvas
             Canvas_Clear(sceneMg->canvas);
 
             // Gambar background image kalau ada
@@ -254,20 +515,15 @@ void m_SceneManager_Update(SceneManager *sceneMg)
                 Canvas_DrawTexture(sceneMg->pendingScene->canvas, 0, 0, sceneMg->backgroundImage);
             }
 
-            // Kasih tau scene bahwa ada update
+            // Kasih tau pending scene bahwa ada update
             sceneMg->pendingScene->update(sceneMg->pendingScene);
 
             // Copy canvas scene ke canvas scene_manager
             Canvas_Update(sceneMg->pendingScene->canvas);
             Canvas_Copy(sceneMg->canvas, sceneMg->pendingScene->canvas);
-
-            // Fade out
-            Canvas_DrawRect(sceneMg->canvas, 0, 0, 1000, 550, sf::Color(0, 0, 0, 255 - ((sceneMg->sceneTransitionProgress - 1.0f) * 255)));
-            // Tell compositor to display our canvas
             Canvas_Update(sceneMg->canvas);
-        }
-        else if (sceneMg->sceneTransitionProgress > 2.0f)
-        {
+
+            // Hapus scene sebelumnya
             sceneMg->currentScene->destroy(sceneMg->currentScene);
             delete sceneMg->currentScene;
 
@@ -278,8 +534,62 @@ void m_SceneManager_Update(SceneManager *sceneMg)
             // sceneMg->lastSceneCanvas = nullptr;
             sceneMg->isPendingSceneHasEntered = false;
         }
+        else if (sceneMg->sceneTransition == SceneTransition::Fade)
+        {
+            if (sceneMg->sceneTransitionProgress <= 1.0f)
+            {
+                // Clear canvas first
+                Canvas_Clear(sceneMg->canvas);
+                // Copy last rendered frame from last page to compositor
+                Canvas_Copy(sceneMg->canvas, sceneMg->currentScene->canvas);
+                // Fade in
+                Canvas_DrawRect(sceneMg->canvas, 0, 0, 1000, 550, sf::Color(0, 0, 0, 255 * sceneMg->sceneTransitionProgress));
+                // Tell compositor to display our canvas
+                Canvas_Update(sceneMg->canvas);
+            }
+            else if (sceneMg->sceneTransitionProgress > 1.0f && sceneMg->sceneTransitionProgress <= 2.0f)
+            {
+                if (!sceneMg->isPendingSceneHasEntered)
+                {
+                    sceneMg->pendingScene->start(sceneMg->pendingScene);
+                    sceneMg->isPendingSceneHasEntered = true;
+                }
 
-        sceneMg->sceneTransitionProgress += 0.025f;
+                Canvas_Clear(sceneMg->canvas);
+
+                // Gambar background image kalau ada
+                if (sceneMg->backgroundImage)
+                {
+                    Canvas_DrawTexture(sceneMg->pendingScene->canvas, 0, 0, sceneMg->backgroundImage);
+                }
+
+                // Kasih tau scene bahwa ada update
+                sceneMg->pendingScene->update(sceneMg->pendingScene);
+
+                // Copy canvas scene ke canvas scene_manager
+                Canvas_Update(sceneMg->pendingScene->canvas);
+                Canvas_Copy(sceneMg->canvas, sceneMg->pendingScene->canvas);
+
+                // Fade out
+                Canvas_DrawRect(sceneMg->canvas, 0, 0, 1000, 550, sf::Color(0, 0, 0, 255 - ((sceneMg->sceneTransitionProgress - 1.0f) * 255)));
+                // Suruh compositor untuk menampilkan canvas
+                Canvas_Update(sceneMg->canvas);
+            }
+            else if (sceneMg->sceneTransitionProgress > 2.0f)
+            {
+                sceneMg->currentScene->destroy(sceneMg->currentScene);
+                delete sceneMg->currentScene;
+
+                sceneMg->isTransitioningScene = false;
+                sceneMg->currentScene = sceneMg->pendingScene;
+                sceneMg->pendingScene = nullptr;
+                // delete sceneMg->lastSceneCanvas;
+                // sceneMg->lastSceneCanvas = nullptr;
+                sceneMg->isPendingSceneHasEntered = false;
+            }
+
+            sceneMg->sceneTransitionProgress += 0.025f;
+        }
     }
     else
     {
@@ -296,7 +606,7 @@ void m_SceneManager_Update(SceneManager *sceneMg)
         sceneMg->currentScene->update(sceneMg->currentScene);
 
         // Hit test UI
-        UI_HitTest(sceneMg->currentScene->ui, sceneMg->window);
+        UI_EventTest(sceneMg->currentScene->ui, sceneMg->engineWindow);
         // Gambar UI
         if (sceneMg->currentScene->ui->isDirty)
         {
@@ -307,44 +617,13 @@ void m_SceneManager_Update(SceneManager *sceneMg)
         // Apabila ada dialog
         if (!sceneMg->dialogQueue.empty())
         {
-            // Kalau enter dipencet, pindah ke dialog berikutnya
-            // Kalau kagak suruh draw dialognya
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter))
-            {
-                if (!sceneMg->dialogEnterKeyPressed)
-                {
-                    std::cout << "Enter pressed!\n";
-                    sceneMg->dialogEnterKeyPressed = true;
+            if (sceneMg->dialogEnterKeyPressed && !sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter))
+                sceneMg->dialogEnterKeyPressed = false;
+            if (sceneMg->state != SceneManagerState::Talking)
+                sceneMg->state = SceneManagerState::Talking;
 
-                    Dialog *dialog = sceneMg->dialogQueue.front();
-                    if (dialog->onFinished != nullptr)
-                    {
-                        dialog->onFinished(dialog->onFinishedParameter);
-                    }
-                    sceneMg->dialogQueue.pop();
-                    delete dialog;
-
-                    if (sceneMg->dialogQueue.empty())
-                    {
-                        sceneMg->state = SceneManagerState::Rest;
-                    }
-
-                    m_SceneManager_ResetDialog(sceneMg);
-                }
-            }
-            else
-            {
-                if (sceneMg->dialogEnterKeyPressed)
-                    sceneMg->dialogEnterKeyPressed = false;
-                if (sceneMg->state != SceneManagerState::Talking)
-                    sceneMg->state = SceneManagerState::Talking;
-
-                m_SceneManager_DrawDialog(sceneMg);
-                if (sceneMg->dialogPersonAnimProgress < 1.0f)
-                {
-                    sceneMg->dialogPersonAnimProgress += sceneMg->dialogPersonAnimProgressStep;
-                }
-            }
+            m_SceneManager_ProcessDialog(sceneMg);
+            sceneMg->dialogAnimProgress += sceneMg->dialogAnimProgressStep;
         }
 
         // Copy canvas scene ke canvas scene_manager
