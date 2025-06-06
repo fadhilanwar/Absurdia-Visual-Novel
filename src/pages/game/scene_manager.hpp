@@ -26,7 +26,7 @@ enum class DialogPersonPosition
     Right
 };
 // Animasi orangnya
-enum DialogPersonAnimation
+enum class DialogPersonAnimation
 {
     None, // Gausah dikasih animasi
     Slide, // Masuk geser dari kiri/kanan/bawah tergantung posisinya dimana
