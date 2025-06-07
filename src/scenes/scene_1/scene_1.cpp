@@ -3,18 +3,20 @@
 #include <iostream>
 #include <cmath>
 
+//ganti background dari kamar ke dapur
 void Scene1_DialogScene1(Scene *scene)
 {
-    std::cout << "Dialog beres\n";
-    Scene *scene2 = Scene2_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene2, SceneTransition::None);
+    SceneManager_SetBackground(scene->sceneManager, "background/dapur_.png");
+}
+
+void Scene1_DialogScene2(Scene *scene)
+{
+    SceneManager_SetBackground(scene->sceneManager, "background/laptop.png");
 }
 
 void Scene1_Start(Scene *scene)
 {
     Scene1Data *data = (Scene1Data *)scene->data;
-    SceneManager_SetBackground(scene->sceneManager, "background/jam_weker.png");
-    SceneManager_AddDialog(scene->sceneManager, {}, {}, "", "");
     
     SceneManager_SetBackground(scene->sceneManager, "background/kamar_pribadi.png");
     SceneManager_AddDialog(
@@ -51,12 +53,21 @@ void Scene1_Start(Scene *scene)
         },
         {},
         "MC",
-        "Aku akan ke dapur untuk membuatnya");
+        "Aku akan ke dapur untuk membuatnya",
+        Scene1_DialogScene1, scene);
 
-    SceneManager_SetBackground(scene->sceneManager, "background/dapur_.png");
-    SceneManager_AddDialog(scene->sceneManager, {}, {}, "", "");
-
-    SceneManager_SetBackground(scene->sceneManager, "background/dapur_.png");
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "pajamas/teaPajamas.png",
+                .position = DialogPersonPosition::Center,
+                .animation = DialogPersonAnimation::Slide},
+        },
+        {},
+        "",
+        ""
+    );
     SceneManager_AddDialog(
         scene->sceneManager,
         {
@@ -92,13 +103,8 @@ void Scene1_Start(Scene *scene)
         },
         {},
         "MC",
-        "Sebentar"
-    );
+        "Sebentar");
 
-    SceneManager_SetBackground(scene->sceneManager, "background/laptop.png");
-
-
-    SceneManager_SetBackground(scene->sceneManager, "background/dapur.png");
     SceneManager_AddDialog(
         scene->sceneManager,
         {
@@ -109,20 +115,23 @@ void Scene1_Start(Scene *scene)
         },
         {},
         "",
-        ""
-    );
+        "",
+    Scene1_DialogScene2, scene);
 
+
+    Scene1_DialogScene2, scene;
     SceneManager_AddDialog(
         scene->sceneManager,
         {
             DialogPerson{
                 .imageFilePath = "pajamas/shockedPajamas.png",
-                .position = DialogPersonPosition::Center,
+                .position = DialogPersonPosition::Left,
                 .animation = DialogPersonAnimation::Slide},
         },
         {},
         "MC",
-        "ADUH GAWAT ITU HARI INI?!!!");
+        "ADUH GAWAT ITU HARI INI?!!!",
+    Scene1_DialogScene1, scene);
 
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -141,7 +150,14 @@ void Scene1_Start(Scene *scene)
 
 void Scene1_Update(Scene *scene)
 {
-    //
+
+    Scene1Data *data = (Scene1Data *)scene->data;
+
+    data->animProgress < 5.0f;
+    {
+        Canvas_DrawImage(scene->canvas, 1000, 550, "background/jam_weker.png");
+    }
+
 }
 
 void Scene1_Destroy(Scene *scene)
