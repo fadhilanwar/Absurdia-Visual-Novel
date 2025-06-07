@@ -86,12 +86,11 @@ void Scene3_Start(Scene *scene)
 
 void Scene3_Update(Scene *scene)
 {
-    // Scene3Data *data = (Scene3Data *)scene->data;
 }
 
 void Scene3_Destroy(Scene *scene)
 {
-    // Tidak ada yang perlu dibersihkan di sini
+
 }
 
 Scene *Scene3_Create()
