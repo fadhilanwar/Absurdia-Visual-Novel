@@ -23,7 +23,7 @@ void Engine_Run(Engine *engine)
     sf::Clock fpsClock;
     sf::Clock clock;
 
-    sf::Font font(GetExePath() + "Roboto-SemiBold.ttf");
+    sf::Font font(GetExePath() + "fonts/Roboto-SemiBold.ttf");
     sf::Text fpsTextBlock(font);
     fpsTextBlock.setPosition({0, 0});
     fpsTextBlock.setFillColor(sf::Color::Red);
