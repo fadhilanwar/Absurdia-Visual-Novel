@@ -387,38 +387,48 @@ void m_SceneManager_DrawDialogQuestions(SceneManager *sceneMg, Dialog *dialog, b
 
 void m_SceneManager_DrawDialogContent(SceneManager *sceneMg, Dialog *dialog, bool &requestNextDialog)
 {
-    float dialogBgProgress = (sceneMg->isFirstDialog ? EaseOutBack(std::min((sceneMg->dialogAnimProgress / 2.f), 1.f)) : 1);
-    int dialogBgYModifier = 300 * dialogBgProgress;
-
-    Canvas_DrawImage(sceneMg->currentScene->canvas, 47, 694 - dialogBgYModifier, "dialog/dialog_bg.png", 1.f, 0.f, std::min(dialogBgProgress * 1.1f, 1.f));
-    Canvas_DrawImage(sceneMg->currentScene->canvas, 381, 677 - dialogBgYModifier, "dialog/nametag.png");
-    Canvas_DrawText(sceneMg->currentScene->canvas, 381 + 17, 677 + 5 - dialogBgYModifier, 204, 21, dialog->name, "fonts/Chonky Bunny.ttf", Alignment::Center, 20, sf::Color::White);
-
-    // Gambar teks dialog sama questions (kalau ada)
-    if (sceneMg->dialogAnimProgress >= 0.8f)
+    // Kalau misalkan isi dialognya kosong, jangan gambar dialognya,
+    // langsung gambar questionsnya aja
+    if (!dialog->message.empty())
     {
-        // Gambar teks dialog
-        std::string cuttedMessage = dialog->message.substr(0, sceneMg->dialogTextProgressMax - sceneMg->dialogTextProgress);
-        Canvas_DrawText(sceneMg->currentScene->canvas, 72, 721 - dialogBgYModifier, cuttedMessage, "fonts/Chonky Bunny.ttf", 24, sf::Color(50, 41, 47));
+        float dialogBgProgress = (sceneMg->isFirstDialog ? EaseOutBack(std::min((sceneMg->dialogAnimProgress / 2.f), 1.f)) : 1);
+        int dialogBgYModifier = 300 * dialogBgProgress;
 
-        // Lupa ini buat apa
-        if (sceneMg->dialogTextWaitTime > 3)
+        Canvas_DrawImage(sceneMg->currentScene->canvas, 47, 694 - dialogBgYModifier, "dialog/dialog_bg.png", 1.f, 0.f, std::min(dialogBgProgress * 1.1f, 1.f));
+        Canvas_DrawImage(sceneMg->currentScene->canvas, 381, 677 - dialogBgYModifier, "dialog/nametag.png");
+        Canvas_DrawText(sceneMg->currentScene->canvas, 381 + 17, 677 + 5 - dialogBgYModifier, 204, 21, dialog->name, "fonts/Chonky Bunny.ttf", Alignment::Center, 20, sf::Color::White);
+
+        // Gambar teks dialog sama questions (kalau ada)
+        if (sceneMg->dialogAnimProgress >= 0.8f)
         {
-            if (sceneMg->dialogTextProgress - 2 < 0)
+            // Gambar teks dialog
+            std::string cuttedMessage = dialog->message.substr(0, sceneMg->dialogTextProgressMax - sceneMg->dialogTextProgress);
+            Canvas_DrawText(sceneMg->currentScene->canvas, 72, 721 - dialogBgYModifier, cuttedMessage, "fonts/Chonky Bunny.ttf", 24, sf::Color(50, 41, 47));
+
+            // Lupa ini buat apa
+            if (sceneMg->dialogTextWaitTime > 3)
             {
-                sceneMg->dialogTextProgress = 0;
+                if (sceneMg->dialogTextProgress - 2 < 0)
+                {
+                    sceneMg->dialogTextProgress = 0;
+                }
+                else
+                {
+                    sceneMg->dialogTextProgress -= 2;
+                }
+                sceneMg->dialogTextWaitTime = 0;
             }
             else
             {
-                sceneMg->dialogTextProgress -= 2;
+                sceneMg->dialogTextWaitTime++;
             }
-            sceneMg->dialogTextWaitTime = 0;
-        }
-        else
-        {
-            sceneMg->dialogTextWaitTime++;
-        }
 
+            // Gambar questions (kalau ada)
+            m_SceneManager_DrawDialogQuestions(sceneMg, dialog, requestNextDialog);
+        }
+    }
+    else
+    {
         // Gambar questions (kalau ada)
         m_SceneManager_DrawDialogQuestions(sceneMg, dialog, requestNextDialog);
     }
