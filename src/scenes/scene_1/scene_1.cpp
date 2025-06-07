@@ -13,7 +13,12 @@ void Scene1_DialogScene2(Scene *scene)
 {
     SceneManager_SetBackground(scene->sceneManager, "background/laptop.png");
 }
-
+void Scene1_DialogBeres(Scene *scene)
+{
+    std::cout << "Dialog beres\n";
+    Scene *scene2 = Scene2_Create();
+    SceneManager_GoToScene(scene->sceneManager, scene2, SceneTransition::Fade);
+}
 void Scene1_Start(Scene *scene)
 {
     Scene1Data *data = (Scene1Data *)scene->data;
@@ -143,7 +148,8 @@ void Scene1_Start(Scene *scene)
         },
         {},
         "MC",
-        "AKU HARUS SEGERA SIAP-SIAP!");
+        "AKU HARUS SEGERA SIAP-SIAP!", 
+    Scene1_DialogBeres, scene);
 
     SceneManager_PlayMusic(scene->sceneManager, "Goofy ahh Song.mp3");
         }
