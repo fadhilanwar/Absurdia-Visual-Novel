@@ -13,20 +13,10 @@ void Scene1_DialogScene1(Scene *scene)
 void Scene1_Start(Scene *scene)
 {
     Scene1Data *data = (Scene1Data *)scene->data;
-    SceneManager_SetBackground(scene->sceneManager, "background/jam.png");
-    SceneManager_AddDialog(
-        scene->sceneManager,
-        {
-            DialogPerson{
-                .imageFilePath = "pajamas/talkingPajamas.png",
-                .position = DialogPersonPosition::Center,
-                .animation = DialogPersonAnimation::Slide},
-        },
-        {},
-        "",
-        ""
-    );
-    SceneManager_SetBackground(scene->sceneManager, "background/kamar.png");
+    SceneManager_SetBackground(scene->sceneManager, "background/jam_weker.png");
+    SceneManager_AddDialog(scene->sceneManager, {}, {}, "", "");
+    
+    SceneManager_SetBackground(scene->sceneManager, "background/kamar_pribadi.png");
     SceneManager_AddDialog(
         scene->sceneManager,
         {
@@ -63,20 +53,10 @@ void Scene1_Start(Scene *scene)
         "MC",
         "Aku akan ke dapur untuk membuatnya");
 
-    SceneManager_SetBackground(scene->sceneManager, "background/dapur.png");
-    SceneManager_AddDialog(
-        scene->sceneManager,
-        {
-            DialogPerson{
-                .imageFilePath = "pajamas/teaPajamas.png",
-                .position = DialogPersonPosition::Center,
-                .animation = DialogPersonAnimation::Slide},
-        },
-        {},
-        "",
-        ""
-    );
+    SceneManager_SetBackground(scene->sceneManager, "background/dapur_.png");
+    SceneManager_AddDialog(scene->sceneManager, {}, {}, "", "");
 
+    SceneManager_SetBackground(scene->sceneManager, "background/dapur_.png");
     SceneManager_AddDialog(
         scene->sceneManager,
         {
@@ -116,18 +96,7 @@ void Scene1_Start(Scene *scene)
     );
 
     SceneManager_SetBackground(scene->sceneManager, "background/laptop.png");
-    SceneManager_AddDialog(
-        scene->sceneManager,
-        {
-            DialogPerson{
-                .imageFilePath = "pajamas/laptopPajamas.png",
-                .position = DialogPersonPosition::Center,
-                .animation = DialogPersonAnimation::Slide},
-        },
-        {},
-        "",
-        ""
-    );
+
 
     SceneManager_SetBackground(scene->sceneManager, "background/dapur.png");
     SceneManager_AddDialog(
@@ -147,7 +116,7 @@ void Scene1_Start(Scene *scene)
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "pajamas/talkingShockedPajamas.png",
+                .imageFilePath = "pajamas/shockedPajamas.png",
                 .position = DialogPersonPosition::Center,
                 .animation = DialogPersonAnimation::Slide},
         },
@@ -159,7 +128,7 @@ void Scene1_Start(Scene *scene)
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "pajamas/talkingShockedPajamas.png",
+                .imageFilePath = "pajamas/shockedPajamas.png",
                 .position = DialogPersonPosition::Center,
                 .animation = DialogPersonAnimation::Slide},
         },
