@@ -465,7 +465,6 @@ void m_SceneManager_ProcessDialog(SceneManager *sceneMg)
     // Kalau kagak yaudah
     if (requestSkipDialog)
     {
-        std::cout << "Enter pressed!\n";
         sceneMg->dialogEnterKeyPressed = true;
 
         Dialog *dialog = sceneMg->dialogQueue.front();
