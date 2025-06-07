@@ -120,9 +120,9 @@ void Scene1_Update(Scene *scene)
     Scene1Data *data = (Scene1Data *)scene->data;
 
     // gatau gabut
-    float rotasiFuad = fmod(data->animProgress, 1);
-    Canvas_DrawImage(scene->canvas, 200, 200, "fuad.png", 1.f, rotasiFuad * 360);
-    data->animProgress += 0.016;
+    // float rotasiFuad = fmod(data->animProgress, 1);
+    // Canvas_DrawImage(scene->canvas, 200, 200, "fuad.png", 1.f, rotasiFuad * 360);
+    // data->animProgress += 0.016;
 }
 
 void Scene1_Destroy(Scene *scene)

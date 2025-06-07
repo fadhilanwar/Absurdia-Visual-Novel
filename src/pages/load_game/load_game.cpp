@@ -43,6 +43,18 @@ void LoadGamePG_Start(Page* page)
     UI_AddImage(page->ui, nullptr, 0, 0, 1000, 550, true, "wp_loadgame.png");
     UI_AddText(page->ui, nullptr, 400, 100, "Load Game", "fonts/Chonky Bunny.ttf", 32, sf::Color::White);
 
+    //baca nama karakter dari file save
+    // std::ifstream saveFile("save.txt");
+    // std::string savedName = "Slot kosong" ;
+    // if (saveFile.is_open() && std::getline(saveFile, savedName))
+    // {
+    //     saveFile.close();
+    // }
+
+    //menampilkan nama karakter yang disimpan
+   // UI_AddButton(page->ui, nullptr, 380,180, 240, 40, {0, 0}, {4, 10}, savedName, "fonts/Chonky Bunny.ttf", 20, sf::Color::Black, "button.png", LoadGamePG_OnButtonClick, page);
+
+
     // Contoh beberapa slot save
     UI_AddButton(page->ui, nullptr, 380, 180, 240, 40, {0, 0}, {4, 10}, "Ahmad", "fonts/Chonky Bunny.ttf", 20, sf::Color::Black, "button.png", LoadGamePG_OnButtonClick, page);
     UI_AddButton(page->ui, nullptr, 380, 240, 240, 40, {0, 0}, {4, 10}, "Masda", "fonts/Chonky Bunny.ttf", 20, sf::Color::Black, "button.png", LoadGamePG_OnButtonClick, page);
