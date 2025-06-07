@@ -6,9 +6,16 @@ void Scene3_DialogScene1(Scene *scene)
     SceneManager_SetBackground(scene->sceneManager, "background/depan_gedung.png");
 }
 
-void Scene3_DialogBeres(Scene *scene)
+void Scene1_DialogPilihan1(Scene *scene)
 {
-    std::cout << "Dialog beres\n";
+    std::cout << "Pilihan 1 dipilih\n";
+    Scene *ending_a = static_cast<Scene*>(Ending_a_Create());
+    SceneManager_GoToScene(scene->sceneManager, ending_a, SceneTransition::None);
+}
+// pilihan 2
+void Scene1_DialogPilihan2(Scene *scene)
+{
+    std::cout << "Pilihan 2 dipilih";
     Scene *scene4 = Scene4_Create();
     SceneManager_GoToScene(scene->sceneManager, scene4, SceneTransition::Fade);
 }
@@ -62,14 +69,20 @@ void Scene3_Start(Scene *scene)
                 .imageFilePath = "work/shockedWork.png",
                 .position = DialogPersonPosition::Left,
                 .animation = DialogPersonAnimation::Slide},
-        },
-        {},
+            },
+           {DialogQuestion{
+                .question = "Sepertinya lebih baik aku pulang",
+                .onAnswered = Scene1_DialogPilihan1,
+                .onAnsweredParameter = scene},
+            DialogQuestion{
+                .question = "Melangkah menuju gedung",
+                .onAnswered = Scene1_DialogPilihan2,
+                .onAnsweredParameter = scene}},
         "MC",
-        "Atapnya... kayak topi sombrero. Ini kantor atau taman hiburan sih?",
-        Scene3_DialogBeres, scene);
+        "Atapnya... kayak topi sombrero. Ini kantor atau taman hiburan sih?");
 
     SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
-}
+    }
 
 void Scene3_Update(Scene *scene)
 {

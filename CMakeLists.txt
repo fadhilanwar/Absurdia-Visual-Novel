@@ -84,6 +84,14 @@ add_executable(main
     src/scenes/scene_31/scene_31.cpp
     src/scenes/scene_32/scene_32.hpp
     src/scenes/scene_32/scene_32.cpp
+    src/scenes/ending_a/ending_a.hpp
+    src/scenes/ending_a/ending_a.cpp
+    src/scenes/ending_b/ending_b.hpp
+    src/scenes/ending_b/ending_b.cpp
+    src/scenes/ending_c/ending_c.hpp
+    src/scenes/ending_c/ending_c.cpp
+    src/scenes/ending_d/ending_d.hpp
+    src/scenes/ending_d/ending_d.cpp
     src/pages/page.hpp
     src/pages/game/game.hpp
     src/pages/game/game.cpp

@@ -16,7 +16,7 @@ void Scene2_Start(Scene *scene)
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "talkingWork.png",
+                .imageFilePath = "work/lari.png",
                 .position = DialogPersonPosition::Left,
                 .animation = DialogPersonAnimation::Slide},
             },
@@ -28,7 +28,7 @@ void Scene2_Start(Scene *scene)
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "tahu_marah.png",
+                .imageFilePath = "figuran/tahu_marah.png",
                 .position = DialogPersonPosition::Right,
                 .animation = DialogPersonAnimation::Joget},
             },
@@ -40,7 +40,7 @@ void Scene2_Start(Scene *scene)
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "talkingWork.png",
+                .imageFilePath = "work/confusedWork.png",
                 .position = DialogPersonPosition::Left,
                 .animation = DialogPersonAnimation::Slide},
             },
@@ -52,7 +52,7 @@ void Scene2_Start(Scene *scene)
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "tahu_senang.png",
+                .imageFilePath = "figuran/tahu_senang.png",
                 .position = DialogPersonPosition::Right,
                 .animation = DialogPersonAnimation::Slide},
             },
@@ -64,7 +64,7 @@ void Scene2_Start(Scene *scene)
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "talkingWork.png",
+                .imageFilePath = "work/talkingWork.png",
                 .position = DialogPersonPosition::Left,
                 .animation = DialogPersonAnimation::Slide},
             },
