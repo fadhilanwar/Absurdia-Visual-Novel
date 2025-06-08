@@ -1,10 +1,20 @@
 #include "scene_5.hpp"
 #include <iostream>
 
-void Scene5_DialogScene1(Scene *scene)
+void Scene5_PindahScene1(Scene *scene)
 {
-    SceneManager_SetBackground(scene->sceneManager, "background/tangga.png");
+    std:: cout << "Pindah scene\n";
+    Scene *scene6 = Scene6_Create();
+    SceneManager_GoToScene(scene->sceneManager, scene6, SceneTransition::Fade);
 }
+
+void Scene5_PindahScene2(Scene *scene)
+{
+    std:: cout << "Pindah scene\n";
+    Scene *scene7 = Scene7_Create();
+    SceneManager_GoToScene(scene->sceneManager, scene7, SceneTransition::Fade);
+}
+
 
 //pilihan 1
 void Scene5_DialogPilihan1(Scene *scene)
@@ -80,12 +90,14 @@ void Scene5_DialogPilihan1(Scene *scene)
                 },
                 {},
                 "MC",
-                "...Eh... baiklah. Terima kasih, Pak.");
+                "...Eh... baiklah. Terima kasih, Pak.",
+            Scene5_PindahScene1, scene);
 }
 
 void Scene5_DialogPilihan2(Scene *scene)
 {
     std::cout << "pilihan 2 dipilih\n";
+    SceneManager_SetBackground(scene->sceneManager, "background/tangga.png");
     SceneManager_AddDialog(
         scene->sceneManager,
         {
@@ -97,7 +109,7 @@ void Scene5_DialogPilihan2(Scene *scene)
         {},
         "MC",
         "Ya ampun... tangganya kok begini sih..",
-    Scene5_DialogScene1, scene);
+    Scene5_PindahScene2, scene);
     
 }
 

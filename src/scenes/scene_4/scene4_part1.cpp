@@ -2,9 +2,9 @@
 #include <iostream>
 
 
-void Scene4Part1_DialogScene1(Scene *scene)
+void Scene4Part1_PindahScene(Scene *scene)
 {
-    std::cout << "Dialog beres\n";
+    std::cout << "Pindah scene\n";
     Scene *scene4Part2 = Scene4Part2_Create();
     SceneManager_GoToScene(scene->sceneManager, scene4Part2, SceneTransition::Fade);
 }
@@ -108,7 +108,7 @@ void Scene4Part1_Start(Scene *scene)
         {},
         "MC",
         "Aneh, tapi yasudahlah",
-        Scene4Part1_DialogScene1, scene);
+        Scene4Part1_PindahScene, scene);
 
     SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
 }
