@@ -16,8 +16,8 @@ void Scene1_DialogPilihan1(Scene *scene)
 void Scene1_DialogPilihan2(Scene *scene)
 {
     std::cout << "Pilihan 2 dipilih";
-    Scene *scene4 = Scene4_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene4, SceneTransition::Fade);
+    Scene *scene4Part1 = Scene4Part1_Create();
+    SceneManager_GoToScene(scene->sceneManager, scene4Part1, SceneTransition::Fade);
 }
 
 void Scene3_Start(Scene *scene)
@@ -44,7 +44,7 @@ void Scene3_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "work/confusedWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::Slide},
+                .animation = DialogPersonAnimation::None},
         },
         {},
         "MC",
@@ -56,7 +56,7 @@ void Scene3_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "work/shockedWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::Slide},
+                .animation = DialogPersonAnimation::None},
         },
         {},
         "MC",
@@ -68,7 +68,7 @@ void Scene3_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "work/shockedWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::Slide},
+                .animation = DialogPersonAnimation::None},
             },
            {DialogQuestion{
                 .question = "Sepertinya lebih baik aku pulang",

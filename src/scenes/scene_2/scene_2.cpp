@@ -42,7 +42,7 @@ void Scene2_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "work/confusedWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::Slide},
+                .animation = DialogPersonAnimation::None},
             },
         {},
         "MC",
@@ -54,7 +54,7 @@ void Scene2_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "figuran/tahu_senang.png",
                 .position = DialogPersonPosition::Right,
-                .animation = DialogPersonAnimation::Slide},
+                .animation = DialogPersonAnimation::None},
             },
         {},
         "Penjual Tahu",
@@ -66,7 +66,7 @@ void Scene2_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "work/talkingWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::Slide},
+                .animation = DialogPersonAnimation::None},
             },
         {},
         "MC",

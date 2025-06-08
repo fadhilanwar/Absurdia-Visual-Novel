@@ -26,8 +26,10 @@ add_executable(main
     src/scenes/scene_2/scene_2.cpp
     src/scenes/scene_3/scene_3.hpp
     src/scenes/scene_3/scene_3.cpp
-    src/scenes/scene_4/scene_4.hpp
-    src/scenes/scene_4/scene_4.cpp
+    src/scenes/scene_4/scene4_part1.hpp
+    src/scenes/scene_4/scene4_part1.cpp
+    src/scenes/scene_4/scene4_part2.hpp
+    src/scenes/scene_4/scene4_part2.cpp
     src/scenes/scene_5/scene_5.hpp
     src/scenes/scene_5/scene_5.cpp
     src/scenes/scene_6/scene_6.hpp

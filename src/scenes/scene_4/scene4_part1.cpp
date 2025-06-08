@@ -1,29 +1,17 @@
-#include "scene_4.hpp"
+#include "scene4_part1.hpp"
 #include <iostream>
 
-void Scene4_DialogScene1(Scene *scene)
+
+void Scene4Part1_DialogScene1(Scene *scene)
 {
-    SceneManager_SetBackground(scene->sceneManager, "background/lift.png");
-}
-//pilihan 1
-void Scene4_DialogPilihan1(Scene *scene)
-{
-    std::cout << "Pilihan 1 dipilih\n";
-    Scene *scene5 = Scene5_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene5, SceneTransition::Fade);
+    std::cout << "Dialog beres\n";
+    Scene *scene4Part2 = Scene4Part2_Create();
+    SceneManager_GoToScene(scene->sceneManager, scene4Part2, SceneTransition::Fade);
 }
 
-//pilihan 2
-void Scene4_DialogPilihan2(Scene *scene)
+void Scene4Part1_Start(Scene *scene)
 {
-    std::cout << "Pilihan 2 dipilih\n";
-    Scene *scene6 = Scene6_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene6, SceneTransition::Fade);
-}
-
-void Scene4_Start(Scene *scene)
-{
-    Scene4Data *data = (Scene4Data *)scene->data;
+    Scene4Part1Data *data = (Scene4Part1Data *)scene->data;
     
     SceneManager_SetBackground(scene->sceneManager, "background/resepsionis.png");
     SceneManager_AddDialog(
@@ -56,7 +44,7 @@ void Scene4_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "figuran/resepsionisTalk.png",
                 .position = DialogPersonPosition::Right,
-                .animation = DialogPersonAnimation::Slide},
+                .animation = DialogPersonAnimation::None},
         },
         {},
         "Resepsionis",
@@ -68,7 +56,7 @@ void Scene4_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "work/confusedWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::Slide},
+                .animation = DialogPersonAnimation::None},
         },
         {},
         "MC",
@@ -80,7 +68,7 @@ void Scene4_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "figuran/resepsionisSenyum.png",
                 .position = DialogPersonPosition::Right,
-                .animation = DialogPersonAnimation::Slide},
+                .animation = DialogPersonAnimation::None},
         },
         {},
         "Resepsionis",
@@ -91,7 +79,7 @@ void Scene4_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "work/talkingWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::Slide},
+                .animation = DialogPersonAnimation::None},
         },
         {},
         "MC",
@@ -103,7 +91,7 @@ void Scene4_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "work/talkingWork.png",
                 .position = DialogPersonPosition::Right,
-                .animation = DialogPersonAnimation::Slide},
+                .animation = DialogPersonAnimation::None},
         },
         {},
         "Resepsionis",
@@ -115,55 +103,35 @@ void Scene4_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "work/talkingWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::Slide},
+                .animation = DialogPersonAnimation::None},
         },
         {},
         "MC",
         "Aneh, tapi yasudahlah",
-        Scene4_DialogScene1, scene);
-
-    SceneManager_AddDialog(
-        scene->sceneManager,
-        {
-            DialogPerson{
-                .imageFilePath = "work/talkingWork.png",
-                .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::Slide},
-            },
-            {
-                DialogQuestion{
-                    .question = "Naik",
-                    .onAnswered = Scene4_DialogPilihan1,
-                    .onAnsweredParameter = scene},
-                DialogQuestion{
-                    .question = "Turun",
-                    .onAnswered = Scene4_DialogPilihan2,
-                    .onAnsweredParameter = scene}},
-        "MC",
-        "Nah, sekarang tinggal ke atas.");
+        Scene4Part1_DialogScene1, scene);
 
     SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
 }
 
-void scene4_Update(Scene *scene)
+void scene4Part1_Update(Scene *scene)
 {
     // Scene4Data *data = (Scene4Data *)scene->data;
 }
 
-void Scene4_Destroy(Scene *scene)
+void Scene4Part1_Destroy(Scene *scene)
 {
     // Scene4Data *data = (Scene4Data *)scene->data;
     // delete data;
 }
 
-Scene *Scene4_Create()
+Scene *Scene4Part1_Create()
 {
-    Scene4Data *data = new Scene4Data();
+    Scene4Part1Data *data = new Scene4Part1Data();
     Scene *scene = new Scene{
         .data = data,
-        .start = Scene4_Start,
-        .update = scene4_Update,
-        .destroy = Scene4_Destroy
+        .start = Scene4Part1_Start,
+        .update = scene4Part1_Update,
+        .destroy = Scene4Part1_Destroy
     };
     return scene;
 }

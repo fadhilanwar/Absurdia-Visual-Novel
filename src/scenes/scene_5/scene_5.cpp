@@ -6,13 +6,6 @@ void Scene5_DialogScene1(Scene *scene)
     SceneManager_SetBackground(scene->sceneManager, "background/tangga.png");
 }
 
-void Scene5_DialogBeres(Scene *scene)
-{
-    std::cout << "Dialog selesai\n";
-    Scene *scene6 = Scene5_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene6, SceneTransition::None);
-}
-
 //pilihan 1
 void Scene5_DialogPilihan1(Scene *scene)
 {

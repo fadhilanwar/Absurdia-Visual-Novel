@@ -6,8 +6,8 @@
 #include "../scene_6/scene_6.hpp"
 #include "../../umum.hpp"
 
-struct Scene4Data
+struct Scene4Part2Data
 {
 
 };
-Scene *Scene4_Create();
+Scene *Scene4Part2_Create();

@@ -42,7 +42,7 @@ void Scene1_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "pajamas/talkingSleepyPajamas.png",
                 .position = DialogPersonPosition::Center,
-                .animation = DialogPersonAnimation::Slide},
+                .animation = DialogPersonAnimation::None},
         },
         {},
         "MC",
@@ -54,7 +54,7 @@ void Scene1_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "pajamas/talkingSleepyPajamas.png",
                 .position = DialogPersonPosition::Center,
-                .animation = DialogPersonAnimation::Slide},
+                .animation = DialogPersonAnimation::None},
         },
         {},
         "MC",
@@ -79,7 +79,7 @@ void Scene1_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "pajamas/talkingTeaPajamas.png",
                 .position = DialogPersonPosition::Center,
-                .animation = DialogPersonAnimation::Slide},
+                .animation = DialogPersonAnimation::None},
         },
         {},
         "MC",
@@ -91,7 +91,7 @@ void Scene1_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "pajamas/teaLookingPajamas.png",
                 .position = DialogPersonPosition::Center,
-                .animation = DialogPersonAnimation::Slide},
+                .animation = DialogPersonAnimation::None},
         },
         {},
         "",
@@ -104,7 +104,7 @@ void Scene1_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "pajamas/teaLookingTalkingPajamas.png",
                 .position = DialogPersonPosition::Center,
-                .animation = DialogPersonAnimation::Slide},
+                .animation = DialogPersonAnimation::None},
         },
         {},
         "MC",
@@ -116,7 +116,7 @@ void Scene1_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "pajamas/shockedPajamas.png",
                 .position = DialogPersonPosition::Center,
-                .animation = DialogPersonAnimation::Slide},
+                .animation = DialogPersonAnimation::None},
         },
         {},
         "",
@@ -131,7 +131,7 @@ void Scene1_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "pajamas/shockedPajamas.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::Slide},
+                .animation = DialogPersonAnimation::None},
         },
         {},
         "MC",
@@ -144,7 +144,7 @@ void Scene1_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "pajamas/shockedPajamas.png",
                 .position = DialogPersonPosition::Center,
-                .animation = DialogPersonAnimation::Slide},
+                .animation = DialogPersonAnimation::None},
         },
         {},
         "MC",
