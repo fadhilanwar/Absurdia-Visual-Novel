@@ -465,12 +465,19 @@ void m_SceneManager_ProcessDialog(SceneManager *sceneMg)
     // Kalau kagak yaudah
     if (requestSkipDialog)
     {
+        bool dontSetFirstDialog;
+
         sceneMg->dialogEnterKeyPressed = true;
 
         Dialog *dialog = sceneMg->dialogQueue.front();
         if (dialog->onFinished != nullptr)
         {
             dialog->onFinished(dialog->onFinishedParameter);
+        }
+        if (dialog->message.empty())
+        {
+            sceneMg->isFirstDialog = true;
+            dontSetFirstDialog = true;
         }
         sceneMg->dialogQueue.pop();
         delete dialog;
@@ -484,7 +491,8 @@ void m_SceneManager_ProcessDialog(SceneManager *sceneMg)
         }
         else
         {
-            sceneMg->isFirstDialog = false;
+            if (!dontSetFirstDialog)
+                sceneMg->isFirstDialog = false;
             // m_SceneManager_DrawDialog(sceneMg);
             // sceneMg->dialogAnimProgress += sceneMg->dialogAnimProgressStep;
         }
