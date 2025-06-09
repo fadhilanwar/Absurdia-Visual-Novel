@@ -22,13 +22,70 @@ void Scene4Part2_Start(Scene *scene)
     Scene4Part2Data *data = (Scene4Part2Data *)scene->data;
     
     SceneManager_SetBackground(scene->sceneManager, "background/lift.png");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "figuran/toav2.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::None
+            }
+        },
+        {},
+        "Speaker Unit",
+        "Selamat datang di Absurdia Inc.!"
+    );
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "figuran/toav2.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::None
+            }
+        },
+        {},
+        "Speaker Unit",
+        "Silahkan nikmati musik kami yang autentik . . ."
+    );
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/confusedWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::None
+            }
+        },
+        {},
+        "Yono",
+        "Ah . . . Seingatku melodinya tidak seperti ini . . ."
+    );
+    
     SceneManager_AddDialog(
         scene->sceneManager,
         {
             DialogPerson{
                 .imageFilePath = "work/talkingWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::Slide},
+                .animation = DialogPersonAnimation::None
+            }
+        },
+        {},
+        "Yono",
+        "Sudahlah."
+    );
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/talkingWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::None},
             },
             {
                 DialogQuestion{
@@ -41,8 +98,9 @@ void Scene4Part2_Start(Scene *scene)
                     .onAnsweredParameter = scene}},
         "Yono",
         "Nah, sekarang tinggal ke atas.");
+        
 
-    SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
+    SceneManager_PlayMusic(scene->sceneManager, "liftMusic.mp3");
 }
 
 void scene4Part2_Update(Scene *scene)

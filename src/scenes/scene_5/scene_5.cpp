@@ -137,6 +137,7 @@ void Scene5_Start(Scene *scene)
                 .onAnsweredParameter = scene}},
         "Yono",
         "Lho... kenapa malah ke basement?");
+        SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
 }
 
 void Scene5_Update(Scene *scene)

@@ -17,12 +17,12 @@ void Scene6_DialogPilihan1(Scene *scene)
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "work/defaultWork.png",
+                .imageFilePath = "work/shockedWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::Slide},
+                .animation = DialogPersonAnimation::None},
         },
         {},
-        "MC",
+        "Yono",
         "Permisi, apakah kau baik-baik saja?"
     );
 
@@ -30,61 +30,61 @@ void Scene6_DialogPilihan1(Scene *scene)
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "figuran/talkingUnknow.png",
+                .imageFilePath = "figuran/talkingUnknown 1.png",
                 .position = DialogPersonPosition::Right,
-                .animation = DialogPersonAnimation::Slide},
+                .animation = DialogPersonAnimation::None},
             },
             {},
             "???",
-            "..Mereka tanya siapa yang menang lomba makan bayangan...");
+            ". . . Mereka tanya siapa yang menang lomba makan bayangan . . . ");
 
     SceneManager_AddDialog(
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "figuran/talkingUnknow.png",
+                .imageFilePath = "figuran/talkingUnknown 1.png",
                 .position = DialogPersonPosition::Right,
-                .animation = DialogPersonAnimation::Slide},
+                .animation = DialogPersonAnimation::None},
             },
             {},
             "???",
-            "Aku... aku menjawab... bayangan sendiri...");
+            "Aku . . . aku menjawab . . . bayangan sendiri . . . ");
 
     SceneManager_AddDialog(
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "figuran/talkingUnknow.png",
+                .imageFilePath = "figuran/talkingUnknown 1.png",
                 .position = DialogPersonPosition::Right,
-                .animation = DialogPersonAnimation::Slide},
+                .animation = DialogPersonAnimation::None},
             },
             {},
             "???",
-            "Tapi mereka... hanya tertawa... dan memberi aku bunga plastik...");            
+            "Tapi mereka . . . hanya tertawa . . . dan memberi aku bunga plastik . . . ");            
             
      SceneManager_AddDialog(
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "work/defaultWork.png",
+                .imageFilePath = "work/confusedWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::Slide},
+                .animation = DialogPersonAnimation::None},
         },
         {},
-        "MC",
-        "Dialog macam apa itu?");
+        "Yono",
+        "Ah... Obrolan macam apa itu?");
 
      SceneManager_AddDialog(
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "work/defaultWork.png",
+                .imageFilePath = "work/confusedWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::Slide},
+                .animation = DialogPersonAnimation::None},
         },
         {},
-        "MC",
-        "...Oke. Aku harus pergi.",
+        "Yono",
+        "Oke . . . Maaf Aku harus pergi.",
     Scene6_PindahScene, scene);    
 }
 
@@ -102,8 +102,8 @@ void Scene6_DialogPilihan2(Scene *scene)
             },
         },
         {},
-        "MC",
-        "Fokus. Fokus. Aku tidak boleh terdistraksi.",
+        "Yono",
+        "Fokus. Fokus. Aku harus siap-siap untuk interviewnya.",
     Scene6_PindahScene, scene);
 }
 
@@ -111,13 +111,43 @@ void Scene6_Start(Scene *scene)
 {
     Scene6Data *data = (Scene6Data *)scene->data;
     SceneManager_SetBackground(scene->sceneManager, "background/lorong.png");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson {
+                .imageFilePath = "figuran/raw 3.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::None
+            }
+        },
+        {},
+        "",
+        ""
+    );
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson {
+                .imageFilePath = "figuran/talkingUnknown 1.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::None
+            }
+        },
+        {},
+        "???",
+        "Haaaahhhhhh . . ."
+    );
+
+
     SceneManager_AddDialog(
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "work/confusedWork.png",
+                .imageFilePath = "work/shockedWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::Slide},
+                .animation = DialogPersonAnimation::None},
         },
         {
             DialogQuestion{
@@ -129,8 +159,8 @@ void Scene6_Start(Scene *scene)
                 .onAnswered = Scene6_DialogPilihan2,
                 .onAnsweredParameter = scene}
             },
-            "MC",
-            "Kenapa ya dia...?");
+            "Yono",
+            "Kenapa ya dia?");
 
     SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
 }
@@ -167,7 +197,7 @@ Scene *Scene6_Create()
 // {
 //     Scene6Data *data = (Scene6Data *)scene->data;
 //     SceneManager_SetBackground(scene->sceneManager, "tiba_dikota.png");
-//     // // SceneManager_AddDialog(scene->sceneManager, true, "MC","Aku harus cepat! Kalau telat, mereka bisa langsung mencoret namaku..", "talkingWork.png", Scene6_DialogScene6, scene);
+//     // // SceneManager_AddDialog(scene->sceneManager, true, "Yono","Aku harus cepat! Kalau telat, mereka bisa langsung mencoret namaku..", "talkingWork.png", Scene6_DialogScene6, scene);
 
 //     SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
 // }
