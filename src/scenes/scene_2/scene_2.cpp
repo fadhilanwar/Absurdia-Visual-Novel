@@ -28,13 +28,38 @@ void Scene2_Start(Scene *scene)
         scene->sceneManager,
         {
             DialogPerson{
+                .imageFilePath = "figuran/tahu_senang.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::None},
+            },
+        {},
+        "Penjual Tahu",
+        "Tahuuuu bulat! diiigoreng dadakan! lima rat . . .");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
                 .imageFilePath = "figuran/tahu_marah.png",
                 .position = DialogPersonPosition::Right,
                 .animation = DialogPersonAnimation::Joget},
             },
         {},
         "Penjual Tahu",
-        "Tahu bulat digoreng dadakan, lima rat—woi! Hati-hati dong!");
+        "Hey! Hati-hati dong kalau jalan!");
+    
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "figuran/tahu_marah.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::Joget},
+            },
+        {},
+        "Penjual Tahu",
+        "Hampir saja tahuku terjatuh"
+    );
 
     SceneManager_AddDialog(
         scene->sceneManager,
