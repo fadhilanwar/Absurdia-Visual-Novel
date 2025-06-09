@@ -56,12 +56,12 @@ void LoadGamePG_Start(Page* page)
 
 
     // Contoh beberapa slot save
-    UI_AddButton(page->ui, nullptr, 380, 180, 240, 40, {0, 0}, {4, 10}, "Ahmad", "fonts/Chonky Bunny.ttf", 20, sf::Color::Black, "button.png", LoadGamePG_OnButtonClick, page);
-    UI_AddButton(page->ui, nullptr, 380, 240, 240, 40, {0, 0}, {4, 10}, "Masda", "fonts/Chonky Bunny.ttf", 20, sf::Color::Black, "button.png", LoadGamePG_OnButtonClick, page);
-    UI_AddButton(page->ui, nullptr, 380, 300, 240, 40, {0, 0}, {4, 10}, "Virgi", "fonts/Chonky Bunny.ttf", 20, sf::Color::Black, "button.png", LoadGamePG_OnButtonClick, page);
+    UI_AddButton(page->ui, nullptr, 380, 180, 240, 40, {0, 0}, {0, 0}, "Ahmad", "fonts/Chonky Bunny.ttf", 20, sf::Color::Black, "ui/button.png", LoadGamePG_OnButtonClick, page);
+    UI_AddButton(page->ui, nullptr, 380, 240, 240, 40, {0, 0}, {0, 0}, "Masda", "fonts/Chonky Bunny.ttf", 20, sf::Color::Black, "ui/button.png", LoadGamePG_OnButtonClick, page);
+    UI_AddButton(page->ui, nullptr, 380, 300, 240, 40, {0, 0}, {0, 0}, "Virgi", "fonts/Chonky Bunny.ttf", 20, sf::Color::Black, "ui/button.png", LoadGamePG_OnButtonClick, page);
 
     // Tombol kembali
-    UI_AddButton(page->ui, nullptr, 350, 400, 35, 35, {0, 0}, {0, 0}, " ", "fonts/Chonky Bunny.ttf", 20, sf::Color::White, "back.png", LoadGamePG_OnBack, page);
+    UI_AddButton(page->ui, nullptr, 350, 400, 35, 35, {0, 0}, {0, 0}, " ", "fonts/Chonky Bunny.ttf", 20, sf::Color::White, "ui/back.png", LoadGamePG_OnBack, page);
 }
 
 void LoadGamePG_Update(Page* page)

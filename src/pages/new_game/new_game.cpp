@@ -42,11 +42,11 @@ void NewGamePG_Start(Page* page) {
 
     UI_AddText(page->ui, nullptr, 420, 120, "New Game", "fonts/Chonky Bunny.ttf", 36, sf::Color::White);
 
-    data->inputNamaKarakter = UI_AddInputField(page->ui, nullptr, 350, 200, 300, 40, {10, 10}, {2, 6}, "Masukkan nama karakter", 20, "fonts/Chonky Bunny.ttf", sf::Color::Black, "button.png", "button_focused.png");
+    data->inputNamaKarakter = UI_AddInputField(page->ui, nullptr, 350, 200, 300, 40, {10, 10}, {0, 0}, "Masukkan nama karakter", 20, "fonts/Chonky Bunny.ttf", sf::Color::Black, "ui/input_field.png", "ui/input_field_focused.png");
 
-    UI_AddButton(page->ui, nullptr, 400, 260, 200, 40, {0, 0}, {4, 10}, "Start", "fonts/Chonky Bunny.ttf", 18, sf::Color::Black, "button.png", NewGamePG_OnStartClick, page);
+    UI_AddButton(page->ui, nullptr, 400, 260, 200, 40, {0, 0}, {0, 0}, "Start", "fonts/Chonky Bunny.ttf", 18, sf::Color::Black, "ui/button.png", NewGamePG_OnStartClick, page);
 
-    UI_AddButton(page->ui, nullptr, 350, 120, 40, 40, {0, 0}, {0, 0}, " ", "fonts/Chonky Bunny.ttf", 18, sf::Color::Black, "back.png", NewGamePG_OnBackClick, page);
+    UI_AddButton(page->ui, nullptr, 350, 120, 40, 40, {0, 0}, {0, 0}, " ", "fonts/Chonky Bunny.ttf", 18, sf::Color::Black, "ui/back.png", NewGamePG_OnBackClick, page);
 }
 
 void NewGamePG_Update(Page* page) 
