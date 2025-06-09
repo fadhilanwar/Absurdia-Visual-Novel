@@ -41,7 +41,7 @@ void LoadGamePG_Start(Page* page)
     LoadGamePageData *data = (LoadGamePageData*)page->data;
 
     UI_AddImage(page->ui, nullptr, 0, 0, 1000, 550, true, "wp_loadgame.png");
-    UI_AddText(page->ui, nullptr, 550, 100, "Load Game", "fonts/Chonky Bunny.ttf", 100, sf::Color::White);
+    UI_AddText(page->ui, nullptr, 400, 90, "Load Game", "fonts/Chonky Bunny.ttf", 50, sf::Color::White);
 
     //baca nama karakter dari file save
     // std::ifstream saveFile("save.txt");
