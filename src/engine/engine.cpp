@@ -1,6 +1,14 @@
 #include "engine.hpp"
 #include <iostream>
 
+// Khusus buat di Windows
+#if defined(_WIN32)
+#define WAIT_TIME 8
+#endif
+#if defined (unix)
+#define WAIT_TIME 16
+#endif
+
 Engine *Engine_Create()
 {
     Engine *engine = new Engine();
@@ -40,7 +48,7 @@ void Engine_Run(Engine *engine)
             fpsClock.restart();
         }
 
-        int waitTime = std::max(8 - clock.getElapsedTime().asMilliseconds(), 0);
+        int waitTime = std::max(WAIT_TIME - clock.getElapsedTime().asMilliseconds(), 0);
         clock.restart();
 
         char inputtedText = engine->engineWindow.inputtedText;
