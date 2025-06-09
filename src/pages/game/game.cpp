@@ -28,7 +28,7 @@ void GamePG_Destroy(Page *page)
 {
     GamePageData *data = (GamePageData *)page->data;
     delete data->sceneImage;
-    // TODO: delete sceneManager
+    delete data->sceneMg;
 }
 
 Page *GamePG_Create()
