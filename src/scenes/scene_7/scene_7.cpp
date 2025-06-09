@@ -26,7 +26,7 @@ void Scene7_Start(Scene *scene)
         },
         {},
         "MC",
-        "Aku nggak salah masuk gedung kan? Ini seperti festival cosplay..."
+        "Aku nggak salah masuk gedung kan? Ini seperti festival cosplay. . ."
     );
 
     SceneManager_AddDialog(
@@ -40,7 +40,7 @@ void Scene7_Start(Scene *scene)
         },
         {},
         "MC",
-        "Sepertinya rumor yang dikatakan orang-??? benar..."
+        "Sepertinya rumor yang dikatakan orang-??? benar. . ."
     );
 
     SceneManager_AddDialog(
@@ -54,7 +54,7 @@ void Scene7_Start(Scene *scene)
         },
         {},
         "MC",
-        "Sudahlah... ini kesempatanku untuk mendapatkan sebuah pekerjaan.",
+        "Sudahlah. . .  ini kesempatanku untuk mendapatkan sebuah pekerjaan.",
     Scene7_DialogScene, scene);
 
 }

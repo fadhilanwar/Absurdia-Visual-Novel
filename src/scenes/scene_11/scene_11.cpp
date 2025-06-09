@@ -29,7 +29,7 @@ void Scene11_Start(Scene *scene)
             },
             {},
             "MC",
-            "Ciieeeeetttsss…");
+            "Ciieeeeetttsss. . .");
 
     SceneManager_AddDialog(
         scene->sceneManager,

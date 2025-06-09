@@ -48,7 +48,7 @@ void Scene4Part2_Start(Scene *scene)
         },
         {},
         "Speaker Unit",
-        "Silahkan nikmati musik kami yang autentik . . ."
+        "Silahkan nikmati musik kami yang autentik. . ."
     );
 
     SceneManager_AddDialog(
@@ -62,7 +62,7 @@ void Scene4Part2_Start(Scene *scene)
         },
         {},
         "Yono",
-        "Ah . . . Seingatku melodinya tidak seperti ini . . ."
+        "Ah. . . Seingatku melodinya tidak seperti ini. . ."
     );
     
     SceneManager_AddDialog(

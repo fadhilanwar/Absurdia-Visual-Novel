@@ -39,7 +39,7 @@ void Scene2_Start(Scene *scene)
             },
         {},
         "Penjual Tahu",
-        "Tahuuuu bulat! diiigoreng dadakan! lima rat . . .");
+        "Tahuuuu bulat! diiigoreng dadakan! lima rat. . .");
 
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -101,7 +101,7 @@ void Scene2_Start(Scene *scene)
             },
         {},
         "Yono",
-        "Oke, lokasi gedungnya nggak jauh dari sini. Seharusnya . . . lima menit cukup.",
+        "Oke, lokasi gedungnya nggak jauh dari sini. Seharusnya. . . lima menit cukup.",
     Scene2_DialogBeres, scene);
 
     SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");

@@ -91,7 +91,7 @@ void Scene3_Start(Scene *scene)
                 .onAnswered = Scene1_DialogPilihan2,
                 .onAnsweredParameter = scene}},
         "Yono",
-        "Atapnya . . .  kayak topi sombrero. Ini kantor atau taman hiburan sih?");
+        "Atapnya. . .  kayak topi sombrero. Ini kantor atau taman hiburan sih?");
 
     SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
     }

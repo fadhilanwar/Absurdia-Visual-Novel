@@ -34,7 +34,7 @@ void Scene1_Start(Scene *scene)
             },
             {},
             "Yono",
-            "Hoaaammmm . . . ");
+            "Hoaaammmm. . . ");
 
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -108,7 +108,7 @@ void Scene1_Start(Scene *scene)
         },
         {},
         "Yono",
-        "Sebentar . . . ",
+        "Sebentar. . . ",
         Scene1_DialogScene2, scene);
 
     SceneManager_AddDialog(

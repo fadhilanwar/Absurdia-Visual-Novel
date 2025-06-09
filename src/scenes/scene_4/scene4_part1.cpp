@@ -36,7 +36,7 @@ void Scene4Part1_Start(Scene *scene)
         },
         {},
         "Yono",
-        "Eh . . . Iya. Saya . . . ");
+        "Eh. . . Iya. Saya. . . ");
     
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -60,7 +60,7 @@ void Scene4Part1_Start(Scene *scene)
         },
         {},
         "Yono",
-        "A . . . aku ke sini . . . ingin interview kerja untuk lowongan pekerjaan yang baru dibuka disini");
+        "Aa. . . aku ke sini. . . ingin interview kerja untuk lowongan pekerjaan yang baru dibuka disini");
     
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -95,7 +95,7 @@ void Scene4Part1_Start(Scene *scene)
         },
         {},
         "Resepsionis",
-        "Oiyaaa . . . jangan kaget ya . . . kau akan terbiasa . . . ahahahaaa!");
+        "Oiyaaa. . . jangan kaget ya. . . kau akan terbiasa. . . ahahahaaa!");
 
     SceneManager_AddDialog(
         scene->sceneManager,

@@ -36,7 +36,7 @@ void Scene6_DialogPilihan1(Scene *scene)
             },
             {},
             "???",
-            ". . . Mereka tanya siapa yang menang lomba makan bayangan . . . ");
+            ". . . Mereka tanya siapa yang menang lomba makan bayangan. . . ");
 
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -48,7 +48,7 @@ void Scene6_DialogPilihan1(Scene *scene)
             },
             {},
             "???",
-            "Aku . . . aku menjawab . . . bayangan sendiri . . . ");
+            "Aku. . .  aku menjawab. . .  bayangan sendiri. . . ");
 
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -60,7 +60,7 @@ void Scene6_DialogPilihan1(Scene *scene)
             },
             {},
             "???",
-            "Tapi mereka . . . hanya tertawa . . . dan memberi aku bunga plastik . . . ");            
+            "Tapi mereka. . .  hanya tertawa. . .  dan memberi aku bunga plastik. . . ");            
             
      SceneManager_AddDialog(
         scene->sceneManager,
@@ -72,7 +72,7 @@ void Scene6_DialogPilihan1(Scene *scene)
         },
         {},
         "Yono",
-        "Ah... Obrolan macam apa itu?");
+        "Ah. . .  Obrolan macam apa itu?");
 
      SceneManager_AddDialog(
         scene->sceneManager,
@@ -84,7 +84,7 @@ void Scene6_DialogPilihan1(Scene *scene)
         },
         {},
         "Yono",
-        "Oke . . . Maaf Aku harus pergi.",
+        "Oke. . .  Tapi maaf, aku harus pergi.",
     Scene6_PindahScene, scene);    
 }
 
@@ -137,7 +137,7 @@ void Scene6_Start(Scene *scene)
         },
         {},
         "???",
-        "Haaaahhhhhh . . ."
+        "Haaaahhhhhh. . ."
     );
 
 

@@ -30,7 +30,7 @@ void Scene5_DialogPilihan1(Scene *scene)
             },
         {},
         "Yono",
-        "Permisi, Pak... ini... ruang interview di mana ya?");
+        "Permisi, Pak. . . ini. . .  ruang interview di mana ya?");
 
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -42,7 +42,7 @@ void Scene5_DialogPilihan1(Scene *scene)
             },
             {},
             "Satpam",
-            "Hmm... di lantai 5");
+            "Hmm. . .  di lantai 5");
 
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -66,7 +66,7 @@ void Scene5_DialogPilihan1(Scene *scene)
             },
             {},
             "Satpam",
-            "Hahaha... di sini dunia bekerja secara terbalik, kawanku.");
+            "Hahaha. . .  di sini dunia bekerja secara terbalik, kawanku.");
 
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -78,7 +78,7 @@ void Scene5_DialogPilihan1(Scene *scene)
             },
             {},
             "Satpam",
-            "Ya... setidaknya di beberapa bagian gedung.");   
+            "Ya. . .  setidaknya di beberapa bagian gedung.");   
             
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -90,7 +90,7 @@ void Scene5_DialogPilihan1(Scene *scene)
                 },
                 {},
                 "Yono",
-                "...Eh... baiklah. Terima kasih, Pak.",
+                ". . .  Eh. . .  baiklah. Terima kasih, Pak.",
             Scene5_PindahScene1, scene);
 }
 
@@ -108,7 +108,7 @@ void Scene5_DialogPilihan2(Scene *scene)
             },
         {},
         "Yono",
-        "Ya ampun... tangganya kok begini sih..",
+        "Ya ampun. . .  tangganya kok begini sih??",
     Scene5_PindahScene2, scene);
     
 }
@@ -136,7 +136,7 @@ void Scene5_Start(Scene *scene)
                 .onAnswered = Scene5_DialogPilihan2,
                 .onAnsweredParameter = scene}},
         "Yono",
-        "Lho... kenapa malah ke basement?");
+        "Lho. . .  kenapa malah ke basement?");
         SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
 }
 

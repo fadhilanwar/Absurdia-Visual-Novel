@@ -37,7 +37,7 @@ void Scene12_Start(Scene *scene)
                     .onAnswered = Scene12_DialogPilihan2,
                     .onAnsweredParameter = scene}},
                     "Mr.Katak",
-                    "Kreatif dengan fonetik... saya suka! ");
+                    "Kreatif dengan fonetik. . .  saya suka! ");
     SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
 }
 

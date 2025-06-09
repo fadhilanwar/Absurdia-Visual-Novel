@@ -52,7 +52,7 @@ void Scene8_Start(Scene *scene)
                 .onAnsweredParameter = scene}
             },
             "MC",
-            "Baiklah... sepertinya aku harus “menyesuaikan");
+            "Baiklah. . .  sepertinya aku harus menyesuaikan");
  
     SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
 }

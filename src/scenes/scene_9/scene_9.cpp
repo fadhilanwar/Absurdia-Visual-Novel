@@ -63,7 +63,7 @@ void Scene9_Start(Scene *scene)
                     .onAnswered = Scene9_DialogPilihan4,
                     .onAnsweredParameter = scene}},
                 "Dr. Badut",
-                "Pertama… kalau kamu seekor kambing, apa nama lengkapmu, mbee?");
+                "Pertama. . .  kalau kamu seekor kambing, apa nama lengkapmu, mbee?");
 
     SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
 }
