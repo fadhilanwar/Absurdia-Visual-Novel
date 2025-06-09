@@ -1,6 +1,42 @@
 #include "scene_9.hpp"
 #include <iostream>
 
+void Scene9_DialogPilihan1(Scene *scene)
+{
+    std:: cout << "Pilihan 1 dipilih ";
+    Scene *scene12 = Scene12_Create();
+    SceneManager_GoToScene(scene->sceneManager, scene12, SceneTransition::Fade);
+}
+
+void Scene9_DialogPilihan2(Scene *scene)
+{
+    std:: cout << "Pilihan 2 dipilih ";
+    Scene *scene13 = Scene13_Create();
+    SceneManager_GoToScene(scene->sceneManager, scene13, SceneTransition:: Fade);
+}
+
+void Scene9_DialogPilihan3(Scene *scene)
+{
+    std:: cout << "Pilihan 3 dipilih";
+    Scene *scene14 = Scene14_Create();
+    SceneManager_GoToScene(scene->sceneManager, scene14, SceneTransition::Fade);
+}
+
+void Scene9_DialogPilihan4(Scene *scene)
+{
+    std:: cout << "Pilihan 4 dipilih";
+    Scene *scene15 = Scene15_Create();
+    SceneManager_GoToScene(scene->sceneManager, scene15, SceneTransition::Fade);
+}
+
+void Scene9_Start(Scene *scene)
+{
+    Scene9Data *data = (Scene9Data *)scene->data;
+    SceneManager_SetBackground(scene->sceneManager, "background/")
+}
+
+
+
 void Scene9_DialogScene9(Scene *scene)
 {
     std::cout << "Dialog beres\n";
