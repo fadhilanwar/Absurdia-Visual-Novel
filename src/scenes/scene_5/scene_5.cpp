@@ -29,7 +29,7 @@ void Scene5_DialogPilihan1(Scene *scene)
                 .animation = DialogPersonAnimation::Slide},
             },
         {},
-        "MC",
+        "Yono",
         "Permisi, Pak... ini... ruang interview di mana ya?");
 
     SceneManager_AddDialog(
@@ -53,7 +53,7 @@ void Scene5_DialogPilihan1(Scene *scene)
                 .animation = DialogPersonAnimation::None},
             },
             {},
-            "MC",
+            "Yono",
             "Lho, ini bukan lantai 5?");
     
      SceneManager_AddDialog(
@@ -89,7 +89,7 @@ void Scene5_DialogPilihan1(Scene *scene)
                 .animation = DialogPersonAnimation::None},
                 },
                 {},
-                "MC",
+                "Yono",
                 "...Eh... baiklah. Terima kasih, Pak.",
             Scene5_PindahScene1, scene);
 }
@@ -107,7 +107,7 @@ void Scene5_DialogPilihan2(Scene *scene)
                 .animation = DialogPersonAnimation::Slide},
             },
         {},
-        "MC",
+        "Yono",
         "Ya ampun... tangganya kok begini sih..",
     Scene5_PindahScene2, scene);
     
@@ -135,7 +135,7 @@ void Scene5_Start(Scene *scene)
                 .question = "Naik tangga",
                 .onAnswered = Scene5_DialogPilihan2,
                 .onAnsweredParameter = scene}},
-        "MC",
+        "Yono",
         "Lho... kenapa malah ke basement?");
 }
 
@@ -172,7 +172,7 @@ Scene *Scene5_Create()
 // {
 //     Scene5Data *data = (Scene5Data *)scene->data;
 //     SceneManager_SetBackground(scene->sceneManager, "tiba_dikota.png");
-//     // SceneManager_AddDialog(scene->sceneManager, true, "MC","Aku harus cepat! Kalau telat, mereka bisa langsung mencoret namaku..", "talkingWork.png", Scene5_DialogScene5, scene);
+//     // SceneManager_AddDialog(scene->sceneManager, true, "Yono","Aku harus cepat! Kalau telat, mereka bisa langsung mencoret namaku..", "talkingWork.png", Scene5_DialogScene5, scene);
 
 //     SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
 // }

@@ -39,7 +39,7 @@ void Scene4Part2_Start(Scene *scene)
                     .question = "Turun",
                     .onAnswered = Scene4Part2_DialogPilihan2,
                     .onAnsweredParameter = scene}},
-        "MC",
+        "Yono",
         "Nah, sekarang tinggal ke atas.");
 
     SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");

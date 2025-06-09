@@ -146,7 +146,7 @@ void Scene1_Start(Scene *scene)
         "AKU HARUS SEGERA SIAP-SIAP!", 
     Scene1_DialogBeres, scene);
 
-    SceneManager_PlayMusic(scene->sceneManager, "Goofy ahh Song.mp3");
+    SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
         }
 
 void Scene1_Update(Scene *scene)

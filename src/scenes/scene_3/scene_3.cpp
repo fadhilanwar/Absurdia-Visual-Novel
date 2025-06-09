@@ -34,7 +34,7 @@ void Scene3_Start(Scene *scene)
                 .animation = DialogPersonAnimation::Slide},
         },
         {},
-        "MC",
+        "Yono",
         "Aku harus cepat! Kalau telat, mereka bisa langsung mencoret namaku..",
         Scene3_DialogScene1, scene);
 
@@ -47,7 +47,7 @@ void Scene3_Start(Scene *scene)
                 .animation = DialogPersonAnimation::None},
         },
         {},
-        "MC",
+        "Yono",
         "Ini gedungnya? Bentuknya nggak biasa banget.");
 
     SceneManager_AddDialog(
@@ -59,8 +59,8 @@ void Scene3_Start(Scene *scene)
                 .animation = DialogPersonAnimation::None},
         },
         {},
-        "MC",
-        "Desain jendelanya kayak kebalik. Apa ini sengaja atau tukang bangunannya ngantuk?");
+        "Yono",
+        "Desain jendelanya aneh. Apa ini disengaja atau tukang bangunannya ngantuk?");
 
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -78,8 +78,8 @@ void Scene3_Start(Scene *scene)
                 .question = "Melangkah menuju gedung",
                 .onAnswered = Scene1_DialogPilihan2,
                 .onAnsweredParameter = scene}},
-        "MC",
-        "Atapnya... kayak topi sombrero. Ini kantor atau taman hiburan sih?");
+        "Yono",
+        "Atapnya . . .  kayak topi sombrero. Ini kantor atau taman hiburan sih?");
 
     SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
     }
@@ -120,7 +120,7 @@ Scene *Scene3_Create()
 // {
 //     Scene3Data *data = (Scene3Data *)scene->data;
 //     SceneManager_SetBackground(scene->sceneManager, "tiba_dikota.png");
-//     // SceneManager_AddDialog(scene->sceneManager, true, "MC","Aku harus cepat! Kalau telat, mereka bisa langsung mencoret namaku..", "talkingWork.png");
+//     // SceneManager_AddDialog(scene->sceneManager, true, "Yono","Aku harus cepat! Kalau telat, mereka bisa langsung mencoret namaku..", "talkingWork.png");
 //     SceneManager_SetBackground(scene->sceneManager, "depan_gedung.png");
 //     // SceneManager_AddDialog(scene->sceneManager, true, "MC", "Ini gedungnya? Bentuknya nggak biasa banget.", "confusedWork.png");
 //     // SceneManager_AddDialog(scene->sceneManager, true, "MC", "Desain jendelanya kayak kebalik. Apa ini sengaja atau tukang bangunannya ngantuk?", "shockedWork.png");
