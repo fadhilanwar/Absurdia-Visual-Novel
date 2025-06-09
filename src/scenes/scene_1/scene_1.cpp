@@ -33,8 +33,8 @@ void Scene1_Start(Scene *scene)
                 .animation = DialogPersonAnimation::Slide},
             },
             {},
-            "MC",
-            "Hoaaammmm...");
+            "Yono",
+            "Hoaaammmm . . . ");
 
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -45,7 +45,7 @@ void Scene1_Start(Scene *scene)
                 .animation = DialogPersonAnimation::None},
         },
         {},
-        "MC",
+        "Yono",
         "Sepertinya teh matcha sangat cocok untuk mengawali hari ini.");
 
     SceneManager_AddDialog(
@@ -57,8 +57,8 @@ void Scene1_Start(Scene *scene)
                 .animation = DialogPersonAnimation::None},
         },
         {},
-        "MC",
-        "Aku akan ke dapur untuk membuatnya",
+        "Yono",
+        "Aku akan ke dapur untuk membuatnya!",
         Scene1_DialogScene1, scene);
 
     SceneManager_AddDialog(
@@ -82,8 +82,8 @@ void Scene1_Start(Scene *scene)
                 .animation = DialogPersonAnimation::None},
         },
         {},
-        "MC",
-        "Ahh, hangat dan racikan yang pas tanpa gula, sempurna!"
+        "Yono",
+        "Ahh, hangat dan racikan yang pas tanpa gula. Sempurna!"
     );
         SceneManager_AddDialog(
         scene->sceneManager,
@@ -107,8 +107,18 @@ void Scene1_Start(Scene *scene)
                 .animation = DialogPersonAnimation::None},
         },
         {},
-        "MC",
-        "Sebentar");
+        "Yono",
+        "Sebentar . . . ",
+        Scene1_DialogScene2, scene);
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {},
+        {},
+        "",
+        "",
+        Scene1_DialogScene1, scene
+    );
 
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -119,22 +129,7 @@ void Scene1_Start(Scene *scene)
                 .animation = DialogPersonAnimation::None},
         },
         {},
-        "",
-        "",
-    Scene1_DialogScene2, scene);
-
-
-    Scene1_DialogScene2, scene;
-    SceneManager_AddDialog(
-        scene->sceneManager,
-        {
-            DialogPerson{
-                .imageFilePath = "pajamas/shockedPajamas.png",
-                .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::None},
-        },
-        {},
-        "MC",
+        "Yono",
         "ADUH GAWAT ITU HARI INI?!!!",
     Scene1_DialogScene1, scene);
 
@@ -147,7 +142,7 @@ void Scene1_Start(Scene *scene)
                 .animation = DialogPersonAnimation::None},
         },
         {},
-        "MC",
+        "Yono",
         "AKU HARUS SEGERA SIAP-SIAP!", 
     Scene1_DialogBeres, scene);
 
@@ -203,7 +198,7 @@ Scene *Scene1_Create()
 //                 .animation = DialogPersonAnimation::Shake},
 //         },
 //         {},
-//         "MC",
+//         "Yono",
 //         "Bakekok bunda",
 //         Scene1_DialogPilihan1,
 //         scene);
@@ -230,7 +225,7 @@ Scene *Scene1_Create()
 //                 .animation = DialogPersonAnimation::Slide},
 //         },
 //         {},
-//         "MC",
+//         "Yono",
 //         "Slide");
 //     SceneManager_AddDialog(
 //         scene->sceneManager,
