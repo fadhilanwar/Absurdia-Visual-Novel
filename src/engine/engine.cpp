@@ -39,6 +39,8 @@ void Engine_Run(Engine *engine)
 
     fpsClock.start();
 
+    sf::Sprite textureSprite(engine->renderTexture.getTexture());
+
     while (engine->engineWindow.window.isOpen())
     {
         if (fpsClock.getElapsedTime().asMilliseconds() >= 1000)
@@ -70,8 +72,7 @@ void Engine_Run(Engine *engine)
         engine->pageManager->update(engine->pageManager);
 
         engine->engineWindow.window.clear();
-        sf::Sprite sprite(engine->renderTexture.getTexture());
-        engine->engineWindow.window.draw(sprite);
+        engine->engineWindow.window.draw(textureSprite);
         engine->engineWindow.window.draw(fpsTextBlock);
         engine->engineWindow.window.display();
         frameRendered++;
