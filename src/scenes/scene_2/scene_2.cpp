@@ -8,6 +8,11 @@ void Scene2_DialogBeres(Scene *scene)
     SceneManager_GoToScene(scene->sceneManager, scene3, SceneTransition::Fade);
 }
 
+void Scene2_DialogScene2(Scene *scene)
+{
+    SceneManager_SetBackground(scene->sceneManager, "background/dalamKereta.png");
+}
+
 void Scene2_Start(Scene *scene)
 {
     Scene2Data *data = (Scene2Data *)scene->data;
@@ -21,7 +26,7 @@ void Scene2_Start(Scene *scene)
                 .animation = DialogPersonAnimation::Slide},
             },
         {},
-        "MC",
+        "Yono",
         "Permisi! Permisi! Maaf!");
 
     SceneManager_AddDialog(
@@ -65,25 +70,26 @@ void Scene2_Start(Scene *scene)
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "work/confusedWork.png",
+                .imageFilePath = "work/lari.png",
                 .position = DialogPersonPosition::Left,
                 .animation = DialogPersonAnimation::None},
             },
         {},
-        "MC",
-        "Maaf, saya terburu-buru. Saya harus ke stasiun kereta api!");
+        "Yono",
+        "Duh! Maaf! Aku sedang buru-buru!");
 
     SceneManager_AddDialog(
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "figuran/tahu_senang.png",
-                .position = DialogPersonPosition::Right,
+                .imageFilePath = "work/lari.png",
+                .position = DialogPersonPosition::Center,
                 .animation = DialogPersonAnimation::None},
             },
         {},
-        "Penjual Tahu",
-        "Oh, ya ampun! Kamu harus cepat!");
+        "Yono",
+        "Itu keretanya! Tunggu!",
+        Scene2_DialogScene2, scene);
 
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -94,8 +100,8 @@ void Scene2_Start(Scene *scene)
                 .animation = DialogPersonAnimation::None},
             },
         {},
-        "MC",
-        "Oke, lokasi gedungnya nggak jauh dari sini. Seharusnya... lima menit cukup.",
+        "Yono",
+        "Oke, lokasi gedungnya nggak jauh dari sini. Seharusnya . . . lima menit cukup.",
     Scene2_DialogBeres, scene);
 
     SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
@@ -134,9 +140,9 @@ Scene *Scene2_Create()
 // {
 //     Scene2Data *data = (Scene2Data *)scene->data;
 //     SceneManager_SetBackground(scene->sceneManager, "kejar_kereta.png");
-//     // SceneManager_AddDialog(scene->sceneManager, true, "MC","Permisi! Permisi! Maaf!", "confusedWork.png");
+//     // SceneManager_AddDialog(scene->sceneManager, true, "Yono","Permisi! Permisi! Maaf!", "confusedWork.png");
 //     // SceneManager_AddDialog(scene->sceneManager, false, "Penjual Tahu", "Tahu bulat digoreng dadakan, lima rat—woi! Hati-hati dong!", "tahu_marah.png");
-//     // SceneManager_AddDialog(scene->sceneManager, true, "MC", "Maaf, saya terburu-buru. Saya harus ke stasiun kereta api!", "talkingWork.png");
+//     // SceneManager_AddDialog(scene->sceneManager, true, "Yono", "Maaf, saya terburu-buru. Saya harus ke stasiun kereta api!", "talkingWork.png");
 //     // SceneManager_AddDialog(scene->sceneManager, false, "Penjual Tahu", "Oh, ya ampun! Kamu harus cepat!", "tahu_senang.png", Scene2_DialogBeres, scene);
 
 //     SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
