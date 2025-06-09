@@ -63,9 +63,9 @@ void MainMenuPG_Start(Page* page)
     //data->textAku = UI_AddText(page->ui, nullptr, 10, 20, "Abcasdsadasdasd", TextStyle::NORMAL, 16, sf::Color(50, 50, 50, 255));
 
     // Nambahin button
-    UI_AddButton(page->ui, nullptr, 75, 220, 150, 50, {0, 0}, {4, 12}, "New Game", "fonts/Chonky Bunny.ttf", 18, sf::Color::Black, "button.png", MainMenuPG_OnButtonClick, page);
-    UI_AddButton(page->ui, nullptr, 75, 290, 150, 50, {0, 0}, {4, 12}, "Load Game", "fonts/Chonky Bunny.ttf", 18, sf::Color::Black, "button.png", MainMenuPG_OnButtonClick2, page);
-    UI_AddButton(page->ui, nullptr, 75, 360, 150, 50, {0, 0}, {4, 12}, "Quit", "fonts/Chonky Bunny.ttf", 18, sf::Color::Black, "button.png",
+    UI_AddButton(page->ui, nullptr, 75, 220, 150, 50, {0, 0}, {4, 12}, "New Game", "fonts/Chonky Bunny.ttf", 18, sf::Color::Black, "ui/button.png", MainMenuPG_OnButtonClick, page);
+    UI_AddButton(page->ui, nullptr, 75, 290, 150, 50, {0, 0}, {4, 12}, "Load Game", "fonts/Chonky Bunny.ttf", 18, sf::Color::Black, "ui/button.png", MainMenuPG_OnButtonClick2, page);
+    UI_AddButton(page->ui, nullptr, 75, 360, 150, 50, {0, 0}, {4, 12}, "Quit", "fonts/Chonky Bunny.ttf", 18, sf::Color::Black, "ui/button.png",
         [](void* param) {
             std::exit(0);
         }, page);
