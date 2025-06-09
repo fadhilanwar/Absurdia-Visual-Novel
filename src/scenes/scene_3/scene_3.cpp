@@ -42,6 +42,18 @@ void Scene3_Start(Scene *scene)
         scene->sceneManager,
         {
             DialogPerson{
+                .imageFilePath = "work/talkingWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::None},
+        },
+        {},
+        "Yono",
+        "Akhirnya sampai juga!");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
                 .imageFilePath = "work/confusedWork.png",
                 .position = DialogPersonPosition::Left,
                 .animation = DialogPersonAnimation::None},
@@ -66,7 +78,7 @@ void Scene3_Start(Scene *scene)
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "work/shockedWork.png",
+                .imageFilePath = "work/confusedWork.png",
                 .position = DialogPersonPosition::Left,
                 .animation = DialogPersonAnimation::None},
             },

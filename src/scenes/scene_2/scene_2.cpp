@@ -16,7 +16,7 @@ void Scene2_DialogScene2(Scene *scene)
 void Scene2_Start(Scene *scene)
 {
     Scene2Data *data = (Scene2Data *)scene->data;
-    SceneManager_SetBackground(scene->sceneManager, "background/kejar_kereta.png");
+    SceneManager_SetBackground(scene->sceneManager, "background/outSubway.png");
     SceneManager_AddDialog(
         scene->sceneManager,
         {

@@ -24,7 +24,7 @@ void Scene4Part1_Start(Scene *scene)
         },
         {},
         "Resepsionis",
-        "Pasti kamu mau bertanya kan, haha!");
+        "Pasti kamu mau bertanya kan? haha!");
     
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -48,7 +48,7 @@ void Scene4Part1_Start(Scene *scene)
         },
         {},
         "Resepsionis",
-        "Ayo ayo, mau tanya apa, ha?");
+        "Ayo ayo! mau tanya apa? ha?");
     
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -60,7 +60,7 @@ void Scene4Part1_Start(Scene *scene)
         },
         {},
         "Yono",
-        "A-aku ke sini... ingin interview kerja di Absurdia Inc.");
+        "A . . . aku ke sini . . . ingin interview kerja untuk lowongan pekerjaan yang baru dibuka disini");
     
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -72,7 +72,7 @@ void Scene4Part1_Start(Scene *scene)
         },
         {},
         "Resepsionis",
-        "Ooo begitu! Langsung naik lift saja, ada di lantai 3. Oke!!");
+        "Ooo begitu! Langsung naik lift saja, ruangannya ada di lantai 3, Oke!!");
     SceneManager_AddDialog(
         scene->sceneManager,
         {
@@ -95,7 +95,7 @@ void Scene4Part1_Start(Scene *scene)
         },
         {},
         "Resepsionis",
-        "Oiya, jangan kaget ya... kau akan terbiasa... ahahaha!");
+        "Oiyaaa . . . jangan kaget ya . . . kau akan terbiasa . . . ahahahaaa!");
 
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -107,7 +107,7 @@ void Scene4Part1_Start(Scene *scene)
         },
         {},
         "Yono",
-        "Aneh, tapi yasudahlah",
+        "Baiklah, lantai 3 ya.",
         Scene4Part1_PindahScene, scene);
 
     SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
