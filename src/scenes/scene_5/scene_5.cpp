@@ -50,7 +50,7 @@ void Scene5_DialogPilihan1(Scene *scene)
             DialogPerson{
                 .imageFilePath = "work/confusedWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::None},
+                .animation = DialogPersonAnimation::Slide},
             },
             {},
             "Yono",
@@ -62,7 +62,7 @@ void Scene5_DialogPilihan1(Scene *scene)
             DialogPerson{
                 .imageFilePath = "figuran/satpamTalking.png",
                 .position = DialogPersonPosition::Right,
-                .animation = DialogPersonAnimation::None},
+                .animation = DialogPersonAnimation::Slide},
             },
             {},
             "Satpam",
@@ -74,7 +74,7 @@ void Scene5_DialogPilihan1(Scene *scene)
             DialogPerson{
                 .imageFilePath = "figuran/satpamTalking.png",
                 .position = DialogPersonPosition::Right,
-                .animation = DialogPersonAnimation::None},
+                .animation = DialogPersonAnimation::Slide},
             },
             {},
             "Satpam",
@@ -86,7 +86,7 @@ void Scene5_DialogPilihan1(Scene *scene)
             DialogPerson{
                 .imageFilePath = "work/talkingWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::None},
+                .animation = DialogPersonAnimation::Slide},
                 },
                 {},
                 "Yono",
@@ -136,7 +136,7 @@ void Scene5_Start(Scene *scene)
                 .onAnswered = Scene5_DialogPilihan2,
                 .onAnsweredParameter = scene}},
         "Yono",
-        "Lho. . .  kenapa malah ke basement?");
+        "Lho. . . ???");
         SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
 }
 

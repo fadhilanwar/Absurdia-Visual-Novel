@@ -30,7 +30,7 @@ void Scene6_DialogPilihan1(Scene *scene)
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "figuran/talkingUnknown 1.png",
+                .imageFilePath = "figuran/talkingUnknow.png",
                 .position = DialogPersonPosition::Right,
                 .animation = DialogPersonAnimation::None},
             },
@@ -42,7 +42,7 @@ void Scene6_DialogPilihan1(Scene *scene)
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "figuran/talkingUnknown 1.png",
+                .imageFilePath = "figuran/talkingUnknow.png",
                 .position = DialogPersonPosition::Right,
                 .animation = DialogPersonAnimation::None},
             },
@@ -54,7 +54,7 @@ void Scene6_DialogPilihan1(Scene *scene)
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "figuran/talkingUnknown 1.png",
+                .imageFilePath = "figuran/talkingUnknow.png",
                 .position = DialogPersonPosition::Right,
                 .animation = DialogPersonAnimation::None},
             },
@@ -97,7 +97,7 @@ void Scene6_DialogPilihan2(Scene *scene)
         {
             DialogPerson{
                 .imageFilePath = "work/defaultWork.png",
-                .position = DialogPersonPosition::Center,
+                .position = DialogPersonPosition::Left,
                 .animation = DialogPersonAnimation::None
             },
         },
@@ -130,7 +130,7 @@ void Scene6_Start(Scene *scene)
         scene->sceneManager,
         {
             DialogPerson {
-                .imageFilePath = "figuran/talkingUnknown 1.png",
+                .imageFilePath = "figuran/talkingUnknow.png",
                 .position = DialogPersonPosition::Right,
                 .animation = DialogPersonAnimation::None
             }

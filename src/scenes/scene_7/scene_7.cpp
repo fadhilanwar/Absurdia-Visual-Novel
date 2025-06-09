@@ -2,7 +2,7 @@
 #include <iostream>
 
 //belum
-// MC menyusuri lorong. Ia melihat pemandangan aneh: pria berkaki bebek, wanita mengenakan jas hujan lengkap dengan payung, seekor ular mengenakan jas dan kacamata baca sambil membaca koran dari ekornya.) 
+// Yono menyusuri lorong. Ia melihat pemandangan aneh: pria berkaki bebek, wanita mengenakan jas hujan lengkap dengan payung, seekor ular mengenakan jas dan kacamata baca sambil membaca koran dari ekornya.) 
 
 void Scene7_DialogScene(Scene *scene)
 {
@@ -15,17 +15,60 @@ void Scene7_Start(Scene *scene)
 {
     Scene7Data *data = (Scene7Data *)scene->data;
     SceneManager_SetBackground(scene->sceneManager, "background/lorong.png");
+    
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "figuran/manusiaBebek.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::Slide
+            },
+        },
+        {},
+        "Manusia Bebek",
+        "Haduh lama sekali ya, QUACK-QUACK!"
+    );
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "figuran/jasHujan.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::Slide
+            },
+        },
+        {},
+        "Little Daydream",
+        "Hihi! Aku tidak sabar ingin interview"
+    );
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "figuran/manusiaUlar.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::Slide
+            },
+        },
+        {},
+        "Mr. Ular",
+        ". . ."
+    );
+
     SceneManager_AddDialog(
         scene->sceneManager,
         {
             DialogPerson{
                 .imageFilePath = "work/shockedWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::Slide
+                .animation = DialogPersonAnimation::None
             },
         },
         {},
-        "MC",
+        "Yono",
         "Aku nggak salah masuk gedung kan? Ini seperti festival cosplay. . ."
     );
 
@@ -35,12 +78,12 @@ void Scene7_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "work/shockedWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::Slide
+                .animation = DialogPersonAnimation::None
             },
         },
         {},
-        "MC",
-        "Sepertinya rumor yang dikatakan orang-??? benar. . ."
+        "Yono",
+        "Sepertinya rumor yang dikatakan orang-orang benar"
     );
 
     SceneManager_AddDialog(
@@ -49,11 +92,11 @@ void Scene7_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "work/shockedWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::Slide
+                .animation = DialogPersonAnimation::None
             },
         },
         {},
-        "MC",
+        "Yono",
         "Sudahlah. . .  ini kesempatanku untuk mendapatkan sebuah pekerjaan.",
     Scene7_DialogScene, scene);
 
@@ -92,7 +135,7 @@ Scene *Scene7_Create()
 // {
 //     Scene7Data *data = (Scene7Data *)scene->data;
 //     SceneManager_SetBackground(scene->sceneManager, "tiba_dikota.png");
-//     // SceneManager_AddDialog(scene->sceneManager, true, "MC","Aku harus cepat! Kalau telat, mereka bisa langsung mencoret namaku..", "talkingWork.png", Scene7_DialogScene7, scene);
+//     // SceneManager_AddDialog(scene->sceneManager, true, "Yono","Aku harus cepat! Kalau telat, mereka bisa langsung mencoret namaku..", "talkingWork.png", Scene7_DialogScene7, scene);
 
 //     SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
 // }
