@@ -40,6 +40,10 @@ void Scene9_Start(Scene *scene)
                 .imageFilePath = "HRD/badutBicara.png",
                 .position = DialogPersonPosition::Right,
                 .animation = DialogPersonAnimation::None},
+            DialogPerson{
+                .imageFilePath = "HRD/badutBicara.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::None},
             },
             {
                 DialogQuestion{
