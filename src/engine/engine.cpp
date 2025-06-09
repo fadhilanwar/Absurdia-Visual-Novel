@@ -8,8 +8,8 @@ Engine *Engine_Create()
     engine->engineWindow = {
         .window = sf::RenderWindow(sf::VideoMode({1000u, 550u}), "Fuad dan Mita", sf::Style::Titlebar | sf::Style::Close)};
     engine->engineWindow.window.setKeyRepeatEnabled(false);
-    // window.setVerticalSyncEnabled(false);
-    // engine->window.setFramerateLimit(60);
+    engine->engineWindow.window.setVerticalSyncEnabled(false);
+    engine->engineWindow.window.setFramerateLimit(0);
     engine->renderTexture = sf::RenderTexture({1000u, 550u});
 
     engine->pageManager = PageManager_Create(&engine->engineWindow, &engine->renderTexture);
@@ -58,8 +58,6 @@ void Engine_Run(Engine *engine)
             engine->engineWindow.inputtedText = '\0';
         else
             engine->engineWindow.inputtedText = inputtedText;
-        // if (engine->engineWindow.inputtedText != '\0')
-        // std::cout << "Key: " << engine->engineWindow.inputtedText << "\n";
 
         engine->pageManager->update(engine->pageManager);
 
