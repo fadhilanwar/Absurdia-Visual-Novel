@@ -8,8 +8,8 @@ Engine *Engine_Create()
     engine->engineWindow = {
         .window = sf::RenderWindow(sf::VideoMode({1000u, 550u}), "Fuad dan Mita", sf::Style::Titlebar | sf::Style::Close)};
     engine->engineWindow.window.setKeyRepeatEnabled(false);
-    engine->engineWindow.window.setVerticalSyncEnabled(false);
-    engine->engineWindow.window.setFramerateLimit(0);
+    // engine->engineWindow.window.setVerticalSyncEnabled(false);
+    // engine->engineWindow.window.setFramerateLimit(0);
     engine->renderTexture = sf::RenderTexture({1000u, 550u});
 
     engine->pageManager = PageManager_Create(&engine->engineWindow, &engine->renderTexture);
@@ -40,7 +40,7 @@ void Engine_Run(Engine *engine)
             fpsClock.restart();
         }
 
-        int waitTime = std::max(16 - clock.getElapsedTime().asMilliseconds(), 0);
+        int waitTime = std::max(8 - clock.getElapsedTime().asMilliseconds(), 0);
         clock.restart();
 
         char inputtedText = engine->engineWindow.inputtedText;
