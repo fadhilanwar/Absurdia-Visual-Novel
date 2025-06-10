@@ -1,12 +1,6 @@
 #include "scene_25.hpp"
 #include <iostream>
 
-void Scene25_DialogScene25(Scene *scene)
-{
-    std::cout << "Dialog beres\n";
-    Scene *scene26 = Scene26_Create();
-    // // SceneManager_GoToScene(scene->sceneManager, scene26);
-}
 
 void playLaughSFX(Scene *scene) {
     SceneManager_PlaySound(scene->sceneManager, "Crowd Laugh.wav");
@@ -14,7 +8,7 @@ void playLaughSFX(Scene *scene) {
 
 void Scene25_PindahScene(Scene *scene)
 {
-    std::cout << "Pindah scene ke Scene 27 cenah\n";
+    std::cout << "Pindah scene\n";
     Scene *Scene27 = Scene27_Create();
     SceneManager_GoToScene(scene->sceneManager, Scene27, SceneTransition::Fade);
 
@@ -37,7 +31,7 @@ void Scene25_Start(Scene *scene)
             //     .animation = DialogPersonAnimation::None},
         },
         {},
-        "MC",
+        "Yono",
         "(MC dan para interviewer berakting jadi pintu dan penghuni rumah.) ");
     
     SceneManager_AddDialog(

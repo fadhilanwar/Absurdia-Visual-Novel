@@ -1,18 +1,40 @@
 #include "scene_26.hpp"
 #include <iostream>
 
-void Scene26_DialogScene26(Scene *scene)
+void Scene26_PindahScene(Scene *scene)
 {
-    std::cout << "Dialog beres\n";
-    Scene *scene27 = Scene27_Create();
-    // SceneManager_GoToSceneene(scene->sceneManager, scene27);
+    std::cout << "Pindah scne\n";
+    Scene *scene28 = Scene28_Create();
+    SceneManager_GoToScene(scene->sceneManager, scene28, SceneTransition::None);
 }
 
 void Scene26_Start(Scene *scene)
 {
     Scene26Data *data = (Scene26Data *)scene->data;
-    SceneManager_SetBackground(scene->sceneManager, "tiba_dikota.png");
-    // SceneManager_AddDialog(scene->sceneManager, true, "MC","Aku harus cepat! Kalau telat, mereka bisa langsung mencoret namaku..", "talkingWork.png", Scene26_DialogScene26, scene);
+    SceneManager_SetBackground(scene->sceneManager, "background/interview.png");
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/confusedWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::None},
+            },
+            {},
+            "Yono",
+            "Saya dulu dilumuri cat hijau, berdiri di antara aroma kayu lapuk dan tikus nostalgia.");
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "HRD/badutSenang.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::None},
+            },
+            {},
+            "Dr. Badut",
+            "Seni cerita… luar biasa",
+    Scene26_PindahScene, scene);
 
     SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
 }
