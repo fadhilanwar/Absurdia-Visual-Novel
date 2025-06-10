@@ -204,13 +204,23 @@ void Scene2_Part1(Scene *scene)
 
 void Scene2_Update(Scene *scene)
 {
+
+
     Scene2Data *data = (Scene2Data *)scene->data;
     if (data->part < 2.f)
     {
+         
         Scene2_Part1(scene);
+
+
     }
     else if (data->part == 2.f)
     {
+        if (!data->soundPlayedPart2) // Cek apakah suara udah diputer belum
+        {
+            SceneManager_PlaySound(scene->sceneManager, "Slip Away.wav");
+            data->soundPlayedPart2 = true; // kalo udah pernah jadi true
+        }
         Scene2_Part2(scene);
     }
     else if (data->part == 3.f)
