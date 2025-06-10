@@ -135,6 +135,9 @@ struct SceneManager
     bool dialogEnterKeyPressed = false;
     // int dialogTextAnimProgressStep = 0;
 
+
+    bool isLogOpen = 0;
+
     sf::Music *musicPlaying = nullptr;
     std::vector<SceneSound *> soundsPlaying;
 

@@ -12,6 +12,8 @@ void GamePG_Start(Page *page)
     Scene *mainMenuScene = Scene1_Create();
     SceneManager_GoToScene(sceneMg, mainMenuScene, SceneTransition::None);
 
+    
+
     data->sceneImage = UI_AddImage(page->ui, nullptr, 0, 0, 1000, 550, false, "");
 }
 
