@@ -3,7 +3,7 @@
 #include "SFML/Audio.hpp"
 #include "../scene.hpp"
 #include "../scene_13/scene_13.hpp"
-#include "../../umum.hpp"
+#include "../scene_14/scene_14.hpp"
 
 struct Scene12Data
 {

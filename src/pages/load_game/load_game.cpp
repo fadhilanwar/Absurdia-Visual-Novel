@@ -41,7 +41,7 @@ void LoadGamePG_Start(Page* page)
     LoadGamePageData *data = (LoadGamePageData*)page->data;
 
     UI_AddImage(page->ui, nullptr, 0, 0, 1000, 550, true, "wp_loadgame.png");
-    UI_AddText(page->ui, nullptr, 550, 100, "Load Game", "fonts/Chonky Bunny.ttf", 100, sf::Color::White);
+    UI_AddText(page->ui, nullptr, 400, 90, "Load Game", "fonts/Chonky Bunny.ttf", 50, sf::Color::White);
 
     //baca nama karakter dari file save
     // std::ifstream saveFile("save.txt");
@@ -56,12 +56,12 @@ void LoadGamePG_Start(Page* page)
 
 
     // Contoh beberapa slot save
-    UI_AddButton(page->ui, nullptr, 380, 180, 240, 40, {0, 0}, {4, 10}, "Ahmad", "fonts/Chonky Bunny.ttf", 20, sf::Color::Black, "button.png", LoadGamePG_OnButtonClick, page);
-    UI_AddButton(page->ui, nullptr, 380, 240, 240, 40, {0, 0}, {4, 10}, "Masda", "fonts/Chonky Bunny.ttf", 20, sf::Color::Black, "button.png", LoadGamePG_OnButtonClick, page);
-    UI_AddButton(page->ui, nullptr, 380, 300, 240, 40, {0, 0}, {4, 10}, "Virgi", "fonts/Chonky Bunny.ttf", 20, sf::Color::Black, "button.png", LoadGamePG_OnButtonClick, page);
+    UI_AddButton(page->ui, nullptr, 380, 180, 240, 40, {0, 0}, {0, 0}, "Ahmad", "fonts/Chonky Bunny.ttf", 20, sf::Color::Black, "ui/button.png", LoadGamePG_OnButtonClick, page);
+    UI_AddButton(page->ui, nullptr, 380, 240, 240, 40, {0, 0}, {0, 0}, "Masda", "fonts/Chonky Bunny.ttf", 20, sf::Color::Black, "ui/button.png", LoadGamePG_OnButtonClick, page);
+    UI_AddButton(page->ui, nullptr, 380, 300, 240, 40, {0, 0}, {0, 0}, "Virgi", "fonts/Chonky Bunny.ttf", 20, sf::Color::Black, "ui/button.png", LoadGamePG_OnButtonClick, page);
 
     // Tombol kembali
-    UI_AddButton(page->ui, nullptr, 350, 400, 35, 35, {0, 0}, {0, 0}, " ", "fonts/Chonky Bunny.ttf", 20, sf::Color::White, "back.png", LoadGamePG_OnBack, page);
+    UI_AddButton(page->ui, nullptr, 350, 400, 35, 35, {0, 0}, {0, 0}, " ", "fonts/Chonky Bunny.ttf", 20, sf::Color::White, "ui/back.png", LoadGamePG_OnBack, page);
 }
 
 void LoadGamePG_Update(Page* page)

@@ -1,6 +1,14 @@
 #include "engine.hpp"
 #include <iostream>
 
+// Khusus buat di Windows
+#if defined(_WIN32)
+#define WAIT_TIME 8
+#endif
+#if defined (unix)
+#define WAIT_TIME 16
+#endif
+
 Engine *Engine_Create()
 {
     Engine *engine = new Engine();
@@ -8,8 +16,8 @@ Engine *Engine_Create()
     engine->engineWindow = {
         .window = sf::RenderWindow(sf::VideoMode({1000u, 550u}), "Fuad dan Mita", sf::Style::Titlebar | sf::Style::Close)};
     engine->engineWindow.window.setKeyRepeatEnabled(false);
-    engine->engineWindow.window.setVerticalSyncEnabled(false);
-    engine->engineWindow.window.setFramerateLimit(0);
+    // engine->engineWindow.window.setVerticalSyncEnabled(false);
+    // engine->engineWindow.window.setFramerateLimit(0);
     engine->renderTexture = sf::RenderTexture({1000u, 550u});
 
     engine->pageManager = PageManager_Create(&engine->engineWindow, &engine->renderTexture);
@@ -31,6 +39,8 @@ void Engine_Run(Engine *engine)
 
     fpsClock.start();
 
+    sf::Sprite textureSprite(engine->renderTexture.getTexture());
+
     while (engine->engineWindow.window.isOpen())
     {
         if (fpsClock.getElapsedTime().asMilliseconds() >= 1000)
@@ -40,7 +50,7 @@ void Engine_Run(Engine *engine)
             fpsClock.restart();
         }
 
-        int waitTime = std::max(16 - clock.getElapsedTime().asMilliseconds(), 0);
+        int waitTime = std::max(WAIT_TIME - clock.getElapsedTime().asMilliseconds(), 0);
         clock.restart();
 
         char inputtedText = engine->engineWindow.inputtedText;
@@ -62,8 +72,7 @@ void Engine_Run(Engine *engine)
         engine->pageManager->update(engine->pageManager);
 
         engine->engineWindow.window.clear();
-        sf::Sprite sprite(engine->renderTexture.getTexture());
-        engine->engineWindow.window.draw(sprite);
+        engine->engineWindow.window.draw(textureSprite);
         engine->engineWindow.window.draw(fpsTextBlock);
         engine->engineWindow.window.display();
         frameRendered++;

@@ -29,8 +29,8 @@ void Scene5_DialogPilihan1(Scene *scene)
                 .animation = DialogPersonAnimation::Slide},
             },
         {},
-        "MC",
-        "Permisi, Pak... ini... ruang interview di mana ya?");
+        "Yono",
+        "Permisi, Pak. . . ini. . .  ruang interview di mana ya?");
 
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -42,7 +42,7 @@ void Scene5_DialogPilihan1(Scene *scene)
             },
             {},
             "Satpam",
-            "Hmm... di lantai 5");
+            "Hmm. . .  di lantai 5");
 
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -50,10 +50,10 @@ void Scene5_DialogPilihan1(Scene *scene)
             DialogPerson{
                 .imageFilePath = "work/confusedWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::None},
+                .animation = DialogPersonAnimation::Slide},
             },
             {},
-            "MC",
+            "Yono",
             "Lho, ini bukan lantai 5?");
     
      SceneManager_AddDialog(
@@ -62,11 +62,11 @@ void Scene5_DialogPilihan1(Scene *scene)
             DialogPerson{
                 .imageFilePath = "figuran/satpamTalking.png",
                 .position = DialogPersonPosition::Right,
-                .animation = DialogPersonAnimation::None},
+                .animation = DialogPersonAnimation::Slide},
             },
             {},
             "Satpam",
-            "Hahaha... di sini dunia bekerja secara terbalik, kawanku.");
+            "Hahaha. . .  di sini dunia bekerja secara terbalik, kawanku.");
 
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -74,11 +74,11 @@ void Scene5_DialogPilihan1(Scene *scene)
             DialogPerson{
                 .imageFilePath = "figuran/satpamTalking.png",
                 .position = DialogPersonPosition::Right,
-                .animation = DialogPersonAnimation::None},
+                .animation = DialogPersonAnimation::Slide},
             },
             {},
             "Satpam",
-            "Ya... setidaknya di beberapa bagian gedung.");   
+            "Ya. . .  setidaknya di beberapa bagian gedung.");   
             
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -86,11 +86,11 @@ void Scene5_DialogPilihan1(Scene *scene)
             DialogPerson{
                 .imageFilePath = "work/talkingWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::None},
+                .animation = DialogPersonAnimation::Slide},
                 },
                 {},
-                "MC",
-                "...Eh... baiklah. Terima kasih, Pak.",
+                "Yono",
+                ". . .  Eh. . .  baiklah. Terima kasih, Pak.",
             Scene5_PindahScene1, scene);
 }
 
@@ -107,8 +107,8 @@ void Scene5_DialogPilihan2(Scene *scene)
                 .animation = DialogPersonAnimation::Slide},
             },
         {},
-        "MC",
-        "Ya ampun... tangganya kok begini sih..",
+        "Yono",
+        "Ya ampun. . .  tangganya kok begini sih??",
     Scene5_PindahScene2, scene);
     
 }
@@ -135,8 +135,9 @@ void Scene5_Start(Scene *scene)
                 .question = "Naik tangga",
                 .onAnswered = Scene5_DialogPilihan2,
                 .onAnsweredParameter = scene}},
-        "MC",
-        "Lho... kenapa malah ke basement?");
+        "Yono",
+        "Lho. . . ???");
+        SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
 }
 
 void Scene5_Update(Scene *scene)
@@ -172,7 +173,7 @@ Scene *Scene5_Create()
 // {
 //     Scene5Data *data = (Scene5Data *)scene->data;
 //     SceneManager_SetBackground(scene->sceneManager, "tiba_dikota.png");
-//     // SceneManager_AddDialog(scene->sceneManager, true, "MC","Aku harus cepat! Kalau telat, mereka bisa langsung mencoret namaku..", "talkingWork.png", Scene5_DialogScene5, scene);
+//     // SceneManager_AddDialog(scene->sceneManager, true, "Yono","Aku harus cepat! Kalau telat, mereka bisa langsung mencoret namaku..", "talkingWork.png", Scene5_DialogScene5, scene);
 
 //     SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
 // }

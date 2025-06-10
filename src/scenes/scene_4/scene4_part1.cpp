@@ -24,19 +24,19 @@ void Scene4Part1_Start(Scene *scene)
         },
         {},
         "Resepsionis",
-        "Pasti kamu mau bertanya kan, haha!");
+        "Pasti kamu mau bertanya kan? haha!");
     
     SceneManager_AddDialog(
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "work/talkingWork.png",
+                .imageFilePath = "work/confusedWork.png",
                 .position = DialogPersonPosition::Left,
                 .animation = DialogPersonAnimation::Slide},
         },
         {},
-        "MC",
-        "iya saya...");
+        "Yono",
+        "Eh. . . Iya. Saya. . . ");
     
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -48,7 +48,7 @@ void Scene4Part1_Start(Scene *scene)
         },
         {},
         "Resepsionis",
-        "Ayo ayo, mau tanya apa, ha?");
+        "Ayo ayo! mau tanya apa? ha?");
     
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -59,20 +59,20 @@ void Scene4Part1_Start(Scene *scene)
                 .animation = DialogPersonAnimation::None},
         },
         {},
-        "MC",
-        "A-aku ke sini... ingin interview kerja di Absurdia Inc.");
+        "Yono",
+        "Aa. . . aku ke sini. . . ingin interview kerja untuk lowongan pekerjaan yang baru dibuka disini");
     
     SceneManager_AddDialog(
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "figuran/resepsionisSenyum.png",
+                .imageFilePath = "figuran/resepsionisTertawa.png",
                 .position = DialogPersonPosition::Right,
                 .animation = DialogPersonAnimation::None},
         },
         {},
         "Resepsionis",
-        "Ooo begitu! Langsung naik lift saja, ada di lantai 3. Oke!!");
+        "Ooo begitu! Langsung naik lift saja, ruangannya ada di lantai 3, Oke!!");
     SceneManager_AddDialog(
         scene->sceneManager,
         {
@@ -82,20 +82,20 @@ void Scene4Part1_Start(Scene *scene)
                 .animation = DialogPersonAnimation::None},
         },
         {},
-        "MC",
-        "Baik. Terima kasih");
+        "Yono",
+        "Baik! Terima kasih");
 
     SceneManager_AddDialog(
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "work/talkingWork.png",
-                .position = DialogPersonPosition::Left,
+                .imageFilePath = "figuran/resepsionisTertawa.png",
+                .position = DialogPersonPosition::Right,
                 .animation = DialogPersonAnimation::None},
         },
         {},
         "Resepsionis",
-        "Oiya, jangan kaget ya... kau akan terbiasa... ahahaha!");
+        "Oiyaaa. . . jangan kaget ya. . . kau akan terbiasa. . . ahahahaaa!");
 
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -106,8 +106,8 @@ void Scene4Part1_Start(Scene *scene)
                 .animation = DialogPersonAnimation::None},
         },
         {},
-        "MC",
-        "Aneh, tapi yasudahlah",
+        "Yono",
+        "Baiklah, lantai 3 ya.",
         Scene4Part1_PindahScene, scene);
 
     SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
@@ -157,7 +157,7 @@ Scene *Scene4Part1_Create()
 //     Scene4Data *data = (Scene4Data *)scene->data;
 //     SceneManager_SetBackground(scene->sceneManager, "resepsionis.png");
 //     // // // // SceneManager_AddDialog(scene->sceneManager, false, "Resepsionis","(sambil tersenyum lebar) Pasti kamu mau bertanya kan, haha!", "resepsionisTertawa.png");
-//     // // SceneManager_AddDialog(scene->sceneManager, true, "MC","Eh… iya, saya...", "talkingWork.png");
+//     // // SceneManager_AddDialog(scene->sceneManager, true, "Yono","Eh… iya, saya...", "talkingWork.png");
 //     // // SceneManager_AddDialog(scene->sceneManager, false, "Resepsionis","Ayo ayo, mau tanya apa, ha?", "resepsionisTalk.png");
 //     // // SceneManager_AddDialog(scene->sceneManager, true, "MC","A-aku ke sini... ingin interview kerja di Absurdia Inc.", "confusedWork.png");
 //     // // SceneManager_AddDialog(scene->sceneManager, false, "Resepsionis", "Ooo begitu! Langsung naik lift saja, ada di lantai 3. Oke!!", "resepsionisSenyum.png");

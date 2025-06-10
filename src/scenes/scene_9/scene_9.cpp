@@ -35,6 +35,19 @@ void Scene9_Start(Scene *scene)
 {
     Scene9Data *data = (Scene9Data *)scene->data;
     SceneManager_SetBackground(scene->sceneManager, "background/interview.png");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "HRD/badutBicara.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::Slide},
+        },
+        {},
+        "Dr. Badut",
+        "Oke, kita mulai saja ya tesnya!");
+
     SceneManager_AddDialog(
         scene->sceneManager,
         {
@@ -61,7 +74,7 @@ void Scene9_Start(Scene *scene)
                     .onAnswered = Scene9_DialogPilihan4,
                     .onAnsweredParameter = scene}},
                 "Dr. Badut",
-                "Pertama… kalau kamu seekor kambing, apa nama lengkapmu, mbee?");
+                "Pertama. . .  kalau kamu seekor kambing, apa nama lengkapmu, mbee?");
 
     SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
 }
