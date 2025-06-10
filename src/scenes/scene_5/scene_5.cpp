@@ -97,7 +97,7 @@ void Scene5_DialogPilihan1(Scene *scene)
 void Scene5_DialogPilihan2(Scene *scene)
 {
     std::cout << "pilihan 2 dipilih\n";
-    SceneManager_SetBackground(scene->sceneManager, "background/tangga.png");
+    SceneManager_SetBackground(scene->sceneManager, "background/stairs.png");
     SceneManager_AddDialog(
         scene->sceneManager,
         {
