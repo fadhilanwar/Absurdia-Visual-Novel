@@ -90,7 +90,7 @@ void Scene4Part1_Start(Scene *scene)
         {
             DialogPerson{
                 .imageFilePath = "work/talkingWork.png",
-                .position = DialogPersonPosition::Right,
+                .position = DialogPersonPosition::Left,
                 .animation = DialogPersonAnimation::None},
         },
         {},
