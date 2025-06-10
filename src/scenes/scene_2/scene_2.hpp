@@ -8,7 +8,10 @@
 
 struct Scene2Data
 {
+    float part = 1.f;
 
+    float animProgress;
+    float animProgressPart;
 };
 
 Scene *Scene2_Create();
