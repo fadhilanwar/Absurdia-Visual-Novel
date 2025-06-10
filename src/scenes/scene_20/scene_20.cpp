@@ -20,7 +20,7 @@ void Scene20_DialogPilihan1(Scene *scene)
                 .animation = DialogPersonAnimation::Slide},
             },
         {},
-        "Fuad Gemink",
+        "Yono",
         "Kalau begitu, mari kita aktingkan ulang sejarah pintu pertama ditemukan.");
     Scene *scene25 = Scene25_Create();
     SceneManager_GoToScene(scene->sceneManager, scene25, SceneTransition::None);
@@ -39,9 +39,8 @@ void Scene20_DialogPilihan2(Scene *scene)
                 .animation = DialogPersonAnimation::Slide},
             },
         {},
-        "Fuad Gemink",
+        "Yono",
         "Saya pernah jadi pintu gudang tua. Banyak kenangan berdebu di sana...");
-
 
     Scene *scene26 = Scene26_Create();
     SceneManager_GoToScene(scene->sceneManager, scene26, SceneTransition::None);
@@ -66,12 +65,12 @@ void Scene20_Start(Scene *scene)
                 .onAnswered = Scene20_DialogPilihan1,
                 .onAnsweredParameter = scene},
            {DialogQuestion{
-                .question = "Cerita Pengalaman jadi Pintu",
+                .question = "Cerita Pengalaman",
                 .onAnswered = Scene20_DialogPilihan2,
                 .onAnsweredParameter = scene}},
            },
         "Mr. Katak",
-        "(SERIUS) Ini sudah macam menonton sebuah Teater!");
+        "Ini sudah seperti menonton sebuah Teater!");
 
     SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
 }

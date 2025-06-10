@@ -20,7 +20,7 @@ void Scene19_DialogPilihan1(Scene *scene)
                 .animation = DialogPersonAnimation::Slide},
             },
         {},
-        "Fuad Gemink",
+        "Yono",
         "Boleh minta cuti satu hari buat latihan suara kambing, Pak?");
     Scene *scene23 = Scene23_Create();
     SceneManager_GoToScene(scene->sceneManager, scene23, SceneTransition::None);
@@ -39,7 +39,7 @@ void Scene19_DialogPilihan2(Scene *scene)
                 .animation = DialogPersonAnimation::Slide},
             },
         {},
-        "Fuad Gemink",
+        "Yono",
         "Kalo gitu.. Ada tes apa lagi nih? Saya mulai penasarann...");
 
 
