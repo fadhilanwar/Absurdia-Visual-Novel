@@ -60,6 +60,31 @@ void Scene15_DialogPilihan1(Scene *scene)
 void Scene15_DialogPilihan2(Scene *scene)
 {
     std:: cout << "Memilih pilihan 2\n";
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/talkingWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Slide},
+            },
+            {},
+            "Yono",
+            "Kalau boleh tahu . . . ");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/talkingWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::None},
+            },
+            {},
+            "Yono",
+            "Apakah kalian punya kambing peliharaan?");
+
     Scene *scene22 = Scene22_Create();
     SceneManager_GoToScene(scene->sceneManager, scene22, SceneTransition::Fade);
 }
