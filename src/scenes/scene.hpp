@@ -11,6 +11,8 @@ struct Scene
     Canvas *canvas;
     UI *ui;
 
+    std::vector<Scene*> childScenes;
+
     void* data;
 
     void (*start)(Scene* scene);

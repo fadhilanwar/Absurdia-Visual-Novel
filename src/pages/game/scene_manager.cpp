@@ -14,6 +14,18 @@ SceneManager *SceneManager_Create(Canvas *canvas, EngineWindow *engineWindow)
     return sceneMg;
 }
 
+void SceneManager_Log(SceneManager *sceneMg) // UI Dialog
+{
+    // UI Dialog-
+    Canvas_DrawImage()
+}
+
+void SceneManager_LogButton(SceneManager *sceneMg  )
+{
+    // UI Botton
+    Canvas_DrawImage(sceneMg->canvas, 904, 16, "ui/logs.png");
+}
+
 void SceneManager_Destroy(SceneManager *sceneMg)
 {
     sceneMg->currentScene->destroy(sceneMg->currentScene);
@@ -524,6 +536,8 @@ void m_SceneManager_Update(SceneManager *sceneMg)
             // Mulai pending scene
             sceneMg->pendingScene->start(sceneMg->pendingScene);
 
+            sceneMg->pendingScene->childScenes = 
+
             // Hapus isi canvas
             Canvas_Clear(sceneMg->canvas);
 
@@ -644,6 +658,13 @@ void m_SceneManager_Update(SceneManager *sceneMg)
             sceneMg->dialogAnimProgress += sceneMg->dialogAnimProgressStep;
         }
 
+        if(sceneMg->isLogOpen){
+
+            SceneManager_Log();
+        }
+        else{
+            SceneManager_LogButton();
+        }
         // Copy canvas scene ke canvas scene_manager
         Canvas_Update(sceneMg->currentScene->canvas);
         Canvas_Copy(sceneMg->canvas, sceneMg->currentScene->canvas);
