@@ -98,7 +98,7 @@ void Scene12_Start(Scene *scene)
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "figuran/katakTertawa.png",
+                .imageFilePath = "HRD/katakTertawa.png",
                 .position = DialogPersonPosition::Right,
                 .animation = DialogPersonAnimation::Slide},
             },
