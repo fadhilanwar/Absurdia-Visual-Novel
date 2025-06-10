@@ -8,11 +8,94 @@ void Scene19_DialogScene19(Scene *scene)
     // // SceneManager_GoToSceneene(scene->sceneManager, scene20);
 }
 
+void Scene19_DialogPilihan1(Scene *scene)
+{
+    std:: cout << "Pilihan 1 dipilih (Minta Cuti buat Latihan suara kambing) ";
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/talkingWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Slide},
+            },
+        {},
+        "Fuad Gemink",
+        "Boleh minta cuti satu hari buat latihan suara kambing, Pak?");
+    Scene *scene23 = Scene23_Create();
+    SceneManager_GoToScene(scene->sceneManager, scene23, SceneTransition::None);
+}
+
+void Scene19_DialogPilihan2(Scene *scene)
+{
+    std:: cout << "Pilihan 2 dipilih (Tanyakan test berikutnya ngapain...) ";
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/talkingWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Slide},
+            },
+        {},
+        "Fuad Gemink",
+        "Kalo gitu.. Ada tes apa lagi nih? Saya mulai penasarann...");
+
+
+    Scene *scene24 = Scene24_Create();
+    SceneManager_GoToScene(scene->sceneManager, scene24, SceneTransition::None);
+}
+
 void Scene19_Start(Scene *scene)
 {
     Scene19Data *data = (Scene19Data *)scene->data;
-    SceneManager_SetBackground(scene->sceneManager, "tiba_dikota.png");
+    SceneManager_SetBackground(scene->sceneManager, "background/interview.png");
     // SceneManager_AddDialog(scene->sceneManager, true, "MC","Aku harus cepat! Kalau telat, mereka bisa langsung mencoret namaku..", "talkingWork.png", Scene19_DialogScene19, scene);
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "HRD/badutBicara.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::Slide},
+        },
+        {},
+        "Dr. Badut",
+        "Hahahaha! Kalau begitu, kita cocok di sini...");
+
+    // SceneManager_AddDialog(
+    //     scene->sceneManager,
+    //     {
+    //         DialogPerson{
+    //             .imageFilePath = "HRD/katakBicara.png",
+    //             .position = DialogPersonPosition::Right,
+    //             .animation = DialogPersonAnimation::Slide},
+    //     },
+    //     {},
+    //     "Mr. Katak",
+    //     "Aku suka orang absurd yang sadar diri.");
+
+        SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "HRD/katakTerpesona.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::Slide},
+            },
+           {DialogQuestion{
+                .question = "Minta Cuti buat Latihan",
+                .onAnswered = Scene19_DialogPilihan1,
+                .onAnsweredParameter = scene},
+           {DialogQuestion{
+                .question = "Tanya Test Berikutnya",
+                .onAnswered = Scene19_DialogPilihan2,
+                .onAnsweredParameter = scene}},
+           },
+        "Mr. Katak",
+        "Aku suka orang absurd yang sadar diri.");
 
     SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
 }
