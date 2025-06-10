@@ -64,7 +64,7 @@ void Scene7_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "work/shockedWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::None
+                .animation = DialogPersonAnimation::Slide
             },
         },
         {},
@@ -90,7 +90,7 @@ void Scene7_Start(Scene *scene)
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "work/shockedWork.png",
+                .imageFilePath = "work/talkingWork.png",
                 .position = DialogPersonPosition::Left,
                 .animation = DialogPersonAnimation::None
             },

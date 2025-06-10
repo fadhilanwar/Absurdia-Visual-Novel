@@ -35,7 +35,7 @@ void Scene2_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "figuran/tahu_senang.png",
                 .position = DialogPersonPosition::Right,
-                .animation = DialogPersonAnimation::None},
+                .animation = DialogPersonAnimation::Slide},
             },
         {},
         "Penjual Tahu",
@@ -72,7 +72,7 @@ void Scene2_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "work/lari.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::None},
+                .animation = DialogPersonAnimation::Slide},
             },
         {},
         "Yono",
@@ -83,13 +83,37 @@ void Scene2_Start(Scene *scene)
         {
             DialogPerson{
                 .imageFilePath = "work/lari.png",
-                .position = DialogPersonPosition::Center,
+                .position = DialogPersonPosition::Left,
                 .animation = DialogPersonAnimation::None},
             },
         {},
         "Yono",
         "Itu keretanya! Tunggu!",
         Scene2_DialogScene2, scene);
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/shockedWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Slide},
+            },
+            {},
+            "Yono",
+            "Hampir saja aku tertinggal kereta");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/shockedWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Slide},
+            },
+            {},
+            "Yono",
+            "Bisa gawat kalau aku ketinggalan.");
 
     SceneManager_AddDialog(
         scene->sceneManager,

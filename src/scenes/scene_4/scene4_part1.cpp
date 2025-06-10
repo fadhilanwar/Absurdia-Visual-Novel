@@ -44,7 +44,7 @@ void Scene4Part1_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "figuran/resepsionisTalk.png",
                 .position = DialogPersonPosition::Right,
-                .animation = DialogPersonAnimation::None},
+                .animation = DialogPersonAnimation::Slide},
         },
         {},
         "Resepsionis",
@@ -56,7 +56,7 @@ void Scene4Part1_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "work/confusedWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::None},
+                .animation = DialogPersonAnimation::Slide},
         },
         {},
         "Yono",
@@ -68,7 +68,7 @@ void Scene4Part1_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "figuran/resepsionisTertawa.png",
                 .position = DialogPersonPosition::Right,
-                .animation = DialogPersonAnimation::None},
+                .animation = DialogPersonAnimation::Slide},
         },
         {},
         "Resepsionis",
@@ -79,7 +79,7 @@ void Scene4Part1_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "work/talkingWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::None},
+                .animation = DialogPersonAnimation::Slide},
         },
         {},
         "Yono",
@@ -91,7 +91,7 @@ void Scene4Part1_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "figuran/resepsionisTertawa.png",
                 .position = DialogPersonPosition::Right,
-                .animation = DialogPersonAnimation::None},
+                .animation = DialogPersonAnimation::Slide},
         },
         {},
         "Resepsionis",
@@ -103,7 +103,7 @@ void Scene4Part1_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "work/talkingWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::None},
+                .animation = DialogPersonAnimation::Slide},
         },
         {},
         "Yono",

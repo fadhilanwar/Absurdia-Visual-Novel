@@ -26,7 +26,7 @@ void Scene5_DialogPilihan1(Scene *scene)
             DialogPerson{
                 .imageFilePath = "work/defaultWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::Slide},
+                .animation = DialogPersonAnimation::None},
             },
         {},
         "Yono",
@@ -74,7 +74,7 @@ void Scene5_DialogPilihan1(Scene *scene)
             DialogPerson{
                 .imageFilePath = "figuran/satpamTalking.png",
                 .position = DialogPersonPosition::Right,
-                .animation = DialogPersonAnimation::Slide},
+                .animation = DialogPersonAnimation::None},
             },
             {},
             "Satpam",
@@ -124,7 +124,7 @@ void Scene5_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "work/confusedWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::FadeIn},
+                .animation = DialogPersonAnimation::Slide},
         },
         {
             DialogQuestion{

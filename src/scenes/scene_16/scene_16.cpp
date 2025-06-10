@@ -4,6 +4,31 @@
 void Scene16_DialogPilihan1(Scene *scene)
 {
     std:: cout << "Memilih pilihan 1\n";
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/confusedWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Slide},
+            },
+            {},
+            "Yono",
+            "Maaf maaf, ini tisu motif polkadot untuk bercak apelnya, hehehe");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/shockedWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::None},
+            },
+            {},
+            "Yono",
+            "Omong-omong soal pintu...");
+    
     Scene *scene26 = Scene26_Create();
     SceneManager_GoToScene(scene->sceneManager, scene26, SceneTransition::Fade);
 }
@@ -11,6 +36,55 @@ void Scene16_DialogPilihan1(Scene *scene)
 void Scene16_DialogPilihan2(Scene *scene)
 {
     std:: cout << "Memilih pilihan 2\n";
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/talkingWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Slide},
+            },
+            {},
+            "Yono",
+            "Ini sebenarnya ilustrasi visual.");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/talkingWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::None},
+            },
+            {},
+            "Yono",
+            "Apel mewakili ide, dan jugglingnya mewakili manajemen.");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "HRD/katakBicara.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::Slide},
+            },
+            {},
+            "Mr. Katak",
+            "Wah! INterpretasi yang performatif ya.");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "HRD/katakBicara.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::None},
+            },
+            {},
+            "Mr. Katak",
+            "Saya suka!");
+
     Scene *scene18 = Scene18_Create();
     SceneManager_GoToScene(scene->sceneManager, scene18, SceneTransition::Fade);
 }
@@ -41,7 +115,7 @@ void Scene16_Start(Scene *scene)
             },
             {},
             "MC",
-            "Ups... semangat saya refleks sirkus, Pak.");
+            "Ups... maaf, saya refleks sirkus.");
 
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -65,11 +139,11 @@ void Scene16_Start(Scene *scene)
             },
             {
                 DialogQuestion{
-                    .question = "Minta maaf dan tawarkan tisu bertema",
+                    .question = "Minta maaf, kasih tisu",
                     .onAnswered = Scene16_DialogPilihan1,
                     .onAnsweredParameter = scene},
                 DialogQuestion{
-                    .question = "Menjelaskan Junggling",
+                    .question = "Klarifikasi Junggling",
                     .onAnswered = Scene16_DialogPilihan2,
                     .onAnsweredParameter = scene}},
                 "",

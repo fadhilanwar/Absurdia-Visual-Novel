@@ -4,6 +4,19 @@
 void Scene11_DialogPilihan1(Scene *scene)
 {
     std:: cout << "Pilihan 1 dipilih\n";
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/talkingWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Slide},
+        },
+        {},
+        "Yono",
+        "Betull! Saya rinkarnasi lemari tahun 90-an");
+
     Scene *scene17 = Scene17_Create();
     SceneManager_GoToScene(scene->sceneManager, scene17, SceneTransition::Fade);
 }
@@ -11,6 +24,19 @@ void Scene11_DialogPilihan1(Scene *scene)
 void Scene11_DialogPilihan2(Scene *scene)
 {
     std:: cout << "Pilihan 2 dipilih\n";
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/talkingWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Slide},
+        },
+        {},
+        "Yono",
+        "Tidak tidak, saya hanya mantan narator kisah horor.");
+
     Scene *scene18 =Scene18_Create();
     SceneManager_GoToScene(scene->sceneManager, scene18, SceneTransition::Fade);
 }
@@ -28,7 +54,7 @@ void Scene11_Start(Scene *scene)
                 .animation = DialogPersonAnimation::Slide},
             },
             {},
-            "MC",
+            "Yono",
             "Ciieeeeetttsss. . .");
 
     SceneManager_AddDialog(

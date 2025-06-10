@@ -5,6 +5,55 @@
 void Scene12_DialogPilihan1(Scene *scene)
 {
     std:: cout << "Memilih pilihan 1\n";
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/happyWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Slide},
+        },
+        {},
+        "Yono",
+        "Terimakasih!");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/talkingWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::None},
+        },
+        {},
+        "Yono",
+        "Dari kecil saya memang suka sekali bermain denga bunyi, hehehe");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "HRD/badutSenang.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::Slide},
+        },
+        {},
+        "Dr. Badut",
+        "Wah begitu!");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "HRD/badutBingung.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::None},
+        },
+        {},
+        "Dr. Badut",
+        "Kulihat-lihat sepertinya kamu keturunan kambing juga ya?");
+
     Scene *scene13 = Scene13_Create();
     SceneManager_GoToScene(scene->sceneManager, scene13, SceneTransition::Fade);
 }
@@ -12,6 +61,31 @@ void Scene12_DialogPilihan1(Scene *scene)
 void Scene12_DialogPilihan2(Scene *scene)
 {
     std:: cout << "Memilih pilihan 2\n";
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/talkingWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Slide},
+        },
+        {},
+        "Yono",
+        "MBEEEEEEE!");
+
+        SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "HRD/KatakTertawa.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::Slide},
+        },
+        {},
+        "Mr. Katak",
+        "Oke oke, kita lanjut ya");
+
     Scene *scene14 = Scene14_Create();
     SceneManager_GoToScene(scene->sceneManager, scene14, SceneTransition::Fade);
 }
