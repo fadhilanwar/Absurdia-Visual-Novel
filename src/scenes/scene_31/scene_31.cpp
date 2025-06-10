@@ -26,7 +26,7 @@ void Scene31_Start(Scene *scene)
 {
     Scene31Data *data = (Scene31Data *)scene->data;
     SceneManager_SetBackground(scene->sceneManager, "background/interview.png");
-    // SceneManager_AddDialog(scene->sceneManager, true, "MC", "Aku harus cepat! Kalau telat, mereka bisa langsung mencoret namaku..", "talkingWork.png", Scene31_DialogScene31, scene);
+    // SceneManager_AddDialog(scene->sceneManager, true, "Yono", "Aku harus cepat! Kalau telat, mereka bisa langsung mencoret namaku..", "talkingWork.png", Scene31_DialogScene31, scene);
 
     SceneManager_PlaySound(scene->sceneManager, "anthem.mp3");
 
@@ -49,8 +49,8 @@ void Scene31_Start(Scene *scene)
             },
             
         {},
-        "MC",
-        "(Panel berdiri dan ikut menyanyi. Pisang mengeluarkan konfeti dari topinya.) ", playMusicSFX, scene);
+        "",
+        "", playMusicSFX, scene);
 
         SceneManager_AddDialog(
         scene->sceneManager,
