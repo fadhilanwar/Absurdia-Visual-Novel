@@ -18,7 +18,7 @@ void Ending_b_Start(Scene *scene)
     );
 
     // Mainkan musik ending
-    SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
+    SceneManager_PlayMusic(scene->sceneManager, "Ending Unlock.wav");
 }
 
 Scene* Ending_b_Create()
