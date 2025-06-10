@@ -1,16 +1,9 @@
 #include "scene_18.hpp"
 #include <iostream>
 
-void Scene18_DialogScene18(Scene *scene)
-{
-    std::cout << "Dialog beres\n";
-    Scene *scene19 = Scene19_Create();
-    // // SceneManager_GoToScene(scene->sceneManager, scene19);
-}
-
 void Scene18_DialogPilihan1(Scene *scene)
 {
-    std:: cout << "Pilihan 1 dipilih (Ide Logo) ";
+    std:: cout << "Pilihan 1 dipilih ";
     SceneManager_AddDialog(
         scene->sceneManager,
         {
@@ -65,7 +58,7 @@ void Scene18_DialogPilihan1(Scene *scene)
 
 void Scene18_DialogPilihan2(Scene *scene)
 {
-    std:: cout << "Pilihan 1 dipilih (Ide Logo) ";
+    std:: cout << "Pilihan 1 dipilih";
     SceneManager_AddDialog(
         scene->sceneManager,
         {
@@ -86,8 +79,6 @@ void Scene18_Start(Scene *scene)
 {
     Scene18Data *data = (Scene18Data *)scene->data;
     SceneManager_SetBackground(scene->sceneManager, "background/interview.png");
-    // SceneManager_AddDialog(scene->sceneManager, true, "MC", "Aku harus cepat! Kalau telat, mereka bisa langsung mencoret namaku..", "talkingWork.png", Scene18_DialogScene18, scene);
-
     SceneManager_AddDialog(
         scene->sceneManager,
         {

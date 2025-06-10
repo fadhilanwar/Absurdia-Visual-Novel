@@ -24,7 +24,7 @@ void Scene8_DialogPilihan1(Scene *scene)
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "HRD/KatakSenyum.png",
+                .imageFilePath = "HRD/katakSenyum.png",
                 .position = DialogPersonPosition::Right,
                 .animation = DialogPersonAnimation::Slide},
         },

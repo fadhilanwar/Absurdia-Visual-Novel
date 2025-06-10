@@ -1,16 +1,9 @@
 #include "scene_20.hpp"
 #include <iostream>
 
-void Scene20_DialogScene20(Scene *scene)
-{
-    std::cout << "Dialog beres\n";
-    Scene *scene21 = Scene21_Create();
-    // // SceneManager_GoToSceneene(scene->sceneManager, scene21);
-}
-
 void Scene20_DialogPilihan1(Scene *scene)
 {
-    std:: cout << "Pilihan 1 dipilih (Maen Peran Peranan) ";
+    std:: cout << "Pilihan 1 dipilih";
     SceneManager_AddDialog(
         scene->sceneManager,
         {
@@ -20,7 +13,7 @@ void Scene20_DialogPilihan1(Scene *scene)
                 .animation = DialogPersonAnimation::Slide},
             },
         {},
-        "Fuad Gemink",
+        "Yono",
         "Kalau begitu, mari kita aktingkan ulang sejarah pintu pertama ditemukan.");
     Scene *scene25 = Scene25_Create();
     SceneManager_GoToScene(scene->sceneManager, scene25, SceneTransition::None);
@@ -28,7 +21,7 @@ void Scene20_DialogPilihan1(Scene *scene)
 
 void Scene20_DialogPilihan2(Scene *scene)
 {
-    std:: cout << "Pilihan 2 dipilih (Cerita Pintu) ";
+    std:: cout << "Pilihan 2 dipilih";
 
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -39,7 +32,7 @@ void Scene20_DialogPilihan2(Scene *scene)
                 .animation = DialogPersonAnimation::Slide},
             },
         {},
-        "Fuad Gemink",
+        "Yono",
         "Saya pernah jadi pintu gudang tua. Banyak kenangan berdebu di sana...");
 
 
@@ -51,7 +44,6 @@ void Scene20_Start(Scene *scene)
 {
     Scene20Data *data = (Scene20Data *)scene->data;
     SceneManager_SetBackground(scene->sceneManager, "background/interview.png");
-    // SceneManager_AddDialog(scene->sceneManager, true, "MC","Aku harus cepat! Kalau telat, mereka bisa langsung mencoret namaku..", "talkingWork.png", Scene20_DialogScene20, scene);
 
      SceneManager_AddDialog(
         scene->sceneManager,

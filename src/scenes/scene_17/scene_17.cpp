@@ -2,17 +2,9 @@
 #include <iostream>
 
 
-
-void Scene17_DialogScene17(Scene *scene)
-{
-    std::cout << "Dialog beres\n";
-    Scene *scene18 = Scene18_Create();
-    // // SceneManager_GoToSceneene(scene->sceneManager, scene18);
-}
-
 void Scene17_DialogPilihan1(Scene *scene)
 {
-    std:: cout << "Pilihan 1 dipilih (Jawab Serius) ";
+    std:: cout << "Pilihan 1 dipilih ";
     SceneManager_AddDialog(
         scene->sceneManager,
         {
@@ -29,7 +21,7 @@ void Scene17_DialogPilihan1(Scene *scene)
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "HRD/KatakTertawa.png",
+                .imageFilePath = "HRD/katakTertawa.png",
                 .position = DialogPersonPosition::Right,
                 .animation = DialogPersonAnimation::Slide},
             },
@@ -93,7 +85,7 @@ void Scene17_Start(Scene *scene)
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "HRD/KatakTertawa.png",
+                .imageFilePath = "HRD/katakTertawa.png",
                 .position = DialogPersonPosition::Right,
                 .animation = DialogPersonAnimation::Slide},
             },
