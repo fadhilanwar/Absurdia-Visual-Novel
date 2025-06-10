@@ -1,18 +1,128 @@
 #include "scene_18.hpp"
 #include <iostream>
 
-void Scene18_DialogScene18(Scene *scene)
+void Scene18_DialogPilihan1(Scene *scene)
 {
-    std::cout << "Dialog beres\n";
-    Scene *scene19 = Scene19_Create();
-    // // SceneManager_GoToScene(scene->sceneManager, scene19);
+    std:: cout << "Pilihan 1 dipilih ";
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/talkingWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Slide},
+            },
+            {},
+            "Yono",
+            "Saya ada ide untuk logo perusahaan.");
+    
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "HRD/badutBicara.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::Slide},
+            },
+            {},
+            "Dr. Badut",
+            "Benarkah? Beri tahu kami");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/talkingWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Slide},
+            },
+            {},
+            "Yono",
+            "Bagaimana kita ganti dengan kambing bawa koper? Autentik bukan!");
+    
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "HRD/badutSenang.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::Slide},
+            },
+            {},
+            "Dr. Badut",
+            "YAYAYAYA! Aku suka idemu");
+
+    Scene *scene21 = Scene21_Create();
+    SceneManager_GoToScene(scene->sceneManager, scene21, SceneTransition::None);
+}
+
+void Scene18_DialogPilihan2(Scene *scene)
+{
+    std:: cout << "Pilihan 1 dipilih";
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/talkingWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Slide},
+            },
+            {},
+            "Yono",
+            "Kalau boleh tahu, Anda punya kambing peliharaan juga?");
+
+    Scene *scene22 = Scene22_Create();
+    SceneManager_GoToScene(scene->sceneManager, scene22, SceneTransition::None);
 }
 
 void Scene18_Start(Scene *scene)
 {
     Scene18Data *data = (Scene18Data *)scene->data;
-    SceneManager_SetBackground(scene->sceneManager, "tiba_dikota.png");
-    // SceneManager_AddDialog(scene->sceneManager, true, "MC", "Aku harus cepat! Kalau telat, mereka bisa langsung mencoret namaku..", "talkingWork.png", Scene18_DialogScene18, scene);
+    SceneManager_SetBackground(scene->sceneManager, "background/interview.png");
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "HRD/katakBicara.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::Slide},
+            },
+        {},
+        "Dr. Badut",
+        "Kamu punya sisis seni yang kuat");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "HRD/katakBicara.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::None},
+            },
+        {},
+        "Dr. Badut",
+        "Kami butuh orang sepertimu!");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/defaultWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Slide},
+            },
+        {
+            DialogQuestion{
+                .question = "Tawarkan Ide Logo",
+                .onAnswered = Scene18_DialogPilihan1,
+                .onAnsweredParameter = scene},
+            DialogQuestion{
+                .question = "Tanya balik soal kambing",
+                .onAnswered = Scene18_DialogPilihan2,
+                .onAnsweredParameter = scene}
+            },
+        "Yono",
+        "");
 
     SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
 }

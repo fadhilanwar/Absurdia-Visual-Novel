@@ -9,7 +9,7 @@ void MainMenuPG_OnButtonClick(void* parameter)
     Page *page = (Page*)parameter;
     MainMenuPageData *data = (MainMenuPageData*)page->data;
 
-    PageManager_PlaySound(page->pageManager, "hidup-jokowi.mp3");
+    // PageManager_PlaySound(page->pageManager, "hidup-jokowi.mp3");
 
     Page *gamePage = NewGamePG_Create();
     PageManager_GoToPage(page->pageManager, gamePage);
@@ -20,7 +20,7 @@ void MainMenuPG_OnButtonClick2(void* parameter)
     Page *page = (Page*)parameter;
     MainMenuPageData *data = (MainMenuPageData*)page->data;
 
-    PageManager_PlaySound(page->pageManager, "hidup-jokowi.mp3");
+    // PageManager_PlaySound(page->pageManager, "hidup-jokowi.mp3");
 
     Page *gamePage = LoadGamePG_Create();
     PageManager_GoToPage(page->pageManager, gamePage);
