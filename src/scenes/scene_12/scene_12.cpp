@@ -4,7 +4,7 @@
 
 void Scene12_DialogPilihan1(Scene *scene)
 {
-    std:: cout << "Memilih pilihan 1\n";
+    std:: cout << "Pilihan 1 dipilih\n";
 
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -60,7 +60,7 @@ void Scene12_DialogPilihan1(Scene *scene)
 
 void Scene12_DialogPilihan2(Scene *scene)
 {
-    std:: cout << "Memilih pilihan 2\n";
+    std:: cout << "Pilihan 2 dipilih\n";
 
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -78,7 +78,7 @@ void Scene12_DialogPilihan2(Scene *scene)
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "HRD/KatakTertawa.png",
+                .imageFilePath = "HRD/katakTertawa.png",
                 .position = DialogPersonPosition::Right,
                 .animation = DialogPersonAnimation::Slide},
         },
@@ -98,7 +98,7 @@ void Scene12_Start(Scene *scene)
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "figuran/katakTertawa.png",
+                .imageFilePath = "HRD/katakTertawa.png",
                 .position = DialogPersonPosition::Right,
                 .animation = DialogPersonAnimation::Slide},
             },

@@ -15,7 +15,7 @@ void Scene11_DialogPilihan1(Scene *scene)
         },
         {},
         "Yono",
-        "Betull! Saya rinkarnasi lemari tahun 90-an");
+        "Betull! Saya reinkarnasi lemari tahun 90-an");
 
     Scene *scene17 = Scene17_Create();
     SceneManager_GoToScene(scene->sceneManager, scene17, SceneTransition::Fade);

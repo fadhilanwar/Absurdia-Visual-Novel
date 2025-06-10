@@ -3,11 +3,9 @@
 
 void Scene9_DialogPilihan1(Scene *scene)
 {
-    std:: cout << "Pilihan 1 dipilih Baadrunsyah";
-    // Scene *scene12 = Scene12_Create();
-    // SceneManager_GoToScene(scene->sceneManager, scene12, SceneTransition::Fade);
-    Scene *scene17 = Scene17_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene17, SceneTransition::Fade);
+    std:: cout << "Pilihan 1 dipilih ";
+    Scene *scene12 = Scene12_Create();
+    SceneManager_GoToScene(scene->sceneManager, scene12, SceneTransition::Fade);
 }
 
 void Scene9_DialogPilihan2(Scene *scene)

@@ -135,6 +135,9 @@ struct SceneManager
     bool dialogEnterKeyPressed = false;
     // int dialogTextAnimProgressStep = 0;
 
+
+    bool isLogOpen = 0;
+
     sf::Music *musicPlaying = nullptr;
     std::vector<SceneSound *> soundsPlaying;
 
@@ -166,3 +169,9 @@ void SceneManager_StopMusic(SceneManager *sceneMg);
 
 // Main suara (bebas mau panggil berapa kali juga, ga kayak musik)
 void SceneManager_PlaySound(SceneManager *sceneMg, std::string filePath);
+
+// Tampilan log dialog
+void SceneManager_Log(SceneManager *sceneMg);
+
+// Tombol untuk membuka log dialog
+void SceneManager_LogButton(SceneManager *sceneMg);

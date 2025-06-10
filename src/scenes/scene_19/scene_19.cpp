@@ -1,16 +1,9 @@
 #include "scene_19.hpp"
 #include <iostream>
 
-void Scene19_DialogScene19(Scene *scene)
-{
-    std::cout << "Dialog beres\n";
-    Scene *scene20 = Scene20_Create();
-    // // SceneManager_GoToSceneene(scene->sceneManager, scene20);
-}
-
 void Scene19_DialogPilihan1(Scene *scene)
 {
-    std:: cout << "Pilihan 1 dipilih (Minta Cuti buat Latihan suara kambing) ";
+    std:: cout << "Pilihan 1 dipilih ";
     SceneManager_AddDialog(
         scene->sceneManager,
         {
@@ -28,7 +21,7 @@ void Scene19_DialogPilihan1(Scene *scene)
 
 void Scene19_DialogPilihan2(Scene *scene)
 {
-    std:: cout << "Pilihan 2 dipilih (Tanyakan test berikutnya ngapain...) ";
+    std:: cout << "Pilihan 2 dipilih ";
 
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -51,7 +44,6 @@ void Scene19_Start(Scene *scene)
 {
     Scene19Data *data = (Scene19Data *)scene->data;
     SceneManager_SetBackground(scene->sceneManager, "background/interview.png");
-    // SceneManager_AddDialog(scene->sceneManager, true, "MC","Aku harus cepat! Kalau telat, mereka bisa langsung mencoret namaku..", "talkingWork.png", Scene19_DialogScene19, scene);
 
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -64,18 +56,6 @@ void Scene19_Start(Scene *scene)
         {},
         "Dr. Badut",
         "Hahahaha! Kalau begitu, kita cocok di sini...");
-
-    // SceneManager_AddDialog(
-    //     scene->sceneManager,
-    //     {
-    //         DialogPerson{
-    //             .imageFilePath = "HRD/katakBicara.png",
-    //             .position = DialogPersonPosition::Right,
-    //             .animation = DialogPersonAnimation::Slide},
-    //     },
-    //     {},
-    //     "Mr. Katak",
-    //     "Aku suka orang absurd yang sadar diri.");
 
         SceneManager_AddDialog(
         scene->sceneManager,

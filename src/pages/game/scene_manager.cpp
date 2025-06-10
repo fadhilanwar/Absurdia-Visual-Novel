@@ -14,6 +14,21 @@ SceneManager *SceneManager_Create(Canvas *canvas, EngineWindow *engineWindow)
     return sceneMg;
 }
 
+void SceneManager_Log(SceneManager *sceneMg) // UI Dialog
+{
+    // UI Dialog-
+    // Canvas_DrawTexture(sceneMg->canvas, )
+    Canvas_DrawImage(sceneMg->canvas, 904, 16, "backgrouund/wp_pilihan", 0.3); //sementara
+    Canvas_DrawText(sceneMg->canvas, 401, 36, 198, 39, "Log Dialogue", "fonts/Chonky Bunny.ttf", Alignment::Center, 20, sf::Color(255, 251, 239, 255)); //sementara
+    Canvas_DrawImage(sceneMg->canvas, 904, 16, "ui/dialogue_log.png"); //sementara
+}
+
+void SceneManager_LogButton(SceneManager *sceneMg)
+{
+    // UI Botton
+    Canvas_DrawImage(sceneMg->canvas, 904, 16, "ui/logs.png");
+}
+
 void SceneManager_Destroy(SceneManager *sceneMg)
 {
     sceneMg->currentScene->destroy(sceneMg->currentScene);
@@ -111,7 +126,10 @@ void SceneManager_StopMusic(SceneManager *sceneMg)
 void SceneManager_PlaySound(SceneManager *sceneMg, std::string filePath)
 {
     sf::SoundBuffer *buffer = new sf::SoundBuffer;
-    buffer->loadFromFile(GetExePath() + filePath);
+    if (!buffer->loadFromFile(GetExePath() + filePath)) {
+        std::cerr << "Failed to load sound: " << filePath << "\n";
+        return;
+    }
     sf::Sound *soundPlayer = new sf::Sound(*buffer);
     SceneSound *sound = new SceneSound{
         .buffer = buffer,
@@ -524,6 +542,8 @@ void m_SceneManager_Update(SceneManager *sceneMg)
             // Mulai pending scene
             sceneMg->pendingScene->start(sceneMg->pendingScene);
 
+            // sceneMg->pendingScene->childScenes = 
+
             // Hapus isi canvas
             Canvas_Clear(sceneMg->canvas);
 
@@ -644,6 +664,13 @@ void m_SceneManager_Update(SceneManager *sceneMg)
             sceneMg->dialogAnimProgress += sceneMg->dialogAnimProgressStep;
         }
 
+        if(sceneMg->isLogOpen){
+
+            SceneManager_Log(sceneMg);
+        }
+        else{
+            SceneManager_LogButton(sceneMg);
+        }
         // Copy canvas scene ke canvas scene_manager
         Canvas_Update(sceneMg->currentScene->canvas);
         Canvas_Copy(sceneMg->canvas, sceneMg->currentScene->canvas);

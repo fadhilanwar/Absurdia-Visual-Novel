@@ -1,25 +1,89 @@
 #include "scene_22.hpp"
 #include <iostream>
 
-void Scene22_DialogScene22(Scene *scene)
+void Scene22_DialogPilihan1(Scene *scene)
 {
-    std::cout << "Dialog beres\n";
-    Scene *scene23 = Scene23_Create();
-    // // SceneManager_GoToSceneene(scene->sceneManager, scene23);
+    std:: cout << "Pilihan 1 dipilih\n";
+    Scene *scene29 = Scene29_Create();
+    SceneManager_GoToScene(scene->sceneManager, scene29, SceneTransition::None);
+}
+
+void Scene22_DialogPilihan2(Scene *scene)
+{
+    std:: cout << "Pilihan 2 dipilih\n";
+    Scene *scene30 = Scene30_Create();
+    SceneManager_GoToScene(scene->sceneManager, scene30, SceneTransition::None);
 }
 
 void Scene22_Start(Scene *scene)
 {
     Scene22Data *data = (Scene22Data *)scene->data;
-    SceneManager_SetBackground(scene->sceneManager, "tiba_dikota.png");
-    // SceneManager_AddDialog(scene->sceneManager, true, "MC","Aku harus cepat! Kalau telat, mereka bisa langsung mencoret namaku..", "talkingWork.png", Scene22_DialogScene22, scene);
+    SceneManager_SetBackground(scene->sceneManager, "background/interview.png");
+    SceneManager_AddDialog(
+        scene->sceneManager,
+    {
+        DialogPerson{
+            .imageFilePath = "HRD/badutSenang.png",
+            .position = DialogPersonPosition::Right,
+            .animation = DialogPersonAnimation::None},
+        },
+        {},
+        "Dr.Badut",
+        "Oh tentu. Kami punya kebun belakang kantor penuh kambing anggora"
+    );
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+    {
+        DialogPerson{
+            .imageFilePath = "work/happyWork.png",
+            .position = DialogPersonPosition::Left,
+            .animation = DialogPersonAnimation::None},
+        },
+        {},
+        "Yono",
+        "Wow. Ada daftar adopsi karyawan?"
+    );
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+    {
+        DialogPerson{
+            .imageFilePath = "HRD/katakSenyum.png",
+            .position = DialogPersonPosition::Right,
+            .animation = DialogPersonAnimation::None},
+        },
+        {},
+        "Mr. Katak",
+        "Ada. Tapi harus lulus tes makan rumput dulu"
+    );
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/confusedWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Slide},
+            },
+            {
+                DialogQuestion{
+                    .question = "Minta maaf, kasih tisu",
+                    .onAnswered = Scene22_DialogPilihan1,
+                    .onAnsweredParameter = scene},
+                DialogQuestion{
+                    .question = "Klarifikasi Junggling",
+                    .onAnswered = Scene22_DialogPilihan2,
+                    .onAnsweredParameter = scene}},
+                "",
+                "");
 
     SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
 }
 
 void Scene22_Update(Scene *scene)
 {
-    Scene22Data *data = (Scene22Data *)scene->data;
+    //Scene22Data *data = (Scene22Data *)scene->data;
 }
 
 void Scene22_Destroy(Scene *scene)
