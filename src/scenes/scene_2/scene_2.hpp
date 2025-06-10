@@ -12,6 +12,7 @@ struct Scene2Data
 
     float animProgress;
     float animProgressPart;
+    bool soundPlayedPart2;
 };
 
 Scene *Scene2_Create();
