@@ -122,7 +122,7 @@ void Scene16_Start(Scene *scene)
         {
             DialogPerson{
                 .imageFilePath = "HRD/katakBicara.png",
-                .position = DialogPersonPosition::Left,
+                .position = DialogPersonPosition::Right,
                 .animation = DialogPersonAnimation::Slide},
             },
             {},
