@@ -4,6 +4,79 @@
 void Scene14_DialogPilihan1(Scene *scene)
 {
     std:: cout << "Memilih pilihan 1\n";
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/talkingWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Slide},
+        },
+        {},
+        "Yono",
+        "Kalau saya diterima . . .");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/talkingWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::None},
+        },
+        {},
+        "Yono",
+        "Kambig saya boleh ikut rapat kan? kan? hehehehe");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "HRD/katakBicara.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::Slide},
+        },
+        {},
+        "Mr. Katak",
+        "Yaa tentu saja boleh!");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "HRD/KatakTertawa.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::None},
+        },
+        {},
+        "Mr. Katak",
+        "Asalkan kambingmu pakai jas dan bisa angkat tangan saat voting");
+    
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/shockedWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::None},
+        },
+        {},
+        "Yono",
+        "Yahhhh . . .");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/talkingWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::None},
+        },
+        {},
+        "Yono",
+        "Kalian punya kambing peliharaan tidak?");
+
     Scene *scene22 = Scene22_Create();
     SceneManager_GoToScene(scene->sceneManager, scene22, SceneTransition::Fade);
 }
@@ -11,6 +84,31 @@ void Scene14_DialogPilihan1(Scene *scene)
 void Scene14_DialogPilihan2(Scene *scene)
 {
     std:: cout << "Memilih pilihan 2\n";
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/talkingWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Slide},
+        },
+        {},
+        "Yono",
+        "Apa aku boleh minta cuti satu hari?");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/talkingWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::None},
+        },
+        {},
+        "Yono",
+        "Buat latihan suara kambing, hehehe");
+
     Scene *scene23 = Scene23_Create();
     SceneManager_GoToScene(scene->sceneManager, scene23, SceneTransition::Fade);
 }
@@ -29,14 +127,14 @@ void Scene14_Start(Scene *scene)
             },
             {},
             "Mr.Katak",
-            "Selamat datang di tahap lanjutan: Tes Kambing Terapan.");
+            "Kita masuk ke tahap lanjutan, Tes Kambing Terapan.");
 
     SceneManager_AddDialog(
         scene->sceneManager,
         {
             DialogPerson{
                 .imageFilePath = "HRD/badutSenang.png",
-                .position = DialogPersonPosition::Left,
+                .position = DialogPersonPosition::Right,
                 .animation = DialogPersonAnimation::Slide},
             },
             {},

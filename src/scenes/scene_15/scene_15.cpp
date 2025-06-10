@@ -4,6 +4,55 @@
 void Scene15_DialogPilihan1(Scene *scene)
 {
     std:: cout << "Memilih pilihan 1\n";
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/talkingWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Slide},
+            },
+            {},
+            "Yono",
+            "Saya ada ide untuk logo perusahaan.");
+    
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "HRD/badutBicara.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::Slide},
+            },
+            {},
+            "Dr. Badut",
+            "Benarkah? Beri tahu kami");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/talkingWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Slide},
+            },
+            {},
+            "Yono",
+            "Bagaimana kita ganti dengan kambing bawa koper? Autentik bukan!");
+    
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "HRD/badutSenang.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::Slide},
+            },
+            {},
+            "Dr. Badut",
+            "YAYAYAYA! Aku suka idemu");
+
     Scene *scene21 = Scene21_Create();
     SceneManager_GoToScene(scene->sceneManager, scene21, SceneTransition::Fade);
 }
@@ -29,7 +78,19 @@ void Scene15_Start(Scene *scene)
             },
             {},
             "Mr.Katak",
-            "Kamu kreatif. Tapi kami ingin melihat sisi lain: bagaimana kamu berkontribusi ke citra perusahaan.");
+            "Kamu ini memang orang yang kreatif.");
+        
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "HRD/katakBicara.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::None},
+            },
+            {},
+            "Mr.Katak",
+            "Tapi kami ingin melihat bagaimana kamu berkontribusi ke citra perusahaan kami.");
 
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -40,7 +101,7 @@ void Scene15_Start(Scene *scene)
                 .animation = DialogPersonAnimation::Slide},
             },
             {},
-            "MC",
+            "Yono",
             "Dengan kambing?");
 
     SceneManager_AddDialog(
@@ -53,7 +114,19 @@ void Scene15_Start(Scene *scene)
             },
             {},
             "Dr. Badut",
-            "Dengan visi");
+            "Dengan visi dong");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "HRD/badutSenang.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Slide},
+            },
+            {},
+            "Dr. Badut",
+            "Sekarang jelaskan visimu untuk menjadi bagian dari kami");
 
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -108,7 +181,7 @@ Scene *Scene15_Create()
 // {
 //     Scene15Data *data = (Scene15Data *)scene->data;
 //     SceneManager_SetBackground(scene->sceneManager, "tiba_dikota.png");
-//     // SceneManager_AddDialog(scene->sceneManager, true, "MC","Aku harus cepat! Kalau telat, mereka bisa langsung mencoret namaku..", "talkingWork.png", Scene15_DialogScene15, scene);
+//     // SceneManager_AddDialog(scene->sceneManager, true, "Yono","Aku harus cepat! Kalau telat, mereka bisa langsung mencoret namaku..", "talkingWork.png", Scene15_DialogScene15, scene);
 
 //     SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
 // }

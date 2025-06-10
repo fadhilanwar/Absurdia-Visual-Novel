@@ -29,7 +29,7 @@ void Scene4Part2_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "figuran/toav2.png",
                 .position = DialogPersonPosition::Right,
-                .animation = DialogPersonAnimation::None
+                .animation = DialogPersonAnimation::Slide
             }
         },
         {},
@@ -57,7 +57,7 @@ void Scene4Part2_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "work/confusedWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::None
+                .animation = DialogPersonAnimation::Slide
             }
         },
         {},

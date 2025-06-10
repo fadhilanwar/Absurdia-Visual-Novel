@@ -32,7 +32,7 @@ void Scene6_DialogPilihan1(Scene *scene)
             DialogPerson{
                 .imageFilePath = "figuran/talkingUnknow.png",
                 .position = DialogPersonPosition::Right,
-                .animation = DialogPersonAnimation::None},
+                .animation = DialogPersonAnimation::Slide},
             },
             {},
             "???",
@@ -68,7 +68,7 @@ void Scene6_DialogPilihan1(Scene *scene)
             DialogPerson{
                 .imageFilePath = "work/confusedWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::None},
+                .animation = DialogPersonAnimation::Slide},
         },
         {},
         "Yono",
@@ -98,7 +98,7 @@ void Scene6_DialogPilihan2(Scene *scene)
             DialogPerson{
                 .imageFilePath = "work/defaultWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::None
+                .animation = DialogPersonAnimation::Slide
             },
         },
         {},
@@ -118,7 +118,7 @@ void Scene6_Start(Scene *scene)
             DialogPerson {
                 .imageFilePath = "figuran/raw 3.png",
                 .position = DialogPersonPosition::Right,
-                .animation = DialogPersonAnimation::None
+                .animation = DialogPersonAnimation::Slide
             }
         },
         {},
@@ -147,7 +147,7 @@ void Scene6_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "work/shockedWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::None},
+                .animation = DialogPersonAnimation::Slide},
         },
         {
             DialogQuestion{
