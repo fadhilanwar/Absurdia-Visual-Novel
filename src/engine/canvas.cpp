@@ -19,7 +19,7 @@ sf::Font &m_Canvas_GetFont(Canvas *canvas, std::string fontPath)
 }
 
 // =======================
-// == Public Functions ==
+// == Public Functions  ==
 // =======================
 Canvas *Canvas_Create()
 {

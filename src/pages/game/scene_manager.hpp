@@ -169,3 +169,9 @@ void SceneManager_StopMusic(SceneManager *sceneMg);
 
 // Main suara (bebas mau panggil berapa kali juga, ga kayak musik)
 void SceneManager_PlaySound(SceneManager *sceneMg, std::string filePath);
+
+// Tampilan log dialog
+void SceneManager_Log(SceneManager *sceneMg);
+
+// Tombol untuk membuka log dialog
+void SceneManager_LogButton(SceneManager *sceneMg);
