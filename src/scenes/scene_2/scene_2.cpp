@@ -19,8 +19,6 @@ void Scene2_Start(Scene *scene)
 {
     Scene2Data *data = (Scene2Data *)scene->data;
     SceneManager_SetBackground(scene->sceneManager, "background/outSubway.png");
-
-    SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
 }
 
 // void Scene2_MulaiDialogPertama(Scene *scene)
