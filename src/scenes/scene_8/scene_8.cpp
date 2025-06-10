@@ -62,20 +62,7 @@ void Scene8_DialogPilihan1(Scene *scene)
 
 void Scene8_DialogPilihan2(Scene *scene)
 {
-    std::cout << "Pilihan 2 dipilih\n";
-
-    SceneManager_AddDialog(
-        scene->sceneManager,
-        {
-            DialogPerson{
-                .imageFilePath = "work/talkingWork.png",
-                .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::Slide},
-        },
-        {},
-        "Yono",
-        "SAYA SIAP KERJA!");
-    
+    std::cout << "Pilihan 2 dipilih\n";  
     Scene *scene10 = Scene10_Create();
     SceneManager_GoToScene(scene->sceneManager, scene10, SceneTransition::Fade);
 }
