@@ -8,10 +8,48 @@ void Scene32_DialogScene32(Scene *scene)
     // // SceneManager_GoToScene(scene->sceneManager, scene32);
 }
 
+void Scene32_PindahScene(Scene *scene)
+{
+    std::cout << "ENDING C TERBUKAAA\n";
+    Scene *ending_c = Ending_c_Create();
+    SceneManager_GoToScene(scene->sceneManager, ending_c, SceneTransition::Fade);
+
+    // SceneManager_PlaySound(scene->sceneManager, "Crowd Laugh.wav");
+
+}
+
+void playApplauseSFX_Scene32(Scene *scene) {
+    SceneManager_PlaySound(scene->sceneManager, "Applause.mp3");
+}
+
 void Scene32_Start(Scene *scene)
 {
     Scene32Data *data = (Scene32Data *)scene->data;
-    SceneManager_SetBackground(scene->sceneManager, "tiba_dikota.png");
+    SceneManager_SetBackground(scene->sceneManager, "background/interview.png");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "HRD/badutBicara.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::Slide},
+        },
+        {},
+        "Dr. Badut",
+        "Luar biasa. Irama ternak digital modern.", playApplauseSFX_Scene32, scene);
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "HRD/katakTertawa.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::Slide},
+        },
+        {},
+        "Mr. Katak",
+        "Kamu cocok untuk posisi DJ Kambing.", Scene32_PindahScene, scene);
     // SceneManager_AddDialog(scene->sceneManager, true, "MC", "Aku harus cepat! Kalau telat, mereka bisa langsung mencoret namaku..", "talkingWork.png", Scene32_DialogScene32, scene);
 
     SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
