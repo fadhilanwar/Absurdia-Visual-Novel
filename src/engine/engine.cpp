@@ -28,27 +28,27 @@ Engine *Engine_Create()
 void Engine_Run(Engine *engine)
 {
     int frameRendered = 0;
-    sf::Clock fpsClock;
+    // sf::Clock fpsClock;
     sf::Clock clock;
 
-    sf::Font font(GetExePath() + "fonts/Roboto-SemiBold.ttf");
-    sf::Text fpsTextBlock(font);
-    fpsTextBlock.setPosition({0, 0});
-    fpsTextBlock.setFillColor(sf::Color::Red);
-    fpsTextBlock.setString("");
+    // sf::Font font(GetExePath() + "fonts/Roboto-SemiBold.ttf");
+    // sf::Text fpsTextBlock(font);
+    // fpsTextBlock.setPosition({0, 0});
+    // fpsTextBlock.setFillColor(sf::Color::Red);
+    // fpsTextBlock.setString("");
 
-    fpsClock.start();
+    // fpsClock.start();
 
     sf::Sprite textureSprite(engine->renderTexture.getTexture());
 
     while (engine->engineWindow.window.isOpen())
     {
-        if (fpsClock.getElapsedTime().asMilliseconds() >= 1000)
-        {
-            fpsTextBlock.setString(std::to_string(frameRendered));
-            frameRendered = 0;
-            fpsClock.restart();
-        }
+        // if (fpsClock.getElapsedTime().asMilliseconds() >= 1000)
+        // {
+        //     fpsTextBlock.setString(std::to_string(frameRendered));
+        //     frameRendered = 0;
+        //     fpsClock.restart();
+        // }
 
         int waitTime = std::max(WAIT_TIME - clock.getElapsedTime().asMilliseconds(), 0);
         clock.restart();
@@ -73,9 +73,9 @@ void Engine_Run(Engine *engine)
 
         engine->engineWindow.window.clear();
         engine->engineWindow.window.draw(textureSprite);
-        engine->engineWindow.window.draw(fpsTextBlock);
+        // engine->engineWindow.window.draw(fpsTextBlock);
         engine->engineWindow.window.display();
-        frameRendered++;
+        // frameRendered++;
 
         clock.stop();
         std::this_thread::sleep_for(std::chrono::milliseconds(waitTime));
