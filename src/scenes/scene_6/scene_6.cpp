@@ -23,7 +23,7 @@ void Scene6_DialogPilihan1(Scene *scene)
         },
         {},
         "Yono",
-        "Permisi, apakah kau baik-baik saja?"
+        "Hey, apakah kau baik-baik saja?"
     );
 
     SceneManager_AddDialog(
@@ -56,7 +56,7 @@ void Scene6_DialogPilihan1(Scene *scene)
             DialogPerson{
                 .imageFilePath = "figuran/talkingUnknow.png",
                 .position = DialogPersonPosition::Right,
-                .animation = DialogPersonAnimation::None},
+                .animation = DialogPersonAnimation::Shake},
             },
             {},
             "???",
@@ -80,7 +80,7 @@ void Scene6_DialogPilihan1(Scene *scene)
             DialogPerson{
                 .imageFilePath = "work/confusedWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::None},
+                .animation = DialogPersonAnimation::Pop},
         },
         {},
         "Yono",
@@ -130,9 +130,23 @@ void Scene6_Start(Scene *scene)
         scene->sceneManager,
         {
             DialogPerson {
+                .imageFilePath = "work/shockedWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Slide
+            }
+        },
+        {},
+        "Yono",
+        "Hah . . . siapa itu"
+    );
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson {
                 .imageFilePath = "figuran/talkingUnknow.png",
                 .position = DialogPersonPosition::Right,
-                .animation = DialogPersonAnimation::None
+                .animation = DialogPersonAnimation::Slide
             }
         },
         {},

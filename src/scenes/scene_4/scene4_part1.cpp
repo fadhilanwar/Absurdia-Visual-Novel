@@ -12,8 +12,9 @@ void Scene4Part1_PindahScene(Scene *scene)
 void Scene4Part1_Start(Scene *scene)
 {
     Scene4Part1Data *data = (Scene4Part1Data *)scene->data;
-    
     SceneManager_SetBackground(scene->sceneManager, "background/resepsionis.png");
+    
+
     SceneManager_AddDialog(
         scene->sceneManager,
         {

@@ -102,13 +102,24 @@ void Scene5_DialogPilihan2(Scene *scene)
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "work/confusedWork.png",
+                .imageFilePath = "work/shockedWork.png",
                 .position = DialogPersonPosition::Left,
                 .animation = DialogPersonAnimation::Slide},
             },
         {},
         "Yono",
-        "Ya ampun. . .  tangganya kok begini sih??",
+        "Ya ampun. . .  tangganya kok begini sih?");
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/confusedWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Shake},
+            },
+        {},
+        "Yono",
+        "Okelah, harus tetap keatas walau akan sedikit pusing . . .",
     Scene5_PindahScene2, scene);
     
 }

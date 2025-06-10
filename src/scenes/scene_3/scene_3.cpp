@@ -6,9 +6,27 @@ void Scene3_DialogScene1(Scene *scene)
     SceneManager_SetBackground(scene->sceneManager, "background/depan_gedung.png");
 }
 
+void Scene3_DialogScene2(Scene *scene)
+{
+    SceneManager_SetBackground(scene->sceneManager, "background/resepsionis.png");
+}
+
 void Scene1_DialogPilihan1(Scene *scene)
 {
     std::cout << "Pilihan 1 dipilih\n";
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/confusedWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Pop},
+        },
+        {},
+        "Yono",
+        "Sepertinya lebih baik aku pulang saja . . . ");
+
     Scene *ending_a = static_cast<Scene*>(Ending_a_Create());
     SceneManager_GoToScene(scene->sceneManager, ending_a, SceneTransition::None);
 }
@@ -16,6 +34,19 @@ void Scene1_DialogPilihan1(Scene *scene)
 void Scene1_DialogPilihan2(Scene *scene)
 {
     std::cout << "Pilihan 2 dipilih";
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/talkingWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Pop},
+        },
+        {},
+        "Yono",
+        "Ah . . . mungkin hanya luarnya saja");
+
     Scene *scene4Part1 = Scene4Part1_Create();
     SceneManager_GoToScene(scene->sceneManager, scene4Part1, SceneTransition::Fade);
 }
@@ -83,11 +114,11 @@ void Scene3_Start(Scene *scene)
                 .animation = DialogPersonAnimation::None},
             },
            {DialogQuestion{
-                .question = "Sepertinya lebih baik aku pulang",
+                .question = "Pulang",
                 .onAnswered = Scene1_DialogPilihan1,
                 .onAnsweredParameter = scene},
             DialogQuestion{
-                .question = "Melangkah menuju gedung",
+                .question = "Masuk",
                 .onAnswered = Scene1_DialogPilihan2,
                 .onAnsweredParameter = scene}},
         "Yono",

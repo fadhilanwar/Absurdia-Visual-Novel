@@ -62,7 +62,7 @@ void Scene4Part2_Start(Scene *scene)
         },
         {},
         "Yono",
-        "Ah. . . Seingatku melodinya tidak seperti ini. . ."
+        "Ah. . . lagu apa ini. . ."
     );
     
     SceneManager_AddDialog(
@@ -76,7 +76,7 @@ void Scene4Part2_Start(Scene *scene)
         },
         {},
         "Yono",
-        "Sudahlah."
+        "Sudahlah, sebenarnya ini cukup lucu"
     );
 
     SceneManager_AddDialog(
@@ -100,7 +100,7 @@ void Scene4Part2_Start(Scene *scene)
         "Nah, sekarang tinggal ke atas.");
         
 
-    SceneManager_PlayMusic(scene->sceneManager, "liftMusic.mp3");
+    SceneManager_PlayMusic(scene->sceneManager, "newElevator.mp3");
 }
 
 void scene4Part2_Update(Scene *scene)

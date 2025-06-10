@@ -83,9 +83,9 @@ void Scene8_Start(Scene *scene)
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "work/confusedWork.png",
+                .imageFilePath = "work/shockedWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::Slide},
+                .animation = DialogPersonAnimation::None},
         },
         {},
         "Yono",
@@ -109,7 +109,7 @@ void Scene8_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "figuran/toav2.png",
                 .position = DialogPersonPosition::Right,
-                .animation = DialogPersonAnimation::None},
+                .animation = DialogPersonAnimation::Pop},
         },
         {},
         "Speaker Unit",
@@ -121,7 +121,7 @@ void Scene8_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "figuran/toav2.png",
                 .position = DialogPersonPosition::Right,
-                .animation = DialogPersonAnimation::None},
+                .animation = DialogPersonAnimation::Shake},
         },
         {},
         "Speaker Unit",
@@ -145,7 +145,7 @@ void Scene8_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "work/talkingWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::None},
+                .animation = DialogPersonAnimation::Pop},
         },
         {
             DialogQuestion{

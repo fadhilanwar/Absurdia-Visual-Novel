@@ -6,13 +6,13 @@ void Scene7_DialogScene(Scene *scene)
 {
     std::cout << "Dialog beres\n";
     Scene *scene8 = Scene8_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene8, SceneTransition::Fade);
+    SceneManager_GoToScene(scene->sceneManager, scene8, SceneTransition::None);
 }
 
 void Scene7_Start(Scene *scene)
 {
     Scene7Data *data = (Scene7Data *)scene->data;
-    SceneManager_SetBackground(scene->sceneManager, "background/lorong.png");
+    SceneManager_SetBackground(scene->sceneManager, "background/depan_pintu.png");
     
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -39,7 +39,21 @@ void Scene7_Start(Scene *scene)
         },
         {},
         "Little Daydream",
-        "Hihi! Aku tidak sabar ingin interview"
+        "Hihihi!"
+    );
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "figuran/jasHujan.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::Pop
+            },
+        },
+        {},
+        "Little Daydream",
+        "Aku tidak sabar ingin interview"
     );
 
     SceneManager_AddDialog(
@@ -60,14 +74,14 @@ void Scene7_Start(Scene *scene)
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "work/shockedWork.png",
+                .imageFilePath = "work/confusedWork.png",
                 .position = DialogPersonPosition::Left,
                 .animation = DialogPersonAnimation::Slide
             },
         },
         {},
         "Yono",
-        "Aku nggak salah masuk gedung kan? Ini seperti festival cosplay. . ."
+        "Aku nggak salah masuk gedung kan? Ini seperti festival cosplay . . ."
     );
 
     SceneManager_AddDialog(
@@ -90,7 +104,7 @@ void Scene7_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "work/talkingWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::None
+                .animation = DialogPersonAnimation::Pop
             },
         },
         {},

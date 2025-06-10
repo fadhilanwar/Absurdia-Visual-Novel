@@ -79,7 +79,7 @@ void Scene1_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "pajamas/talkingTeaPajamas.png",
                 .position = DialogPersonPosition::Center,
-                .animation = DialogPersonAnimation::None},
+                .animation = DialogPersonAnimation::Pop},
         },
         {},
         "Yono",
@@ -108,7 +108,7 @@ void Scene1_Start(Scene *scene)
         },
         {},
         "Yono",
-        "Sebentar. . . ",
+        "Sebentar . . . ",
         Scene1_DialogScene2, scene);
 
     SceneManager_AddDialog(
@@ -126,7 +126,7 @@ void Scene1_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "pajamas/shockedPajamas.png",
                 .position = DialogPersonPosition::Center,
-                .animation = DialogPersonAnimation::None},
+                .animation = DialogPersonAnimation::Shake},
         },
         {},
         "Yono",
@@ -139,7 +139,7 @@ void Scene1_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "pajamas/shockedPajamas.png",
                 .position = DialogPersonPosition::Center,
-                .animation = DialogPersonAnimation::None},
+                .animation = DialogPersonAnimation::Pop},
         },
         {},
         "Yono",
