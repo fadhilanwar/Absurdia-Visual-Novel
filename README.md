@@ -1,7 +1,7 @@
 Project UAS SDA
 
 
-![](docs/screenshot.png)
+![](docs/garamararam.png)
 
 
 
