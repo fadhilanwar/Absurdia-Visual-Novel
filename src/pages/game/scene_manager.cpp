@@ -127,7 +127,8 @@ void m_SceneManager_ResetDialog(SceneManager *sceneMg)
     sceneMg->dialogAnimProgressStep = 0.05f;
     sceneMg->dialogTextProgress = -1;
     sceneMg->dialogTextProgressMax = -1;
-    sceneMg->dialogTextWaitTime = 4;
+    sceneMg->dialogTextWaitTime = 0;
+    sceneMg->dialogAnimProgressAfterText = 0.f;
 }
 
 void m_SceneManager_DrawDialogPersons(SceneManager *sceneMg, Dialog *dialog)
