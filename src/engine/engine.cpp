@@ -14,7 +14,7 @@ Engine *Engine_Create()
     Engine *engine = new Engine();
 
     engine->engineWindow = {
-        .window = sf::RenderWindow(sf::VideoMode({1000u, 550u}), "Fuad dan Mita", sf::Style::Titlebar | sf::Style::Close)};
+        .window = sf::RenderWindow(sf::VideoMode({1000u, 550u}), "Absurdia.Inc - Interview terakhir sebelum Gila", sf::Style::Titlebar | sf::Style::Close)};
     engine->engineWindow.window.setKeyRepeatEnabled(false);
     // engine->engineWindow.window.setVerticalSyncEnabled(false);
     // engine->engineWindow.window.setFramerateLimit(0);
