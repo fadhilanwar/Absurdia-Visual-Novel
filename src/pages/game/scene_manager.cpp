@@ -685,6 +685,64 @@ void m_SceneManager_Update(SceneManager *sceneMg)
 
             sceneMg->sceneTransitionProgress += 0.025f;
         }
+        else if (sceneMg->sceneTransition == SceneTransition::FadeEnding) // Buat Ending Fade nya agak lamaan
+        {
+            if (sceneMg->sceneTransitionProgress <= 1.0f)
+            {
+                // Clear canvas first
+                Canvas_Clear(sceneMg->canvas);
+                // Copy last rendered frame from last page to compositor
+                Canvas_Copy(sceneMg->canvas, sceneMg->currentScene->canvas);
+                // Fade in
+                Canvas_DrawRect(sceneMg->canvas, 0, 0, 1000, 550, sf::Color(0, 0, 0, 255 * sceneMg->sceneTransitionProgress));
+                // Tell compositor to display our canvas
+                Canvas_Update(sceneMg->canvas);
+            }
+            else if (sceneMg->sceneTransitionProgress > 1.0f && sceneMg->sceneTransitionProgress <= 2.0f)
+            {
+                if (!sceneMg->isPendingSceneHasEntered)
+                {
+                    sceneMg->pendingScene->start(sceneMg->pendingScene);
+                    sceneMg->isPendingSceneHasEntered = true;
+                }
+
+                Canvas_Clear(sceneMg->canvas);
+
+                // Gambar background image kalau ada
+                if (sceneMg->backgroundImage)
+                {
+                    Canvas_DrawTexture(sceneMg->pendingScene->canvas, 0, 0, sceneMg->backgroundImage);
+                }
+
+                // Kasih tau scene bahwa ada update
+                sceneMg->pendingScene->update(sceneMg->pendingScene);
+                if (sceneMg->pendingScene->updateAfterPersons != nullptr)
+                    sceneMg->pendingScene->updateAfterPersons(sceneMg->pendingScene);
+
+                // Copy canvas scene ke canvas scene_manager
+                Canvas_Update(sceneMg->pendingScene->canvas);
+                Canvas_Copy(sceneMg->canvas, sceneMg->pendingScene->canvas);
+
+                // Fade out
+                Canvas_DrawRect(sceneMg->canvas, 0, 0, 1000, 550, sf::Color(0, 0, 0, 255 - ((sceneMg->sceneTransitionProgress - 1.0f) * 255)));
+                // Suruh compositor untuk menampilkan canvas
+                Canvas_Update(sceneMg->canvas);
+            }
+            else if (sceneMg->sceneTransitionProgress > 2.0f)
+            {
+                sceneMg->currentScene->destroy(sceneMg->currentScene);
+                delete sceneMg->currentScene;
+
+                sceneMg->isTransitioningScene = false;
+                sceneMg->currentScene = sceneMg->pendingScene;
+                sceneMg->pendingScene = nullptr;
+                // delete sceneMg->lastSceneCanvas;
+                // sceneMg->lastSceneCanvas = nullptr;
+                sceneMg->isPendingSceneHasEntered = false;
+            }
+
+            sceneMg->sceneTransitionProgress += 0.01f;
+        }
     }
     else
     {
