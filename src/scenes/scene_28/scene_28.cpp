@@ -4,15 +4,52 @@
 void Scene28_DialogScene28(Scene *scene)
 {
     std::cout << "Dialog beres\n";
-    Scene *scene29 = Scene29_Create();
-    // SceneManager_GoToSceneene(scene->sceneManager, scene29);
+    Scene *ending_d = static_cast<Scene*>(Ending_d_Create());
+    SceneManager_GoToScene(scene->sceneManager, ending_d, SceneTransition::Fade);
+    // SceneManager_GoToSceneene(scene->sceneManager, ending_d);
 }
 
 void Scene28_Start(Scene *scene)
 {
     Scene28Data *data = (Scene28Data *)scene->data;
-    SceneManager_SetBackground(scene->sceneManager, "tiba_dikota.png");
+    SceneManager_SetBackground(scene->sceneManager, "background/interview.png");
     // SceneManager_AddDialog(scene->sceneManager, true, "MC","Aku harus cepat! Kalau telat, mereka bisa langsung mencoret namaku..", "talkingWork.png", Scene28_DialogScene28, scene);
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "HRD/katakTerpesona.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::Slide},
+        },
+        {},
+        "Mr. Katak",
+        "Kami akan buat prortitpenya! Kamu resmi jadi kepala riset kambing!");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/happyWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Slide},
+            },
+        {},
+        "Yono",
+        "Wah! terimakasih pak");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/happyWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Pop},
+        },
+        {},
+        "Yono",
+        "Ini mimpi jadi nyata!", Scene28_DialogScene28, scene);
 
     SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
 }

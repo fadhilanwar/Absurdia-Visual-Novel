@@ -17,11 +17,13 @@ void Scene24_DialogPilihan1(Scene *scene)
             DialogPerson{
                 .imageFilePath = "work/happyWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::Slide},
+                .animation = DialogPersonAnimation::Joget},
             },
         {},
         "Yono",
-        "(bernyanyi dengan gerakan tangan teatrikal) “Ngok ngok… masa depan, di atas kubus transparan~!", Scene24_DialogPilihan1, scene);
+        "“Ngok ngok… masa depaaaaaan . . . di atas kubus yang \ntransparaaaaan~");
+    Scene *scene31 = Scene31_Create();
+    SceneManager_GoToScene(scene->sceneManager, scene31, SceneTransition::None);
     
 }
 void Scene24_DialogPilihan2(Scene *scene)
@@ -39,7 +41,10 @@ void Scene24_DialogPilihan2(Scene *scene)
             },
         {},
         "Yono",
-        "(beatbox) “Ng-ngok-ngok! Masa depan~!”", Scene24_DialogPilihan2, scene);
+        "(beatbox) “Ng-ngok-ngok! Masa depan~!”");
+
+    Scene *scene32 = Scene32_Create();
+    SceneManager_GoToScene(scene->sceneManager, scene32, SceneTransition::None);
 }
 
 void Scene24_Start(Scene *scene)
@@ -57,7 +62,7 @@ void Scene24_Start(Scene *scene)
         },
         {},
         "Dr. Badut",
-        "Tes terakhir… nyanyikan lagu kebangsaan Absurdia.");
+        "Tes terakhir . . . nyanyikan lagu kebangsaan Absurdia.");
         
     SceneManager_AddDialog(
         scene->sceneManager,

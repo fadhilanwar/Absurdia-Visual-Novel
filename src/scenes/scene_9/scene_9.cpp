@@ -5,21 +5,46 @@ void Scene9_DialogPilihan1(Scene *scene)
 {
     std:: cout << "Pilihan 1 dipilih ";
     Scene *scene12 = Scene12_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene12, SceneTransition::Fade);
+    SceneManager_GoToScene(scene->sceneManager, scene12, SceneTransition::None);
 }
 
 void Scene9_DialogPilihan2(Scene *scene)
 {
     std:: cout << "Pilihan 2 dipilih ";
     Scene *scene13 = Scene13_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene13, SceneTransition::Fade);
+    SceneManager_GoToScene(scene->sceneManager, scene13, SceneTransition::None);
 }
 
 void Scene9_DialogPilihan3(Scene *scene)
 {
     std:: cout << "Pilihan 3 dipilih";
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/talkingWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Slide},
+        },
+        {},
+        "Yono",
+        "Mbeeeeeeee!");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "HRD/badutBicara.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::Slide},
+        },
+        {},
+        "Dr. Badut",
+        "Baiklah");
+
     Scene *scene14 = Scene14_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene14, SceneTransition::Fade);
+    SceneManager_GoToScene(scene->sceneManager, scene14, SceneTransition::None);
 }
 
 void Scene9_DialogPilihan4(Scene *scene)
@@ -64,11 +89,11 @@ void Scene9_Start(Scene *scene)
                     .onAnswered = Scene9_DialogPilihan2,
                     .onAnsweredParameter = scene},
                 DialogQuestion{
-                    .question = "Mengembik ",
+                    .question = "Mengembik",
                     .onAnswered = Scene9_DialogPilihan3,
                     .onAnsweredParameter = scene},
                 DialogQuestion{
-                    .question = "Tulis nama di kertas",
+                    .question = "Ambil kertas",
                     .onAnswered = Scene9_DialogPilihan4,
                     .onAnsweredParameter = scene}},
                 "Dr. Badut",

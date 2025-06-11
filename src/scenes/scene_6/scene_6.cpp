@@ -44,7 +44,7 @@ void Scene6_DialogPilihan1(Scene *scene)
             DialogPerson{
                 .imageFilePath = "figuran/talkingUnknow.png",
                 .position = DialogPersonPosition::Right,
-                .animation = DialogPersonAnimation::None},
+                .animation = DialogPersonAnimation::Pop},
             },
             {},
             "???",

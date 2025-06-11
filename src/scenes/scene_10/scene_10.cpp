@@ -30,7 +30,7 @@ void Scene10_DialogPilihan1(Scene *scene) {
         "Kebiasaanku terbawa dari tempat sirkus dulu");
 
     Scene *scene9 = Scene9_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene9, SceneTransition::Fade);
+    SceneManager_GoToScene(scene->sceneManager, scene9, SceneTransition::None);
 }
 
 void Scene10_DialogPilihan2(Scene *scene) {
@@ -49,7 +49,7 @@ void Scene10_DialogPilihan2(Scene *scene) {
         "Tuan-tuan, lihat ini!");
 
     Scene *scene16 = Scene16_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene16, SceneTransition::Fade);
+    SceneManager_GoToScene(scene->sceneManager, scene16, SceneTransition::None);
 }
 
 void Scene10_Start(Scene *scene)
@@ -78,11 +78,11 @@ void Scene10_Start(Scene *scene)
         },
         {
             DialogQuestion{
-                .question = "Duduk dan minta maaf",
+                .question = "Minta maaf",
                 .onAnswered = Scene10_DialogPilihan1,
                 .onAnsweredParameter = scene},
             DialogQuestion{
-                .question = "Juggling apel",
+                .question = "Juggling",
                 .onAnswered = Scene10_DialogPilihan2,
                 .onAnsweredParameter = scene},
         },
