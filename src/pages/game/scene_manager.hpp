@@ -96,7 +96,8 @@ struct SceneSound
 enum class SceneTransition
 {
     None,
-    Fade
+    Fade,
+    FadeEnding
 };
 
 enum class SceneManagerState

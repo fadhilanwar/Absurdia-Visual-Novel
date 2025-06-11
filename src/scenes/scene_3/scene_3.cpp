@@ -15,7 +15,7 @@ void Scene1_DialogPilihan1(Scene *scene)
 {
     std::cout << "Pilihan 1 dipilih\n";
 
-    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[0], SceneTransition::None);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[0], SceneTransition::Fade);
 }
 // pilihan 2
 void Scene1_DialogPilihan2(Scene *scene)
