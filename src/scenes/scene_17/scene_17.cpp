@@ -29,8 +29,7 @@ void Scene17_DialogPilihan1(Scene *scene)
         "Mr. Katak",
         "Hahaha! Analogi yang bagus");
 
-    Scene *scene18 = Scene18_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene18, SceneTransition::None);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[0], SceneTransition::None);
 }
 
 void Scene17_DialogPilihan2(Scene *scene)
@@ -49,8 +48,7 @@ void Scene17_DialogPilihan2(Scene *scene)
         "Yono",
         "Kalau begitu, saya harus buka dan tutup interview ini cepat layaknya pintu.");
 
-    Scene *scene19 = Scene19_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene19, SceneTransition::None);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[1], SceneTransition::None);
 }
 
 void Scene17_DialogPilihan3(Scene *scene)
@@ -72,8 +70,7 @@ void Scene17_DialogPilihan3(Scene *scene)
         "Yono",
         "Krekk... ciiitt... tok!");
 
-    Scene *scene20 = Scene20_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene20, SceneTransition::None);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[2], SceneTransition::None);
 }
 
 void Scene17_Start(Scene *scene)

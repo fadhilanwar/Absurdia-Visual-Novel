@@ -29,8 +29,7 @@ void Scene10_DialogPilihan1(Scene *scene) {
         "Yono",
         "Kebiasaanku terbawa dari tempat sirkus dulu");
 
-    Scene *scene9 = Scene9_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene9, SceneTransition::None);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[0], SceneTransition::None);
 }
 
 void Scene10_DialogPilihan2(Scene *scene) {
@@ -48,8 +47,7 @@ void Scene10_DialogPilihan2(Scene *scene) {
         "Yono",
         "Tuan-tuan, lihat ini!");
 
-    Scene *scene16 = Scene16_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene16, SceneTransition::None);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[1], SceneTransition::None);
 }
 
 void Scene10_Start(Scene *scene)

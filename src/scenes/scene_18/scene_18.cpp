@@ -52,8 +52,7 @@ void Scene18_DialogPilihan1(Scene *scene)
             "Dr. Badut",
             "YAYAYAYA! Aku suka idemu");
 
-    Scene *scene21 = Scene21_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene21, SceneTransition::None);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[0], SceneTransition::None);
 }
 
 void Scene18_DialogPilihan2(Scene *scene)
@@ -71,8 +70,7 @@ void Scene18_DialogPilihan2(Scene *scene)
             "Yono",
             "Kalau boleh tahu, Anda punya kambing peliharaan juga?");
 
-    Scene *scene22 = Scene22_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene22, SceneTransition::None);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[1], SceneTransition::None);
 }
 
 void Scene18_Start(Scene *scene)

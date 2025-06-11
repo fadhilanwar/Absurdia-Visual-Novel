@@ -41,8 +41,7 @@ void Scene21_DialogPilihan1(Scene *scene)
         "Mr. Katak",
         "Kau ini memang gercep ya!");
 
-    Scene *scene27 = Scene27_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene27, SceneTransition::None);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[0], SceneTransition::None);
 }
 
 void Scene21_DialogPilihan2(Scene *scene)
@@ -73,8 +72,7 @@ void Scene21_DialogPilihan2(Scene *scene)
         "Yono",
         "Nanti dia bisa mengembik dan scan barcode!");
 
-    Scene *scene28 = Scene28_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene28, SceneTransition::None);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[1], SceneTransition::None);
 }
 
 void Scene21_Start(Scene *scene)

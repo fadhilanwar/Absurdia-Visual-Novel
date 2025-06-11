@@ -17,8 +17,7 @@ void Scene11_DialogPilihan1(Scene *scene)
         "Yono",
         "Betull! Saya reinkarnasi lemari tahun 90-an");
 
-    Scene *scene17 = Scene17_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene17, SceneTransition::None);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[0], SceneTransition::None);
 }
 
 void Scene11_DialogPilihan2(Scene *scene)
@@ -37,8 +36,7 @@ void Scene11_DialogPilihan2(Scene *scene)
         "Yono",
         "Tidak tidak, saya hanya mantan narator kisah horor.");
 
-    Scene *scene18 =Scene18_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene18, SceneTransition::None);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[1], SceneTransition::None);
 }
 
 void Scene11_Start(Scene *scene)

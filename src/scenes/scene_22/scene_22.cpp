@@ -4,8 +4,8 @@
 void Scene22_DialogPilihan1(Scene *scene)
 {
     std:: cout << "Pilihan 1 dipilih\n";
-    Scene *scene29 = Scene29_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene29, SceneTransition::None);
+
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[0], SceneTransition::None);
 }
 
 void Scene22_DialogPilihan2(Scene *scene)
@@ -22,8 +22,8 @@ void Scene22_DialogPilihan2(Scene *scene)
         {},
         "Yono",
         "Kambing saya boleh ikut rapat kan? kan? hehehehe");
-    Scene *scene30 = Scene30_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene30, SceneTransition::None);
+
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[1], SceneTransition::None);
 }
 
 void Scene22_Start(Scene *scene)

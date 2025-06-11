@@ -22,8 +22,8 @@ void Scene24_DialogPilihan1(Scene *scene)
         {},
         "Yono",
         "“Ngok ngok… masa depaaaaaan . . . di atas kubus yang \ntransparaaaaan~");
-    Scene *scene31 = Scene31_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene31, SceneTransition::None);
+
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[0], SceneTransition::None);
     
 }
 void Scene24_DialogPilihan2(Scene *scene)
@@ -43,8 +43,7 @@ void Scene24_DialogPilihan2(Scene *scene)
         "Yono",
         "(beatbox) “Ng-ngok-ngok! Masa depan~!”");
 
-    Scene *scene32 = Scene32_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene32, SceneTransition::None);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[1], SceneTransition::None);
 }
 
 void Scene24_Start(Scene *scene)

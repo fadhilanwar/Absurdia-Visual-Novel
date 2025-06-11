@@ -1,10 +1,9 @@
 #include "scene_13.hpp"
 #include <iostream>
 
-
 void Scene13_DialogPilihan1(Scene *scene)
 {
-    std:: cout << "Pilihan 1 dipilih\n";
+    std::cout << "Pilihan 1 dipilih\n";
 
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -42,13 +41,12 @@ void Scene13_DialogPilihan1(Scene *scene)
         "Yono",
         "Oke pak! ");
 
-    Scene *scene14 = Scene14_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene14, SceneTransition::Fade);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[0], SceneTransition::Fade);
 }
 
 void Scene13_DialogPilihan2(Scene *scene)
 {
-    std:: cout << "Pilihan 2 dipilih\n";
+    std::cout << "Pilihan 2 dipilih\n";
 
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -74,15 +72,13 @@ void Scene13_DialogPilihan2(Scene *scene)
         "Yono",
         "Sudah kuisi formulirnya dengan krayon merah");
 
-    Scene *scene18 = Scene18_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene18, SceneTransition::Fade);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[2], SceneTransition::Fade);
 }
 
 void Scene13_DialogPilihan3(Scene *scene)
 {
-    std:: cout << "Pilihan 3 dipilih\n";
-    Scene *scene15 =Scene15_Create();
-    SceneManager_GoToScene(scene->sceneManager,scene15, SceneTransition::None);
+    std::cout << "Pilihan 3 dipilih\n";
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[1], SceneTransition::None);
 }
 
 void Scene13_Start(Scene *scene)
@@ -96,10 +92,10 @@ void Scene13_Start(Scene *scene)
                 .imageFilePath = "HRD/badutBicara.png",
                 .position = DialogPersonPosition::Right,
                 .animation = DialogPersonAnimation::Slide},
-            },
-            {},
-            "Dr. Badut",
-            "Akta lahirnya mana?");
+        },
+        {},
+        "Dr. Badut",
+        "Akta lahirnya mana?");
 
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -112,7 +108,7 @@ void Scene13_Start(Scene *scene)
         {},
         "Yono",
         "Ahhh . . . ");
-    
+
     SceneManager_AddDialog(
         scene->sceneManager,
         {
@@ -124,7 +120,7 @@ void Scene13_Start(Scene *scene)
         {},
         "Yono",
         "Saya lahir secara tidak resmi, hehehe");
-        
+
     SceneManager_AddDialog(
         scene->sceneManager,
         {
@@ -136,7 +132,7 @@ void Scene13_Start(Scene *scene)
         {},
         "Dr. Badut",
         "Waduh waduuuuuh!");
-    
+
     SceneManager_AddDialog(
         scene->sceneManager,
         {
@@ -156,34 +152,31 @@ void Scene13_Start(Scene *scene)
                 .imageFilePath = "HRD/badutBicara.png",
                 .position = DialogPersonPosition::Right,
                 .animation = DialogPersonAnimation::None},
-            },
-            {
-                DialogQuestion{
-                    .question = "Isi dengan serius",
-                    .onAnswered = Scene13_DialogPilihan1,
-                    .onAnsweredParameter = scene},
-                DialogQuestion{
-                    .question = "Ambil krayon merah",
-                    .onAnswered = Scene13_DialogPilihan2,
-                    .onAnsweredParameter = scene},
-                DialogQuestion{
-                    .question = "Jadikan origami",
-                    .onAnswered = Scene13_DialogPilihan3,
-                    .onAnsweredParameter = scene}},
-                    "Dr. Badut",
-                    "Silahkan isi formulirnya dulu ya");
+        },
+        {DialogQuestion{
+             .question = "Isi dengan serius",
+             .onAnswered = Scene13_DialogPilihan1,
+             .onAnsweredParameter = scene},
+         DialogQuestion{
+             .question = "Ambil krayon merah",
+             .onAnswered = Scene13_DialogPilihan2,
+             .onAnsweredParameter = scene},
+         DialogQuestion{
+             .question = "Jadikan origami",
+             .onAnswered = Scene13_DialogPilihan3,
+             .onAnsweredParameter = scene}},
+        "Dr. Badut",
+        "Silahkan isi formulirnya dulu ya");
 
     SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
 }
 
 void Scene13_Update(Scene *scene)
 {
-
 }
 
 void Scene13_Destroy(Scene *scene)
 {
-
 }
 
 Scene *Scene13_Create()
@@ -193,7 +186,6 @@ Scene *Scene13_Create()
         .data = mainMenu,
         .start = Scene13_Start,
         .update = Scene13_Update,
-        .destroy = Scene13_Destroy
-    };
+        .destroy = Scene13_Destroy};
     return scene;
 }

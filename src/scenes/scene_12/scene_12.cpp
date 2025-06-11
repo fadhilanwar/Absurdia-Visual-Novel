@@ -54,8 +54,7 @@ void Scene12_DialogPilihan1(Scene *scene)
         "Dr. Badut",
         "Kulihat-lihat sepertinya kamu keturunan kambing juga ya?");
 
-    Scene *scene13 = Scene13_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene13, SceneTransition::None);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[0], SceneTransition::None);
 }
 
 void Scene12_DialogPilihan2(Scene *scene)
@@ -86,8 +85,7 @@ void Scene12_DialogPilihan2(Scene *scene)
         "Mr. Katak",
         "Oke oke, kita lanjut ya");
 
-    Scene *scene14 = Scene14_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene14, SceneTransition::None);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[1], SceneTransition::None);
 }
 
 void Scene12_Start(Scene *scene)

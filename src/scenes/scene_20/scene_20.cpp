@@ -15,8 +15,8 @@ void Scene20_DialogPilihan1(Scene *scene)
         {},
         "Yono",
         "Kalau begitu, mari kita aktingkan ulang sejarah pintu pertama ditemukan.");
-    Scene *scene25 = Scene25_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene25, SceneTransition::None);
+
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[0], SceneTransition::None);
 }
 
 void Scene20_DialogPilihan2(Scene *scene)
@@ -83,8 +83,7 @@ void Scene20_DialogPilihan2(Scene *scene)
         "Mr. Katak",
         "Wah ide yang sangat bagus!");
 
-    Scene *scene26 = Scene26_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene26, SceneTransition::None);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[1], SceneTransition::None);
 }
 
 void Scene20_Start(Scene *scene)

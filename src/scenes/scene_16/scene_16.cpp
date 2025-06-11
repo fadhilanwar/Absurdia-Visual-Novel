@@ -29,8 +29,7 @@ void Scene16_DialogPilihan1(Scene *scene)
             "Yono",
             "Omong-omong soal pintu . . .");
     
-    Scene *scene26 = Scene26_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene26, SceneTransition::None);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[0], SceneTransition::None);
 }
 
 void Scene16_DialogPilihan2(Scene *scene)
@@ -85,8 +84,7 @@ void Scene16_DialogPilihan2(Scene *scene)
             "Mr. Katak",
             "Saya suka!");
 
-    Scene *scene18 = Scene18_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene18, SceneTransition::None);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[1], SceneTransition::None);
 }
 
 void Scene16_DialogScene2(Scene *scene)

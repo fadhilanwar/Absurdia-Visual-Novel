@@ -77,8 +77,7 @@ void Scene14_DialogPilihan1(Scene *scene)
         "Yono",
         "Kalian punya kambing peliharaan tidak?");
 
-    Scene *scene22 = Scene22_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene22, SceneTransition::None);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[0], SceneTransition::None);
 }
 
 void Scene14_DialogPilihan2(Scene *scene)
@@ -109,8 +108,7 @@ void Scene14_DialogPilihan2(Scene *scene)
         "Yono",
         "Buat latihan suara kambing, hehehe");
 
-    Scene *scene23 = Scene23_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene23, SceneTransition::None);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[0], SceneTransition::None);
 }
 
 void Scene14_Start(Scene *scene)

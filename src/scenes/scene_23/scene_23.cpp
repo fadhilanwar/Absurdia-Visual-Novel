@@ -11,8 +11,8 @@ void Scene23_DialogScene23(Scene *scene)
 void Scene23_PindahScene(Scene *scene)
 {
     std::cout << "Pindah scene ke Scene 24 cenah\n";
-    Scene *Scene24 = Scene24_Create();
-    SceneManager_GoToScene(scene->sceneManager, Scene24, SceneTransition::None);
+
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[0], SceneTransition::None);
 
     // SceneManager_PlaySound(scene->sceneManager, "Crowd Laugh.wav");
 

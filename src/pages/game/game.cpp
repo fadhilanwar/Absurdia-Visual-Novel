@@ -140,6 +140,8 @@ void GamePG_Start(Page *page)
 
     // Scene 13
     Graph_AddConnection(graph, 14, 15);
+    Graph_AddConnection(graph, 14, 16);
+    Graph_AddConnection(graph, 14, 19);
 
     // Scene 14
     Graph_AddConnection(graph, 15, 23);
@@ -153,6 +155,7 @@ void GamePG_Start(Page *page)
     Graph_AddConnection(graph, 17, 19);
 
     // Scene 17
+    Graph_AddConnection(graph, 18, 19);
     Graph_AddConnection(graph, 18, 20);
     Graph_AddConnection(graph, 18, 21);
 
@@ -162,12 +165,15 @@ void GamePG_Start(Page *page)
 
     // Scene 19
     Graph_AddConnection(graph, 20, 24);
+    Graph_AddConnection(graph, 20, 25);
 
     // Scene 20
     Graph_AddConnection(graph, 21, 26);
+    Graph_AddConnection(graph, 21, 27);
 
     // Scene 21
     Graph_AddConnection(graph, 22, 28);
+    Graph_AddConnection(graph, 22, 29);
 
     // Scene 22
     Graph_AddConnection(graph, 23, 30);
@@ -178,6 +184,7 @@ void GamePG_Start(Page *page)
 
     // Scene 24
     Graph_AddConnection(graph, 25, 32);
+    Graph_AddConnection(graph, 25, 33);
 
     // Scene 25
     Graph_AddConnection(graph, 26, 27);

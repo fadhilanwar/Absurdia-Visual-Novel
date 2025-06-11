@@ -15,8 +15,8 @@ void Scene19_DialogPilihan1(Scene *scene)
         {},
         "Yono",
         "Boleh minta cuti satu hari buat latihan suara kambing, Pak?");
-    Scene *scene23 = Scene23_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene23, SceneTransition::None);
+        
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[0], SceneTransition::None);
 }
 
 void Scene19_DialogPilihan2(Scene *scene)
@@ -36,8 +36,7 @@ void Scene19_DialogPilihan2(Scene *scene)
         "Kalo gitu.. Ada tes apa lagi nih? Saya mulai penasarann...");
 
 
-    Scene *scene24 = Scene24_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene24, SceneTransition::None);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[1], SceneTransition::None);
 }
 
 void Scene19_Start(Scene *scene)

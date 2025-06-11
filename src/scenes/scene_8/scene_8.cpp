@@ -56,22 +56,19 @@ void Scene8_DialogPilihan1(Scene *scene)
         "Yono",
         "Baik, terima kasih tuan!");
 
-    Scene *scene9 = Scene9_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene9, SceneTransition::Fade);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[0], SceneTransition::Fade);
 }
 
 void Scene8_DialogPilihan2(Scene *scene)
 {
     std::cout << "Pilihan 2 dipilih\n";  
-    Scene *scene10 = Scene10_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene10, SceneTransition::Fade);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[1], SceneTransition::Fade);
 }
 
 void Scene8_DialogPilihan3(Scene *scene)
 {
     std::cout << "Pilihan 3 dipilih\n";
-    Scene *scene11 = Scene11_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene11, SceneTransition::Fade);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[2], SceneTransition::Fade);
 }
 
 void Scene8_Start(Scene *scene)

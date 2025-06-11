@@ -29,8 +29,7 @@ void Scene9_DialogPilihan1(Scene *scene)
         "Yono",
         "Baaaadrun syah!");
 
-    Scene *scene12 = Scene12_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene12, SceneTransition::None);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[0], SceneTransition::None);
 }
 
 void Scene9_DialogPilihan2(Scene *scene)
@@ -61,8 +60,7 @@ void Scene9_DialogPilihan2(Scene *scene)
         "Yono",
         "Kambing Bin Ternak?");
 
-    Scene *scene13 = Scene13_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene13, SceneTransition::None);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[1], SceneTransition::None);
 }
 
 void Scene9_DialogPilihan3(Scene *scene)
@@ -93,8 +91,7 @@ void Scene9_DialogPilihan3(Scene *scene)
         "Dr. Badut",
         "Baiklah");
 
-    Scene *scene14 = Scene14_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene14, SceneTransition::None);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[2], SceneTransition::None);
 }
 
 void Scene9_DialogScene2(Scene *scene)
@@ -114,8 +111,7 @@ void Scene9_DialogPilihan4(Scene *scene)
         "",
         "", Scene9_DialogScene2, scene);
 
-    Scene *scene15 = Scene15_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene15, SceneTransition::Fade);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[3], SceneTransition::Fade);
 }
 
 void Scene9_Start(Scene *scene)
