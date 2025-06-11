@@ -13,8 +13,8 @@ void Ending_a_Start(Scene *scene)
         scene->sceneManager,
         {}, // Tidak ada karakter
         {},
-        "MC",
-        "Selamat! Kamu telah menyelesaikan game ini. Terima kasih telah bermain!"
+        "Hidup sederhana",
+        "Yono pun pulang ke rumah, menyeduh kembali tehnya, dan menikmati pemandangan kota dari atas\n apartemennya. Tamat."
     );
 
     // Mainkan musik ending

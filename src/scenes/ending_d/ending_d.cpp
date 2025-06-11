@@ -19,8 +19,8 @@ void Ending_d_Start(Scene *scene)
         scene->sceneManager,
         {}, // Tidak ada karakter
         {},
-        "MC",
-        "Selamat! Kamu telah menyelesaikan game ini. Terima kasih telah bermain!", playEndingSFX, scene
+        "Bintang Kantor",
+        "Yono menjadi selebriti kantor, selalu menjadi pusat perhatian dan tampil di semua acara kantor", playEndingSFX, scene
     );
 
     // Mainkan musik ending

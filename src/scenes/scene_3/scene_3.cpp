@@ -15,18 +15,6 @@ void Scene1_DialogPilihan1(Scene *scene)
 {
     std::cout << "Pilihan 1 dipilih\n";
 
-    SceneManager_AddDialog(
-        scene->sceneManager,
-        {
-            DialogPerson{
-                .imageFilePath = "work/confusedWork.png",
-                .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::Pop},
-        },
-        {},
-        "Yono",
-        "Sepertinya lebih baik aku pulang saja . . . ");
-
     Scene *ending_a = static_cast<Scene*>(Ending_a_Create());
     SceneManager_GoToScene(scene->sceneManager, ending_a, SceneTransition::None);
 }

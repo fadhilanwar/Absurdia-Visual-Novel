@@ -13,8 +13,8 @@ void Ending_c_Start(Scene *scene)
         scene->sceneManager,
         {}, // Tidak ada karakter
         {},
-        "MC",
-        "Selamat! Kamu telah menyelesaikan game ini. Terima kasih telah bermain!"
+        "Absurdist",
+        "Diterima sebagai Kreator Gaya Hidup Absurd, Yono menjadi ikon gaya hidup gila di Absurdia Inc."
     );
 
     // Mainkan musik ending

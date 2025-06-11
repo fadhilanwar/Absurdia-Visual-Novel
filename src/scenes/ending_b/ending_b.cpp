@@ -13,8 +13,8 @@ void Ending_b_Start(Scene *scene)
         scene->sceneManager,
         {}, // Tidak ada karakter
         {},
-        "MC",
-        "Selamat! Kamu telah menyelesaikan game ini. Terima kasih telah bermain!"
+        "Awal Yang Absurd",
+        "Yono diterima kerja di Absurdia Inc. Hidup Yono kedepannya akan penuh dengan kejadian-kejadian\n absurd yang menyenangkan "
     );
 
     // Mainkan musik ending
