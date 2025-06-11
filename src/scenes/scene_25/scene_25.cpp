@@ -10,7 +10,7 @@ void Scene25_PindahScene(Scene *scene)
 {
     std::cout << "Pindah scene\n";
     Scene *Scene27 = Scene27_Create();
-    SceneManager_GoToScene(scene->sceneManager, Scene27, SceneTransition::Fade);
+    SceneManager_GoToScene(scene->sceneManager, Scene27, SceneTransition::None);
 
     // SceneManager_PlaySound(scene->sceneManager, "Crowd Laugh.wav");
 
@@ -21,18 +21,6 @@ void Scene25_Start(Scene *scene)
     Scene25Data *data = (Scene25Data *)scene->data;
 
     SceneManager_SetBackground(scene->sceneManager, "background/interview.png");
-
-    SceneManager_AddDialog(
-        scene->sceneManager,
-        {
-            // DialogPerson{
-            //     .imageFilePath = "work/confusedWork.png",
-            //     .position = DialogPersonPosition::Left,
-            //     .animation = DialogPersonAnimation::None},
-        },
-        {},
-        "Yono",
-        "(MC dan para interviewer berakting jadi pintu dan penghuni rumah.) ");
     
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -70,20 +58,42 @@ void Scene25_Start(Scene *scene)
         "Pisang",
         "PISAANGGG!", playLaughSFX, scene);
 
-    
 
     SceneManager_AddDialog(
         scene->sceneManager,
         {
-            // DialogPerson{
-            //     .imageFilePath = "work/talkingWork.png",
-            //     .position = DialogPersonPosition::Left,
-            //     .animation = DialogPersonAnimation::None},
+            DialogPerson{
+                .imageFilePath = "work/happyWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Joget},
+            DialogPerson{
+                .imageFilePath = "HRD/badutSenang.png",
+                .position = DialogPersonPosition::Center,
+                .animation = DialogPersonAnimation::Joget},
+            DialogPerson{
+                .imageFilePath = "HRD/katakTertawa.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::Joget},
+            DialogPerson{
+                .imageFilePath = "HRD/pisangBicara.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::Joget},
         },
         {},
-        "MC",
-        "(Mereka Tertawa dan Bertepuk Tangan..)",
-        Scene25_PindahScene, scene);
+        "",
+        "");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "HRD/katakTertawa.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::Joget},
+        },
+        {},
+        "Mr. Katak",
+        "Hahaha! Tadi itu asyik", Scene25_PindahScene, scene);
 
     // Musik
     SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");

@@ -1,9 +1,47 @@
 #include "scene_13.hpp"
 #include <iostream>
 
+
 void Scene13_DialogPilihan1(Scene *scene)
 {
     std:: cout << "Pilihan 1 dipilih\n";
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/talkingWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Pop},
+        },
+        {},
+        "Yono",
+        "Baiklah, sudah aku isi dengan lengkap dan rapi!");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "HRD/katakBicara.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::Slide},
+        },
+        {},
+        "Mr. Katak",
+        "Bagus, asistenku akan mengurusnya nanti");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/talkingWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Slide},
+        },
+        {},
+        "Yono",
+        "Oke pak! ");
+
     Scene *scene14 = Scene14_Create();
     SceneManager_GoToScene(scene->sceneManager, scene14, SceneTransition::Fade);
 }
@@ -11,6 +49,31 @@ void Scene13_DialogPilihan1(Scene *scene)
 void Scene13_DialogPilihan2(Scene *scene)
 {
     std:: cout << "Pilihan 2 dipilih\n";
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/talkingWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Pop},
+        },
+        {},
+        "Yono",
+        "Ini pak!");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/happyWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::None},
+        },
+        {},
+        "Yono",
+        "Sudah kuisi formulirnya dengan krayon merah");
+
     Scene *scene18 = Scene18_Create();
     SceneManager_GoToScene(scene->sceneManager, scene18, SceneTransition::Fade);
 }
@@ -19,7 +82,7 @@ void Scene13_DialogPilihan3(Scene *scene)
 {
     std:: cout << "Pilihan 3 dipilih\n";
     Scene *scene15 =Scene15_Create();
-    SceneManager_GoToScene(scene->sceneManager,scene15, SceneTransition::Fade);
+    SceneManager_GoToScene(scene->sceneManager,scene15, SceneTransition::None);
 }
 
 void Scene13_Start(Scene *scene)

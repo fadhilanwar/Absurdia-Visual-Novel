@@ -34,6 +34,54 @@ void Scene20_DialogPilihan2(Scene *scene)
         {},
         "Yono",
         "Saya pernah jadi pintu gudang tua. Banyak kenangan berdebu di sana...");
+    
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/talkingWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::None},
+            },
+        {},
+        "Yono",
+        "Dan aku selalu melihat robot kambing tua yang sudah berkarat");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/shockedWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::None},
+            },
+        {},
+        "Yono",
+        "Setiap hari aku menggambarnya, dan menyimpannya gambarnya di sakuku");
+    
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/talkingWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Pop},
+            },
+        {},
+        "Yono",
+        "Dan aku berpikir untuk membuatnya lagi disini!");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "HRD/katakTerpesona.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::Slide},
+            },
+        {},
+        "Mr. Katak",
+        "Wah ide yang sangat bagus!");
 
     Scene *scene26 = Scene26_Create();
     SceneManager_GoToScene(scene->sceneManager, scene26, SceneTransition::None);

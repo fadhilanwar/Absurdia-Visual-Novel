@@ -11,6 +11,17 @@ void Scene22_DialogPilihan1(Scene *scene)
 void Scene22_DialogPilihan2(Scene *scene)
 {
     std:: cout << "Pilihan 2 dipilih\n";
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/talkingWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Pop},
+        },
+        {},
+        "Yono",
+        "Kambing saya boleh ikut rapat kan? kan? hehehehe");
     Scene *scene30 = Scene30_Create();
     SceneManager_GoToScene(scene->sceneManager, scene30, SceneTransition::None);
 }
@@ -62,17 +73,17 @@ void Scene22_Start(Scene *scene)
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "work/confusedWork.png",
+                .imageFilePath = "work/shockedWork.png",
                 .position = DialogPersonPosition::Left,
                 .animation = DialogPersonAnimation::Slide},
             },
             {
                 DialogQuestion{
-                    .question = "Minta maaf, kasih tisu",
+                    .question = "Ikut tes",
                     .onAnswered = Scene22_DialogPilihan1,
                     .onAnsweredParameter = scene},
                 DialogQuestion{
-                    .question = "Klarifikasi Junggling",
+                    .question = "Tanya kambing lagi",
                     .onAnswered = Scene22_DialogPilihan2,
                     .onAnsweredParameter = scene}},
                 "",

@@ -54,7 +54,7 @@ void Scene15_DialogPilihan1(Scene *scene)
             "YAYAYAYA! Aku suka idemu");
 
     Scene *scene21 = Scene21_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene21, SceneTransition::Fade);
+    SceneManager_GoToScene(scene->sceneManager, scene21, SceneTransition::None);
 }
 
 void Scene15_DialogPilihan2(Scene *scene)
@@ -86,7 +86,7 @@ void Scene15_DialogPilihan2(Scene *scene)
             "Apakah kalian punya kambing peliharaan?");
 
     Scene *scene22 = Scene22_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene22, SceneTransition::Fade);
+    SceneManager_GoToScene(scene->sceneManager, scene22, SceneTransition::None);
 }
 
 void Scene15_DialogScene2(Scene *scene)
@@ -106,12 +106,36 @@ void Scene15_Start(Scene *scene)
             {},
             "",
             "", Scene15_DialogScene2, scene);
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/happyWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Pop},
+        },
+        {},
+        "Yono",
+        "Tadaaaa!");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/talkingWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::None},
+        },
+        {},
+        "Yono",
+        "Jadilah anak kambing kecil yang lucu!");
             
     SceneManager_AddDialog(
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "HRD/katakBicara.png",
+                .imageFilePath = "HRD/katakTerpesona.png",
                 .position = DialogPersonPosition::Right,
                 .animation = DialogPersonAnimation::Slide},
             },
@@ -135,7 +159,7 @@ void Scene15_Start(Scene *scene)
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "work/confusedWork.png",
+                .imageFilePath = "work/shockedWork.png",
                 .position = DialogPersonPosition::Left,
                 .animation = DialogPersonAnimation::Slide},
             },
@@ -148,7 +172,7 @@ void Scene15_Start(Scene *scene)
         {
             DialogPerson{
                 .imageFilePath = "HRD/badutSenang.png",
-                .position = DialogPersonPosition::Left,
+                .position = DialogPersonPosition::Right,
                 .animation = DialogPersonAnimation::Slide},
             },
             {},
@@ -159,9 +183,9 @@ void Scene15_Start(Scene *scene)
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "HRD/badutSenang.png",
-                .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::Slide},
+                .imageFilePath = "HRD/badutBicara.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::None},
             },
             {},
             "Dr. Badut",
@@ -171,17 +195,17 @@ void Scene15_Start(Scene *scene)
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "work/confusedWork.png",
+                .imageFilePath = "work/shockedWork.png",
                 .position = DialogPersonPosition::Left,
                 .animation = DialogPersonAnimation::Slide},
             },
             {
                 DialogQuestion{
-                    .question = "Tawarkan ide buat logo kambing Absurdia",
+                    .question = "Tawarkan ide",
                     .onAnswered = Scene15_DialogPilihan1,
                     .onAnsweredParameter = scene},
                 DialogQuestion{
-                    .question = "Tanya balik apakah mereka punya kambing peliharaan?",
+                    .question = "Tanya balik",
                     .onAnswered = Scene15_DialogPilihan2,
                     .onAnsweredParameter = scene}},
                 "",

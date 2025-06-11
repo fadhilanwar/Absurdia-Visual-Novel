@@ -16,7 +16,7 @@ void Scene26_Start(Scene *scene)
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "work/confusedWork.png",
+                .imageFilePath = "work/talkingWork.png",
                 .position = DialogPersonPosition::Left,
                 .animation = DialogPersonAnimation::None},
             },
@@ -33,7 +33,7 @@ void Scene26_Start(Scene *scene)
             },
             {},
             "Dr. Badut",
-            "Seni cerita… luar biasa",
+            "Seni cerita ya! luar biasa!",
     Scene26_PindahScene, scene);
 
     SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");

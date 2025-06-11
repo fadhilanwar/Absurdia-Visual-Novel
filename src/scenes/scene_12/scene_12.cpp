@@ -55,7 +55,7 @@ void Scene12_DialogPilihan1(Scene *scene)
         "Kulihat-lihat sepertinya kamu keturunan kambing juga ya?");
 
     Scene *scene13 = Scene13_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene13, SceneTransition::Fade);
+    SceneManager_GoToScene(scene->sceneManager, scene13, SceneTransition::None);
 }
 
 void Scene12_DialogPilihan2(Scene *scene)
@@ -87,7 +87,7 @@ void Scene12_DialogPilihan2(Scene *scene)
         "Oke oke, kita lanjut ya");
 
     Scene *scene14 = Scene14_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene14, SceneTransition::Fade);
+    SceneManager_GoToScene(scene->sceneManager, scene14, SceneTransition::None);
 }
 
 void Scene12_Start(Scene *scene)

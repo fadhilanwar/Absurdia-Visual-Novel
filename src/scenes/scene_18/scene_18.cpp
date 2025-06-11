@@ -10,7 +10,7 @@ void Scene18_DialogPilihan1(Scene *scene)
             DialogPerson{
                 .imageFilePath = "work/talkingWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::Slide},
+                .animation = DialogPersonAnimation::None},
             },
             {},
             "Yono",
@@ -65,7 +65,7 @@ void Scene18_DialogPilihan2(Scene *scene)
             DialogPerson{
                 .imageFilePath = "work/talkingWork.png",
                 .position = DialogPersonPosition::Left,
-                .animation = DialogPersonAnimation::Slide},
+                .animation = DialogPersonAnimation::None},
             },
             {},
             "Yono",
