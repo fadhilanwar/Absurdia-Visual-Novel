@@ -47,20 +47,20 @@ void Scene27_Start(Scene *scene)
                 .animation = DialogPersonAnimation::Slide},
         },
         {},
-        "Fuad Gemink",
-        "Se-sserius, Pak? Saya… diterima?");
+        "Yono",
+        "Se . . . sserius, Pak? Saya . . . diterima?");
 
     SceneManager_AddDialog(
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "HRD/badutBicara.png",
+                .imageFilePath = "HRD/badutSenang.png",
                 .position = DialogPersonPosition::Right,
                 .animation = DialogPersonAnimation::Slide},
         },
         {},
         "Dr. Badut",
-        "Kamu satu-satunya yang bertahan sampai akhir tanpa menjadi bayangan sendiri.!");
+        "Kamu satu-satunya yang bertahan sampai akhir tanpa menjadi bayangan sendiri!");
 
     SceneManager_AddDialog(
         scene->sceneManager,
