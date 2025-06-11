@@ -154,7 +154,7 @@ void Scene2_Part2(Scene *scene)
         {
             float rotationSpeed = std::max((float)fmod(4 - animProgressSubstracted, 4), 0.f);
             float rotation = std::max((float)fmod(4 - animProgressSubstracted, 4), 0.f) * 1080 * rotationSpeed;
-            Canvas_DrawImage(scene->canvas, 314, y + 30, "figuran/tahu_marah.png", 1.f, rotation);
+            Canvas_DrawImage(scene->canvas, 314, y + 30, "figuran/tahu_marah.png", 1.f, -rotation);
         }
         else
         {
