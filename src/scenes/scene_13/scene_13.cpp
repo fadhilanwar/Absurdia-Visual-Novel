@@ -90,7 +90,7 @@ void Scene13_Start(Scene *scene)
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "HRD/badutSenang.png",
+                .imageFilePath = "HRD/badutBicara.png",
                 .position = DialogPersonPosition::Right,
                 .animation = DialogPersonAnimation::None},
             },
@@ -100,11 +100,11 @@ void Scene13_Start(Scene *scene)
                     .onAnswered = Scene13_DialogPilihan1,
                     .onAnsweredParameter = scene},
                 DialogQuestion{
-                    .question = "Isi dengan krayon merah",
+                    .question = "Ambil krayon merah",
                     .onAnswered = Scene13_DialogPilihan2,
                     .onAnsweredParameter = scene},
                 DialogQuestion{
-                    .question = "Buat formulir jadi origami kambing",
+                    .question = "Jadikan origami",
                     .onAnswered = Scene13_DialogPilihan3,
                     .onAnsweredParameter = scene}},
                     "Dr. Badut",

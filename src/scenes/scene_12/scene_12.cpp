@@ -100,15 +100,15 @@ void Scene12_Start(Scene *scene)
             DialogPerson{
                 .imageFilePath = "HRD/katakTertawa.png",
                 .position = DialogPersonPosition::Right,
-                .animation = DialogPersonAnimation::Slide},
+                .animation = DialogPersonAnimation::Pop},
             },
             {
                 DialogQuestion{
-                    .question = "Terimakasih dan duduk tegap",
+                    .question = "Terima Kasih",
                     .onAnswered = Scene12_DialogPilihan1,
                     .onAnsweredParameter = scene},
                 DialogQuestion{
-                    .question = "Mbeeeee (dengan nada pelan)",
+                    .question = "Mengembik",
                     .onAnswered = Scene12_DialogPilihan2,
                     .onAnsweredParameter = scene}},
                     "Mr.Katak",

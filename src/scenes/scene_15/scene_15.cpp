@@ -89,10 +89,24 @@ void Scene15_DialogPilihan2(Scene *scene)
     SceneManager_GoToScene(scene->sceneManager, scene22, SceneTransition::Fade);
 }
 
+void Scene15_DialogScene2(Scene *scene)
+{
+    SceneManager_SetBackground(scene->sceneManager, "background/interview.png");
+}
+
 void Scene15_Start(Scene *scene)
 {
     Scene15Data *data = (Scene15Data *)scene->data;
-    SceneManager_SetBackground(scene->sceneManager, "background/interview.png");
+    SceneManager_SetBackground(scene->sceneManager, "background/narrOrigami.png");
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            
+            },
+            {},
+            "",
+            "", Scene15_DialogScene2, scene);
+            
     SceneManager_AddDialog(
         scene->sceneManager,
         {

@@ -4,6 +4,31 @@
 void Scene9_DialogPilihan1(Scene *scene)
 {
     std:: cout << "Pilihan 1 dipilih ";
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/shockedWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Slide},
+        },
+        {},
+        "Yono",
+        "Hmm . . . ");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/talkingWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Pop},
+        },
+        {},
+        "Yono",
+        "Baaaadrun syah!");
+
     Scene *scene12 = Scene12_Create();
     SceneManager_GoToScene(scene->sceneManager, scene12, SceneTransition::None);
 }
@@ -11,6 +36,31 @@ void Scene9_DialogPilihan1(Scene *scene)
 void Scene9_DialogPilihan2(Scene *scene)
 {
     std:: cout << "Pilihan 2 dipilih ";
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/shockedWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Slide},
+        },
+        {},
+        "Yono",
+        "Hmm . . . ");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/talkingWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Pop},
+        },
+        {},
+        "Yono",
+        "Kambing Bin Ternak?");
+
     Scene *scene13 = Scene13_Create();
     SceneManager_GoToScene(scene->sceneManager, scene13, SceneTransition::None);
 }
@@ -47,9 +97,23 @@ void Scene9_DialogPilihan3(Scene *scene)
     SceneManager_GoToScene(scene->sceneManager, scene14, SceneTransition::None);
 }
 
+void Scene9_DialogScene2(Scene *scene)
+{
+    SceneManager_SetBackground(scene->sceneManager, "background/narrOrigami.png");
+}
+
 void Scene9_DialogPilihan4(Scene *scene)
 {
     std:: cout << "Pilihan 4 dipilih";
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+        },
+        {},
+        "",
+        "", Scene9_DialogScene2, scene);
+
     Scene *scene15 = Scene15_Create();
     SceneManager_GoToScene(scene->sceneManager, scene15, SceneTransition::Fade);
 }

@@ -9,7 +9,7 @@ void GamePG_Start(Page *page)
     SceneManager *sceneMg = SceneManager_Create(canvas, page->pageManager->engineWindow);
     data->sceneMg = sceneMg;
 
-    Scene *mainMenuScene = Scene1_Create();
+    Scene *mainMenuScene = Scene10_Create();
     SceneManager_GoToScene(sceneMg, mainMenuScene, SceneTransition::None);
 
     
