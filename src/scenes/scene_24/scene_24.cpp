@@ -21,7 +21,7 @@ void Scene24_DialogPilihan1(Scene *scene)
             },
         {},
         "Yono",
-        "“Ngok ngok… masa depaaaaaan . . . di atas kubus yang \ntransparaaaaan~");
+        "Ngok ngok . . . masa depaaaaaan . . . di atas kubus yang transparaaaaan~");
 
     SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[0], SceneTransition::None);
     
@@ -41,7 +41,7 @@ void Scene24_DialogPilihan2(Scene *scene)
             },
         {},
         "Yono",
-        "(beatbox) “Ng-ngok-ngok! Masa depan~!”");
+        "(beatbox) Ng-ngok-ngok! Masa depan~!");
 
     SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[1], SceneTransition::None);
 }
@@ -84,11 +84,11 @@ void Scene24_Start(Scene *scene)
                 .animation = DialogPersonAnimation::Slide},
             },
            {DialogQuestion{
-                .question = "Nyanyi dengan Penuh Semangat",
+                .question = "Semangat nyanyi",
                 .onAnswered = Scene24_DialogPilihan1,
                 .onAnsweredParameter = scene},
            {DialogQuestion{
-                .question = "Nyanyikan + Beatbox",
+                .question = "Tambahin Beatbox",
                 .onAnswered = Scene24_DialogPilihan2,
                 .onAnsweredParameter = scene}},
            },

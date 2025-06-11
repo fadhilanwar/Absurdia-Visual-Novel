@@ -9,7 +9,11 @@ void Scene31_DialogScene31(Scene *scene)
 }
 
 void playMusicSFX(Scene *scene) {
-    SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
+    SceneManager_PlayMusic(scene->sceneManager, "Applause.mp3");
+}
+
+void playMusicSFX2(Scene *scene) {
+    SceneManager_PlayMusic(scene->sceneManager, "Crowd Laugh.wav");
 }
 
 void Scene31_PindahScene(Scene *scene)
@@ -28,8 +32,7 @@ void Scene31_Start(Scene *scene)
     SceneManager_SetBackground(scene->sceneManager, "background/interview.png");
     // SceneManager_AddDialog(scene->sceneManager, true, "Yono", "Aku harus cepat! Kalau telat, mereka bisa langsung mencoret namaku..", "talkingWork.png", Scene31_DialogScene31, scene);
 
-    SceneManager_PlaySound(scene->sceneManager, "anthem.mp3");
-
+    SceneManager_PlaySound(scene->sceneManager, "Crowd Laugh.wav");
 
     SceneManager_AddDialog(
         scene->sceneManager,
@@ -63,6 +66,8 @@ void Scene31_Start(Scene *scene)
         {},
         "Mr. Katak",
         "Dengan ini Selamat! Kamu jadi penyanyi utama acara tahunan kita!", Scene31_PindahScene, scene);
+
+        SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
 
 }
 
