@@ -21,8 +21,10 @@ add_executable(main
     src/umum.hpp
     src/umum.cpp
     src/scenes/scene.hpp
-    src/scenes/scene_1/scene_1.hpp
-    src/scenes/scene_1/scene_1.cpp
+    src/scenes/scene_1/scene_1_part2.hpp
+    src/scenes/scene_1/scene_1_part2.cpp
+    src/scenes/scene_1/scene_1_part3.hpp
+    src/scenes/scene_1/scene_1_part3.cpp
     src/scenes/scene_2/scene_2.hpp
     src/scenes/scene_2/scene_2.cpp
     src/scenes/scene_3/scene_3.hpp

@@ -4,8 +4,7 @@
 void Scene6_PindahScene(Scene *scene)
 {
     std:: cout << "Pindah scene\n";
-    Scene *scene7 = Scene7_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene7, SceneTransition::Fade);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[0], SceneTransition::Fade);
 }
 
 //pilihan 1

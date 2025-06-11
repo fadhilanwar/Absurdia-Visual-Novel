@@ -11,12 +11,13 @@ struct Scene
     Canvas *canvas;
     UI *ui;
 
-    std::vector<Scene*> childScenes;
+    std::vector<int> connectedSceneNumbers;
 
     void* data;
 
     void (*start)(Scene* scene);
     void (*update)(Scene* scene);
+    void (*updateAfterPersons)(Scene* scene);
     void (*destroy)(Scene* scene);
 
     ~Scene()

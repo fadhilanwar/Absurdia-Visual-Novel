@@ -9,6 +9,7 @@
 #include "../../engine/canvas.hpp"
 #include "../../engine/ui.hpp"
 #include "../../scenes/scene.hpp"
+#include "graph.hpp"
 
 struct Scene;
 
@@ -109,6 +110,8 @@ struct SceneManager;
 void SceneManager_Destroy(SceneManager *sceneManager);
 struct SceneManager
 {
+    Graph *graph;
+
     SceneManagerState state = SceneManagerState::Empty;
     EngineWindow *engineWindow;
     Canvas *canvas;
@@ -150,10 +153,10 @@ struct SceneManager
 };
 
 // Buat SceneManager (jangan dipanggil dipanggil kecuali dari game.cpp)
-SceneManager *SceneManager_Create(Canvas *canvas, EngineWindow *engineWindow);
+SceneManager *SceneManager_Create(Graph *graph, Canvas *canvas, EngineWindow *engineWindow);
 
 // Pindah scene
-void SceneManager_GoToScene(SceneManager *sceneManager, Scene *scene, SceneTransition transition);
+void SceneManager_GoToScene(SceneManager *sceneManager, int sceneNumber, SceneTransition transition);
 // Atur background scene
 void SceneManager_SetBackground(SceneManager *sceneMg, std::string filePath);
 

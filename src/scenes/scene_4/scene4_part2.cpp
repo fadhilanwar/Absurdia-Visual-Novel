@@ -5,16 +5,14 @@
 void Scene4Part2_DialogPilihan1(Scene *scene)
 {
     std::cout << "Pilihan 1 dipilih\n";
-    Scene *scene5 = Scene5_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene5, SceneTransition::Fade);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[0], SceneTransition::Fade);
 }
 
 //pilihan 2
 void Scene4Part2_DialogPilihan2(Scene *scene)
 {
     std::cout << "Pilihan 2 dipilih\n";
-    Scene *scene6 = Scene6_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene6, SceneTransition::Fade);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[1], SceneTransition::Fade);
 }
 
 void Scene4Part2_Start(Scene *scene)

@@ -7,20 +7,22 @@ void Scene2_DialogBeres(Scene *scene)
 {
     std::cout << "Dialog beres\n";
     Scene *scene3 = Scene3_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene3, SceneTransition::Fade);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[0], SceneTransition::Fade);
 }
 
 void Scene2_DialogScene2(Scene *scene)
 {
+    Scene2Data *data = (Scene2Data *)scene->data;
+    data->hasChangedToKereta = true;
+
     SceneManager_SetBackground(scene->sceneManager, "background/dalamKereta.png");
 }
 
 void Scene2_Start(Scene *scene)
 {
     Scene2Data *data = (Scene2Data *)scene->data;
-    SceneManager_SetBackground(scene->sceneManager, "background/outSubway.png");
+    SceneManager_SetBackground(scene->sceneManager, "background/outSubway_remastered.png");
 }
-
 
 void Scene2_Part3(Scene *scene)
 {
@@ -204,9 +206,8 @@ void Scene2_Part1(Scene *scene)
 
 void Scene2_Update(Scene *scene)
 {
-
-
     Scene2Data *data = (Scene2Data *)scene->data;
+
     if (data->part < 2.f)
     {
          
@@ -231,6 +232,15 @@ void Scene2_Update(Scene *scene)
     data->animProgress += 0.016f;
 }
 
+void Scene2_UpdateAfterPersons(Scene *scene)
+{
+    Scene2Data *data = (Scene2Data *)scene->data;
+
+    if (!data->hasChangedToKereta)
+        Canvas_DrawImage(scene->canvas, 0, 0, "composition/scene_2/front.png");
+}
+
+
 void Scene2_Destroy(Scene *scene)
 {
 }
@@ -242,6 +252,7 @@ Scene *Scene2_Create()
         .data = data,
         .start = Scene2_Start,
         .update = Scene2_Update,
+        .updateAfterPersons = Scene2_UpdateAfterPersons,
         .destroy = Scene2_Destroy};
     return scene;
 }

@@ -4,15 +4,13 @@
 void Scene5_PindahScene1(Scene *scene)
 {
     std:: cout << "Pindah scene\n";
-    Scene *scene6 = Scene6_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene6, SceneTransition::Fade);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[0], SceneTransition::Fade);
 }
 
 void Scene5_PindahScene2(Scene *scene)
 {
     std:: cout << "Pindah scene\n";
-    Scene *scene7 = Scene7_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene7, SceneTransition::Fade);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[1], SceneTransition::Fade);
 }
 
 

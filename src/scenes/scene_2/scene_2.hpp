@@ -9,9 +9,11 @@
 struct Scene2Data
 {
     float part = 1.f;
+    bool hasChangedToKereta;
 
     float animProgress;
     float animProgressPart;
+
     bool soundPlayedPart2;
 };
 

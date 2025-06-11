@@ -15,8 +15,7 @@ void Scene1_DialogPilihan1(Scene *scene)
 {
     std::cout << "Pilihan 1 dipilih\n";
 
-    Scene *ending_a = static_cast<Scene*>(Ending_a_Create());
-    SceneManager_GoToScene(scene->sceneManager, ending_a, SceneTransition::None);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[0], SceneTransition::None);
 }
 // pilihan 2
 void Scene1_DialogPilihan2(Scene *scene)
@@ -36,7 +35,7 @@ void Scene1_DialogPilihan2(Scene *scene)
         "Ah . . . mungkin hanya luarnya saja");
 
     Scene *scene4Part1 = Scene4Part1_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene4Part1, SceneTransition::Fade);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[1], SceneTransition::Fade);
 }
 
 void Scene3_Start(Scene *scene)

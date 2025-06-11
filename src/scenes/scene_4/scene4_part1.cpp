@@ -6,7 +6,7 @@ void Scene4Part1_PindahScene(Scene *scene)
 {
     std::cout << "Pindah scene\n";
     Scene *scene4Part2 = Scene4Part2_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene4Part2, SceneTransition::Fade);
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[0], SceneTransition::Fade);
 }
 
 void Scene4Part1_Start(Scene *scene)

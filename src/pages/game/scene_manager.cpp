@@ -5,9 +5,10 @@
 
 void m_SceneManager_Update(SceneManager *sceneMg);
 
-SceneManager *SceneManager_Create(Canvas *canvas, EngineWindow *engineWindow)
+SceneManager *SceneManager_Create(Graph *graph, Canvas *canvas, EngineWindow *engineWindow)
 {
     auto sceneMg = new SceneManager{
+        .graph = graph,
         .engineWindow = engineWindow,
         .canvas = canvas,
         .update = m_SceneManager_Update};
@@ -18,9 +19,9 @@ void SceneManager_Log(SceneManager *sceneMg) // UI Dialog
 {
     // UI Dialog-
     // Canvas_DrawTexture(sceneMg->canvas, )
-    Canvas_DrawImage(sceneMg->canvas, 904, 16, "backgrouund/wp_pilihan", 0.3); //sementara
-    Canvas_DrawText(sceneMg->canvas, 401, 36, 198, 39, "Log Dialogue", "fonts/Chonky Bunny.ttf", Alignment::Center, 20, sf::Color(255, 251, 239, 255)); //sementara
-    Canvas_DrawImage(sceneMg->canvas, 904, 16, "ui/dialogue_log.png"); //sementara
+    Canvas_DrawImage(sceneMg->canvas, 904, 16, "backgrouund/wp_pilihan", 0.3);                                                                          // sementara
+    Canvas_DrawText(sceneMg->canvas, 401, 36, 198, 39, "Log Dialogue", "fonts/Chonky Bunny.ttf", Alignment::Center, 20, sf::Color(255, 251, 239, 255)); // sementara
+    Canvas_DrawImage(sceneMg->canvas, 904, 16, "ui/dialogue_log.png");                                                                                  // sementara
 }
 
 void SceneManager_LogButton(SceneManager *sceneMg)
@@ -47,11 +48,13 @@ void SceneManager_Destroy(SceneManager *sceneMg)
     delete sceneMg->musicPlaying;
 }
 
-void SceneManager_GoToScene(SceneManager *sceneMg, Scene *scene, SceneTransition transition)
+void SceneManager_GoToScene(SceneManager *sceneMg, int sceneNumber, SceneTransition transition)
 {
+    Scene *scene = sceneMg->graph->scenes[sceneNumber];
     scene->sceneManager = sceneMg;
     scene->canvas = Canvas_Create();
     scene->ui = UI_Create();
+    scene->connectedSceneNumbers = sceneMg->graph->connections[sceneNumber];
 
     sceneMg->sceneTransition = transition;
 
@@ -126,7 +129,8 @@ void SceneManager_StopMusic(SceneManager *sceneMg)
 void SceneManager_PlaySound(SceneManager *sceneMg, std::string filePath)
 {
     sf::SoundBuffer *buffer = new sf::SoundBuffer;
-    if (!buffer->loadFromFile(GetExePath() + filePath)) {
+    if (!buffer->loadFromFile(GetExePath() + filePath))
+    {
         std::cerr << "Failed to load sound: " << filePath << "\n";
         return;
     }
@@ -469,6 +473,10 @@ void m_SceneManager_ProcessDialog(SceneManager *sceneMg)
     // Gambar semua orangnya + dianimasiin
     m_SceneManager_DrawDialogPersons(sceneMg, dialog);
 
+    // Kalau di scenenya ada fungsi updateAfterPersons, panggil
+    if (sceneMg->currentScene->updateAfterPersons != nullptr)
+        sceneMg->currentScene->updateAfterPersons(sceneMg->currentScene);
+
     // Gambar background dialog, teks nama orang, teks isi dialog, sama questions
     // kalau salah satu question dijawab, requestSkipDialog akan menjadi true
     m_SceneManager_DrawDialogContent(sceneMg, dialog, requestSkipDialog);
@@ -542,7 +550,7 @@ void m_SceneManager_Update(SceneManager *sceneMg)
             // Mulai pending scene
             sceneMg->pendingScene->start(sceneMg->pendingScene);
 
-            // sceneMg->pendingScene->childScenes = 
+            // sceneMg->pendingScene->childScenes =
 
             // Hapus isi canvas
             Canvas_Clear(sceneMg->canvas);
@@ -603,6 +611,8 @@ void m_SceneManager_Update(SceneManager *sceneMg)
 
                 // Kasih tau scene bahwa ada update
                 sceneMg->pendingScene->update(sceneMg->pendingScene);
+                if (sceneMg->pendingScene->updateAfterPersons != nullptr)
+                    sceneMg->pendingScene->updateAfterPersons(sceneMg->pendingScene);
 
                 // Copy canvas scene ke canvas scene_manager
                 Canvas_Update(sceneMg->pendingScene->canvas);
@@ -663,12 +673,19 @@ void m_SceneManager_Update(SceneManager *sceneMg)
             m_SceneManager_ProcessDialog(sceneMg);
             sceneMg->dialogAnimProgress += sceneMg->dialogAnimProgressStep;
         }
+        else
+        {
+            if (sceneMg->currentScene->updateAfterPersons != nullptr)
+                sceneMg->currentScene->updateAfterPersons(sceneMg->currentScene);
+        }
 
-        if(sceneMg->isLogOpen){
+        if (sceneMg->isLogOpen)
+        {
 
             SceneManager_Log(sceneMg);
         }
-        else{
+        else
+        {
             SceneManager_LogButton(sceneMg);
         }
         // Copy canvas scene ke canvas scene_manager
