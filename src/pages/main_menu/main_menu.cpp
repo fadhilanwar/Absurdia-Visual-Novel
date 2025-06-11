@@ -70,7 +70,7 @@ void MainMenuPG_Start(Page* page)
             std::exit(0);
         }, page);
 
-    PageManager_PlayMusic(page->pageManager, "Goofy ahh Song.mp3");
+    PageManager_PlayMusic(page->pageManager, "music/calm.mpeg");
 
    // UI_AddButton(page->ui, nullptr, 20, 50, 100, 50, "Pencet aku", 18, sf::Color::Blue, "fuad.png", MainMenuPG_ButtonDiklik, page);
 

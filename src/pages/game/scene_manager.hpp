@@ -111,13 +111,16 @@ struct SceneManager;
 void SceneManager_Destroy(SceneManager *sceneManager);
 struct SceneManager
 {
-    Graph *graph;
+    std::string saveName;
 
+    Graph *graph;
+    
     SceneManagerState state = SceneManagerState::Empty;
     EngineWindow *engineWindow;
     Canvas *canvas;
-
+    
     Scene *currentScene;
+    int currentSceneNumber;
     Scene *pendingScene = nullptr;
     SceneTransition sceneTransition = SceneTransition::None;
     bool isTransitioningScene = false;
@@ -139,8 +142,7 @@ struct SceneManager
     bool dialogEnterKeyPressed = false;
     // int dialogTextAnimProgressStep = 0;
 
-
-    bool isLogOpen = 0;
+    bool isSaveButtonClicked;
 
     sf::Music *musicPlaying = nullptr;
     std::vector<SceneSound *> soundsPlaying;
@@ -154,7 +156,7 @@ struct SceneManager
 };
 
 // Buat SceneManager (jangan dipanggil dipanggil kecuali dari game.cpp)
-SceneManager *SceneManager_Create(Graph *graph, Canvas *canvas, EngineWindow *engineWindow);
+SceneManager *SceneManager_Create(std::string saveName, Graph *graph, Canvas *canvas, EngineWindow *engineWindow);
 
 // Pindah scene
 void SceneManager_GoToScene(SceneManager *sceneManager, int sceneNumber, SceneTransition transition);
