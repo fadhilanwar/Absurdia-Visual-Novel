@@ -35,7 +35,7 @@ void NewGamePG_OnStartClick(void *parameter)
         std::cout << "Nama tidak boleh kosong!";
         return;
     }
-    
+
     std::ofstream saveFile("./saves/" + nama);
     if (saveFile.is_open())
     {
@@ -51,7 +51,7 @@ void NewGamePG_OnStartClick(void *parameter)
     PageManager_StopMusic(page->pageManager);
 
     // simpan nama karakter atau oper ke game
-    Page *gamePage = GamePG_Create();
+    Page *gamePage = GamePG_CreateFromSave(nama);
     PageManager_GoToPage(page->pageManager, gamePage);
 }
 
