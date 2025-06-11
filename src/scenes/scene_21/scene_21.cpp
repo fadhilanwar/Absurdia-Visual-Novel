@@ -4,6 +4,43 @@
 void Scene21_DialogPilihan1(Scene *scene)
 {
     std:: cout << "Pilihan 1 dipilih\n";
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/talkingWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Pop},
+        },
+        {},
+        "Yono",
+        "Boleeeeh!");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/talkingWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Pop},
+        },
+        {},
+        "Yono",
+        "Kubuatkan sketsanya ya!");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "HRD/katakTerpesona.png",
+                .position = DialogPersonPosition::Right,
+                .animation = DialogPersonAnimation::Slide},
+        },
+        {},
+        "Mr. Katak",
+        "Kau ini memang gercep ya!");
+
     Scene *scene27 = Scene27_Create();
     SceneManager_GoToScene(scene->sceneManager, scene27, SceneTransition::None);
 }
@@ -11,6 +48,31 @@ void Scene21_DialogPilihan1(Scene *scene)
 void Scene21_DialogPilihan2(Scene *scene)
 {
     std:: cout << "Pilihan 2 dipilih\n";
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/shockedWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Pop},
+        },
+        {},
+        "Yono",
+        "Bagaimana kalau kambingnya robotik?");
+
+    SceneManager_AddDialog(
+        scene->sceneManager,
+        {
+            DialogPerson{
+                .imageFilePath = "work/happyWork.png",
+                .position = DialogPersonPosition::Left,
+                .animation = DialogPersonAnimation::Pop},
+        },
+        {},
+        "Yono",
+        "Nanti dia bisa mengembik dan scan barcode!");
+
     Scene *scene28 = Scene28_Create();
     SceneManager_GoToScene(scene->sceneManager, scene28, SceneTransition::None);
 }
@@ -29,11 +91,11 @@ void Scene21_Start(Scene *scene)
         },
         {
             DialogQuestion{
-                .question = "Setuju dan buat sketsa di kertas",
+                .question = "Buat sketsa",
                 .onAnswered = Scene21_DialogPilihan1,
                 .onAnsweredParameter = scene},
             DialogQuestion{
-                .question = "Mengusulkan kambing robot",
+                .question = "Inovasi lain",
                 .onAnswered = Scene21_DialogPilihan2,
                 .onAnsweredParameter = scene
             },

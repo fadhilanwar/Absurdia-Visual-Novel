@@ -78,7 +78,7 @@ void Scene14_DialogPilihan1(Scene *scene)
         "Kalian punya kambing peliharaan tidak?");
 
     Scene *scene22 = Scene22_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene22, SceneTransition::Fade);
+    SceneManager_GoToScene(scene->sceneManager, scene22, SceneTransition::None);
 }
 
 void Scene14_DialogPilihan2(Scene *scene)
@@ -110,7 +110,7 @@ void Scene14_DialogPilihan2(Scene *scene)
         "Buat latihan suara kambing, hehehe");
 
     Scene *scene23 = Scene23_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene23, SceneTransition::Fade);
+    SceneManager_GoToScene(scene->sceneManager, scene23, SceneTransition::None);
 }
 
 void Scene14_Start(Scene *scene)
@@ -139,13 +139,13 @@ void Scene14_Start(Scene *scene)
             },
             {},
             "Dr. Badut",
-            "Kami ingin tahu bagaimana kamu bersosialisasi di habitat kambing korporat.");
+            "Kami ingin tahu bagaimana kamu bersosialisasi di habitat \nkambing korporat.");
 
     SceneManager_AddDialog(
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "work/confusedWork.png",
+                .imageFilePath = "work/shockedWork.png",
                 .position = DialogPersonPosition::Left,
                 .animation = DialogPersonAnimation::Slide},
             },

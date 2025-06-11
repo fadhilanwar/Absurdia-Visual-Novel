@@ -18,7 +18,7 @@ void Scene11_DialogPilihan1(Scene *scene)
         "Betull! Saya reinkarnasi lemari tahun 90-an");
 
     Scene *scene17 = Scene17_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene17, SceneTransition::Fade);
+    SceneManager_GoToScene(scene->sceneManager, scene17, SceneTransition::None);
 }
 
 void Scene11_DialogPilihan2(Scene *scene)
@@ -38,7 +38,7 @@ void Scene11_DialogPilihan2(Scene *scene)
         "Tidak tidak, saya hanya mantan narator kisah horor.");
 
     Scene *scene18 =Scene18_Create();
-    SceneManager_GoToScene(scene->sceneManager, scene18, SceneTransition::Fade);
+    SceneManager_GoToScene(scene->sceneManager, scene18, SceneTransition::None);
 }
 
 void Scene11_Start(Scene *scene)
@@ -49,7 +49,7 @@ void Scene11_Start(Scene *scene)
             scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "work/confusedWork.png",
+                .imageFilePath = "work/talkingWork.png",
                 .position = DialogPersonPosition::Left,
                 .animation = DialogPersonAnimation::Slide},
             },
@@ -61,7 +61,7 @@ void Scene11_Start(Scene *scene)
         scene->sceneManager,
         {
             DialogPerson{
-                .imageFilePath = "HRD/katakMeringis.png",
+                .imageFilePath = "HRD/katakBicara.png",
                 .position = DialogPersonPosition::Right,
                 .animation = DialogPersonAnimation::Slide},
             },
@@ -76,6 +76,8 @@ void Scene11_Start(Scene *scene)
                     .onAnsweredParameter = scene}},
                 "Mr.Katak",
                 "Suara pintu kamu sangat realistis. Kamu mantan pintu?");
+
+    SceneManager_PlayMusic(scene->sceneManager, "Morning.mp3");
 }
 
 
