@@ -27,14 +27,22 @@ void Ending_d_Start(Scene *scene)
     SceneManager_PlayMusic(scene->sceneManager, "Ending Unlock.wav");
 }
 
+void Ending_d_Update(Scene *scene)
+{
+}
+
+void Ending_d_Destroy(Scene *scene)
+{
+}
+
 Scene* Ending_d_Create()
 {
     Ending_dData *data = new Ending_dData();
     Scene *scene = new Scene{
         .data = data,
         .start = Ending_d_Start,
-        .update = nullptr,   // Tidak ada update per frame
-        .destroy = nullptr   // Tidak ada resource tambahan
+        .update = Ending_d_Update,
+        .destroy = Ending_d_Destroy
     };
     return scene;
 }
