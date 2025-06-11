@@ -5,12 +5,13 @@
 
 #include "../../scenes/scene.hpp"
 
+struct Scene;
 
 struct Graph
 {
     std::vector<Scene *> scenes;
 
-    std::vector<std::vector<int>> connections;
+    std::map<int, std::vector<int>> connections;
 };
 
 

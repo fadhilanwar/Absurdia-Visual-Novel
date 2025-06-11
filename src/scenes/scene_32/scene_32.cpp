@@ -11,8 +11,8 @@ void Scene32_DialogScene32(Scene *scene)
 void Scene32_PindahScene(Scene *scene)
 {
     std::cout << "ENDING C TERBUKAAA\n";
-    Scene *ending_c = Ending_c_Create();
-    SceneManager_GoToScene(scene->sceneManager, ending_c, SceneTransition::Fade);
+    
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[0], SceneTransition::Fade);
 
     // SceneManager_PlaySound(scene->sceneManager, "Crowd Laugh.wav");
 

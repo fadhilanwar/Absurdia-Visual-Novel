@@ -4,8 +4,8 @@
 void Scene30_DialogScene30(Scene *scene)
 {
     std::cout << "Dialog beres\n";
-    Scene *ending_d = static_cast<Scene*>(Ending_d_Create());
-    SceneManager_GoToScene(scene->sceneManager, ending_d, SceneTransition::Fade);
+    
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[0], SceneTransition::Fade);
 }
 
 void Scene30_Start(Scene *scene)

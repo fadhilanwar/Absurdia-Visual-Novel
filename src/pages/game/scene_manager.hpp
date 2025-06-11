@@ -12,6 +12,7 @@
 #include "graph.hpp"
 
 struct Scene;
+struct Graph;
 
 //
 // ============================

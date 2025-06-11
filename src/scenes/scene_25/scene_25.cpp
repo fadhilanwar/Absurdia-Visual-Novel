@@ -9,8 +9,8 @@ void playLaughSFX(Scene *scene) {
 void Scene25_PindahScene(Scene *scene)
 {
     std::cout << "Pindah scene\n";
-    Scene *Scene27 = Scene27_Create();
-    SceneManager_GoToScene(scene->sceneManager, Scene27, SceneTransition::None);
+    
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[0], SceneTransition::None);
 
     // SceneManager_PlaySound(scene->sceneManager, "Crowd Laugh.wav");
 

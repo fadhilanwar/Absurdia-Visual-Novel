@@ -11,8 +11,8 @@ void Scene27_DialogScene27(Scene *scene)
 void Scene27_PindahScene(Scene *scene)
 {
      std::cout << "ENDING B TERBUKAAA\n";
-    Scene *ending_b = Ending_b_Create();
-    SceneManager_GoToScene(scene->sceneManager, ending_b, SceneTransition::Fade);
+
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[0], SceneTransition::Fade);
 
 }
 

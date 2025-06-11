@@ -98,6 +98,8 @@ add_executable(main
     src/scenes/ending_d/ending_d.hpp
     src/scenes/ending_d/ending_d.cpp
     src/pages/page.hpp
+    src/pages/game/graph.hpp
+    src/pages/game/graph.cpp
     src/pages/game/game.hpp
     src/pages/game/game.cpp
     src/pages/game/scene_manager.hpp

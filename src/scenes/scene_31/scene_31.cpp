@@ -19,8 +19,8 @@ void playMusicSFX2(Scene *scene) {
 void Scene31_PindahScene(Scene *scene)
 {
     std::cout << "ENDING D TERBUKAAA\n";
-    Scene *ending_d = Ending_d_Create();
-    SceneManager_GoToScene(scene->sceneManager, ending_d, SceneTransition::Fade);
+    
+    SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[0], SceneTransition::Fade);
 
     // SceneManager_PlaySound(scene->sceneManager, "Crowd Laugh.wav");
 
