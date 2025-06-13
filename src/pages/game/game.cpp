@@ -205,8 +205,8 @@ void GamePG_Start(Page *page)
     Graph_AddConnection(graph, 31, 35);
 
     // Scene 31
-    // Graph_AddConnection(graph, 23, 30);
-
+    Graph_AddConnection(graph, 32, 36);
+    
     // Scene 32
     Graph_AddConnection(graph, 33, 37);
     Graph_AddConnection(graph, 33, 36);

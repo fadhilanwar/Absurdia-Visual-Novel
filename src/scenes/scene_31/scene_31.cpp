@@ -52,8 +52,8 @@ void Scene31_Start(Scene *scene)
             },
             
         {},
-        "",
-        "", playMusicSFX, scene);
+        "All HRD",
+        "(Puas dengan Hasil Nyanyian Yono)", playMusicSFX, scene);
 
         SceneManager_AddDialog(
         scene->sceneManager,

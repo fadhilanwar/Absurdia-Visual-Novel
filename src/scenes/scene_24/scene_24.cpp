@@ -2,13 +2,14 @@
 #include <iostream>
 
 
-void playBeatboxSFX(Scene *scene) {
-    SceneManager_PlaySound(scene->sceneManager, "beatbox.mp3");
-}
+// void playBeatboxSFX(Scene *scene) {
+//     SceneManager_PlaySound(scene->sceneManager, "beatbox.mp3");
+// }
 
 void Scene24_DialogPilihan1(Scene *scene)
 {
-    SceneManager_PlaySound(scene->sceneManager, "anthem.mp3");
+
+    SceneManager_PlaySound(scene->sceneManager, "anthem.wav");
 
     std:: cout << "Pilihan 1 dipilih ";
     SceneManager_AddDialog(
@@ -24,6 +25,7 @@ void Scene24_DialogPilihan1(Scene *scene)
         "Ngok ngok . . . masa depaaaaaan . . . di atas kubus yang transparaaaaan~");
 
     SceneManager_GoToScene(scene->sceneManager, scene->connectedSceneNumbers[0], SceneTransition::None);
+
     
 }
 void Scene24_DialogPilihan2(Scene *scene)
