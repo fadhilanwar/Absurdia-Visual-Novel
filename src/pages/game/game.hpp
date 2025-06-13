@@ -10,8 +10,10 @@ struct GamePageData
 {
     SceneManager* sceneMg;
 
+    std::string saveName;
+    int loadFromScene = 0;
     UIElement *sceneImage;
 };
 
 Page* GamePG_Create();
-Page* GamePG_CreateFromSave(const char* saveName);
+Page* GamePG_CreateFromSave(std::string saveName);

@@ -1,33 +1,23 @@
 #include "scene_manager.hpp"
 
+#include <filesystem>
 #include <iostream>
+#include <fstream>
 #include <cmath>
+
+namespace fs = std::filesystem;
 
 void m_SceneManager_Update(SceneManager *sceneMg);
 
-SceneManager *SceneManager_Create(Graph *graph, Canvas *canvas, EngineWindow *engineWindow)
+SceneManager *SceneManager_Create(std::string saveName, Graph *graph, Canvas *canvas, EngineWindow *engineWindow)
 {
     auto sceneMg = new SceneManager{
+        .saveName = saveName,
         .graph = graph,
         .engineWindow = engineWindow,
         .canvas = canvas,
         .update = m_SceneManager_Update};
     return sceneMg;
-}
-
-void SceneManager_Log(SceneManager *sceneMg) // UI Dialog
-{
-    // UI Dialog-
-    // Canvas_DrawTexture(sceneMg->canvas, )
-    Canvas_DrawImage(sceneMg->canvas, 904, 16, "backgrouund/wp_pilihan", 0.3);                                                                          // sementara
-    Canvas_DrawText(sceneMg->canvas, 401, 36, 198, 39, "Log Dialogue", "fonts/Chonky Bunny.ttf", Alignment::Center, 20, sf::Color(255, 251, 239, 255)); // sementara
-    Canvas_DrawImage(sceneMg->canvas, 904, 16, "ui/dialogue_log.png");                                                                                  // sementara
-}
-
-void SceneManager_LogButton(SceneManager *sceneMg)
-{
-    // UI Botton
-    Canvas_DrawImage(sceneMg->canvas, 904, 16, "ui/logs.png");
 }
 
 void SceneManager_Destroy(SceneManager *sceneMg)
@@ -57,6 +47,8 @@ void SceneManager_GoToScene(SceneManager *sceneMg, int sceneNumber, SceneTransit
     scene->connectedSceneNumbers = sceneMg->graph->connections[sceneNumber];
 
     sceneMg->sceneTransition = transition;
+
+    sceneMg->currentSceneNumber = sceneNumber;
 
     if (sceneMg->currentScene != nullptr)
     {
@@ -526,6 +518,61 @@ void m_SceneManager_ProcessDialog(SceneManager *sceneMg)
     }
 }
 
+void m_SceneManager_Save(SceneManager *sceneMg)
+{
+    std::vector<std::string> fileNames;
+    std::string directoryPath = "./saves";
+
+    if (fs::exists(directoryPath) && fs::is_directory(directoryPath))
+    {
+
+        std::ofstream outFile(directoryPath + "/" + sceneMg->saveName);
+        if (!outFile)
+        {
+            throw std::invalid_argument("Gagal buka file save");
+        }
+
+        outFile << sceneMg->currentSceneNumber << std::endl;
+
+        outFile.close();
+    }
+    else
+    {
+        throw std::invalid_argument("Directory saves ga ada (jangan dihapus woy!)");
+    }
+}
+
+void m_SceneManager_ProcessSaveButton(SceneManager *sceneMg)
+{
+    if (!sceneMg->isSaveButtonClicked)
+    {
+        Canvas_DrawImage(sceneMg->currentScene->canvas, 953, 18, "ui/save.png");
+    }
+    else
+    {
+        Canvas_DrawText(sceneMg->currentScene->canvas, 900, 18, "Saved!", "fonts/Blugie.ttf", 16, sf::Color::White);
+    }
+
+    sf::Vector2i mousePos = sf::Mouse::getPosition(sceneMg->engineWindow->window);
+
+    if (mousePos.x >= 953 && mousePos.x <= 983 &&
+        mousePos.y >= 18 && mousePos.y <= 48)
+    {
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+        {
+            if (!sceneMg->isSaveButtonClicked)
+            {
+                sceneMg->isSaveButtonClicked = true;
+                m_SceneManager_Save(sceneMg);
+            }
+        }
+        else if (sceneMg->isSaveButtonClicked)
+        {
+            sceneMg->isSaveButtonClicked = false;
+        }
+    }
+}
+
 void m_SceneManager_Update(SceneManager *sceneMg)
 {
     // Hapus semua sound yang udah selesai playing
@@ -737,15 +784,9 @@ void m_SceneManager_Update(SceneManager *sceneMg)
                 sceneMg->currentScene->updateAfterPersons(sceneMg->currentScene);
         }
 
-        if (sceneMg->isLogOpen)
-        {
+        // Gambar save button
+        m_SceneManager_ProcessSaveButton(sceneMg);
 
-            SceneManager_Log(sceneMg);
-        }
-        else
-        {
-            SceneManager_LogButton(sceneMg);
-        }
         // Copy canvas scene ke canvas scene_manager
         Canvas_Update(sceneMg->currentScene->canvas);
         Canvas_Copy(sceneMg->canvas, sceneMg->currentScene->canvas);

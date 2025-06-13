@@ -1,42 +1,70 @@
 #include "new_game.hpp"
 #include "../main_menu/main_menu.hpp"
-#include "../game/game.hpp" 
+#include "../game/game.hpp"
 #include "../../engine/ui.hpp"
+
 #include <iostream>
 #include <fstream>
+#include <filesystem>
 
-void NewGamePG_OnStartClick(void* parameter) {
-    Page* page = (Page*)parameter;
-    NewGamePageData* data = (NewGamePageData*)page->data;
+namespace fs = std::filesystem;
+
+void NewGamePG_OnStartClick(void *parameter)
+{
+    Page *page = (Page *)parameter;
+    NewGamePageData *data = (NewGamePageData *)page->data;
+
+    std::string directoryPath = "./saves";
+
+    if (!fs::exists(directoryPath))
+    {
+        // Create the directory
+        if (fs::create_directory(directoryPath))
+        {
+            std::cout << "Folder save dibuat" << std::endl;
+        }
+        else
+        {
+            throw std::invalid_argument("Gagal buat folder save");
+        }
+    }
 
     std::string nama = UI_GetInputText(data->inputNamaKarakter);
-    std::ofstream saveFile("save.txt");
+    if (nama.empty())
+    {
+        std::cout << "Nama tidak boleh kosong!";
+        return;
+    }
+
+    std::ofstream saveFile("./saves/" + nama);
     if (saveFile.is_open())
     {
-        saveFile << nama << std:: endl;
+        saveFile << 0 << std::endl;
         saveFile.close();
-        std::cout << "Nama karakter disimpan ke save.txt";
+        std::cout << "Save berhasil disimpan";
     }
     else
     {
-        std::cerr << "Gagal menyimpan nama karakter";
+        throw std::invalid_argument("Gagal menyimpan save");
     }
 
     PageManager_StopMusic(page->pageManager);
 
     // simpan nama karakter atau oper ke game
-    Page* gamePage = GamePG_Create(); 
+    Page *gamePage = GamePG_CreateFromSave(nama);
     PageManager_GoToPage(page->pageManager, gamePage);
 }
 
-void NewGamePG_OnBackClick(void* parameter) {
-    Page* page = (Page*)parameter;
-    Page* mainMenu = MainMenuPG_Create();
+void NewGamePG_OnBackClick(void *parameter)
+{
+    Page *page = (Page *)parameter;
+    Page *mainMenu = MainMenuPG_Create();
     PageManager_GoToPage(page->pageManager, mainMenu);
 }
 
-void NewGamePG_Start(Page* page) {
-    NewGamePageData* data = (NewGamePageData*)page->data;
+void NewGamePG_Start(Page *page)
+{
+    NewGamePageData *data = (NewGamePageData *)page->data;
 
     UI_AddImage(page->ui, nullptr, 0, 0, 1000, 550, true, "wp_loadgame.png");
 
@@ -49,24 +77,24 @@ void NewGamePG_Start(Page* page) {
     UI_AddButton(page->ui, nullptr, 350, 120, 40, 40, {0, 0}, {0, 0}, " ", "fonts/Chonky Bunny.ttf", 18, sf::Color::Black, "ui/back.png", NewGamePG_OnBackClick, page);
 }
 
-void NewGamePG_Update(Page* page) 
+void NewGamePG_Update(Page *page)
 {
     //
 }
 
-void NewGamePG_Destroy(Page* page) 
+void NewGamePG_Destroy(Page *page)
 {
-    NewGamePageData* data = (NewGamePageData*)page->data;
+    NewGamePageData *data = (NewGamePageData *)page->data;
     delete data;
 }
 
-Page* NewGamePG_Create() {
-    NewGamePageData* data = new NewGamePageData{};
-    Page* page = new Page{
+Page *NewGamePG_Create()
+{
+    NewGamePageData *data = new NewGamePageData{};
+    Page *page = new Page{
         .data = data,
         .start = NewGamePG_Start,
         .update = NewGamePG_Update,
-        .destroy = NewGamePG_Destroy
-    };
+        .destroy = NewGamePG_Destroy};
     return page;
 }

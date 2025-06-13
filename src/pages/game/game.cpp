@@ -1,6 +1,7 @@
 #include "game.hpp"
 
 #include <iostream>
+#include <fstream>
 
 #include "../../scenes/scene_1/scene_1_part2.hpp"
 #include "../../scenes/scene_1/scene_1_part3.hpp"
@@ -40,7 +41,6 @@
 #include "../../scenes/ending_b/ending_b.hpp"
 #include "../../scenes/ending_c/ending_c.hpp"
 #include "../../scenes/ending_d/ending_d.hpp"
-
 
 void GamePG_Start(Page *page)
 {
@@ -211,13 +211,11 @@ void GamePG_Start(Page *page)
     Graph_AddConnection(graph, 33, 37);
     Graph_AddConnection(graph, 33, 36);
 
-
     Canvas *canvas = Canvas_Create();
-    SceneManager *sceneMg = SceneManager_Create(graph, canvas, page->pageManager->engineWindow);
+    SceneManager *sceneMg = SceneManager_Create(data->saveName, graph, canvas, page->pageManager->engineWindow);
     data->sceneMg = sceneMg;
 
-    Scene *mainMenuScene = Scene1Part2_Create();
-    SceneManager_GoToScene(sceneMg, 0, SceneTransition::None);
+    SceneManager_GoToScene(sceneMg, data->loadFromScene, SceneTransition::None);
 
     data->sceneImage = UI_AddImage(page->ui, nullptr, 0, 0, 1000, 550, false, "");
 }
@@ -249,9 +247,27 @@ Page *GamePG_Create()
     return page;
 }
 
-Page *GamePG_CreateFromSave(const char *saveName)
+Page *GamePG_CreateFromSave(std::string saveName)
 {
     GamePageData *data = new GamePageData{};
+
+    std::ifstream inFile("./saves/" + saveName);
+    // Check if the file is open
+    if (!inFile)
+    {
+        throw std::invalid_argument("Gagal buka save");
+    }
+
+    int loadFromScene = -1;
+    inFile >> loadFromScene;
+    if (inFile.fail()) {
+        inFile.close();
+        throw std::invalid_argument("Gagal baca save");
+    }
+
+    data->saveName = saveName;
+    data->loadFromScene = loadFromScene;
+
     Page *page = new Page{
         .data = data,
         .start = GamePG_Start,

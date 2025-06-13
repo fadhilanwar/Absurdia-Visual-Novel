@@ -5,6 +5,8 @@
 struct LoadGamePageData
 {
    UIElement *textAku;
+
+   std::string saveName;
 };
 
 Page *LoadGamePG_Create();
